@@ -4,35 +4,33 @@ public class RainyHills {
 
 	// рассматриваем участки с водой как сосуд с кривым дном,
 	// у которого есть левая и правая стенки (l, r)
-	public int calcVolume(int[] surface) {
-		return calcVesselVolume(surface, 0, surface.length - 1);
-		//		int l, r;
-		//
-		//		int cur = 0;
-		//
-		//		// пробегаемся по поверхности слева направо
-		//		while (cur < surface.length) {
-		//			// Если вода может стечь вправо
-		//			if (surface[cur] > surface[cur + 1]) {
-		//				// то указываем левую стенку
-		//				l = cur;
-		//
-		//				// от левой стенки пробегаемся по поверхности дальше направо
-		//				while (cur < surface.length) {
-		//					cur++;
-		//					if (surface[cur] <= surface[l]) {
-		//
-		//					}
-		//				}
-		//			}
-		//
-		//			cur++;
-		//		}
-		//
-		//		return 0;
+	public int calcWaterVolumeOnSurface(int[] surface) {
+		int l, r;
+
+		int cur = 0;
+
+		// пробегаемся по поверхности слева направо
+		while (cur < surface.length) {
+			// Если вода может стечь вправо
+			if (surface[cur] > surface[cur + 1]) {
+				// то указываем левую стенку
+				l = cur;
+
+				// от левой стенки пробегаемся по поверхности дальше направо
+				while (++cur < surface.length) {
+					if (surface[cur] <= surface[l]) { // TODO определить условие нахождения правой стенки сосуда
+
+					}
+				}
+			}
+
+			cur++;
+		}
+
+		return 0;
 	}
 
-	private int calcVesselVolume(int[] surface, int l, int r) {
+	public int calcVesselVolume(int[] surface, int l, int r) {
 		int result = 0;
 
 		int waterLevel = Math.min(surface[l], surface[r]);

@@ -1,10 +1,59 @@
 package com.ail.crxmarkets;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
+import org.junit.Ignore;
 import org.junit.Test;
 
 public class RainyHillsTest {
+
+	@Test
+	public void calcVesselVolume() throws Exception {
+		RainyHills rainyHills = new RainyHills();
+
+		List<TestData> testDataList = new ArrayList<>();
+
+		testDataList.add(new TestData(new int[] { 0 }, 0));
+
+		testDataList.add(new TestData(new int[] { 7 }, 0));
+		testDataList.add(new TestData(new int[] { 0, 0 }, 0));
+
+		testDataList.add(new TestData(new int[] { 1, 1 }, 0));
+		testDataList.add(new TestData(new int[] { 1, 0, 1 }, 1));
+		testDataList.add(new TestData(new int[] { 1, 1, 0, 1 }, 1));
+		testDataList.add(new TestData(new int[] { 1, 0, 0, 1 }, 2));
+		testDataList.add(new TestData(new int[] { 1, 0, 0, 0, 1 }, 3));
+
+		testDataList.add(new TestData(new int[] { 3, 3 }, 0));
+		testDataList.add(new TestData(new int[] { 3, 0, 3 }, 3));
+		testDataList.add(new TestData(new int[] { 3, 3, 0, 3 }, 3));
+		testDataList.add(new TestData(new int[] { 3, 0, 0, 3 }, 6));
+		testDataList.add(new TestData(new int[] { 3, 0, 0, 0, 3 }, 9));
+
+		testDataList.add(new TestData(new int[] { 3, 0, 2 }, 2));
+		testDataList.add(new TestData(new int[] { 2, 0, 3 }, 2));
+
+		testDataList.add(new TestData(new int[] { 3, 0, 1 }, 1));
+		testDataList.add(new TestData(new int[] { 1, 0, 3 }, 1));
+
+		testDataList.add(new TestData(new int[] { 3, 3, 0, 3 }, 3));
+		testDataList.add(new TestData(new int[] { 3, 0, 0, 3 }, 6));
+		testDataList.add(new TestData(new int[] { 3, 0, 0, 0, 3 }, 9));
+
+		testDataList.add(new TestData(new int[] { 3, 3, 3, 3 }, 0));
+
+		testDataList.add(new TestData(new int[] { 3, 1, 2, 0, 3 }, 6));
+
+		testDataList.add(new TestData(new int[] { 5, 3, 0, 2, 4 }, 7));
+		testDataList.add(new TestData(new int[] { 4, 4, 2, 0, 5 }, 6));
+
+		for (TestData testData : testDataList) {
+			assertThat(rainyHills.calcVesselVolume(testData.getSurface(), 0, testData.getSurface().length - 1), equalTo(testData.getWaterVolume()));
+		}
+	}
 
 	@Test
 	public void testPrintHills() throws Exception {
@@ -13,43 +62,34 @@ public class RainyHillsTest {
 	}
 
 	@Test
-	public void testCalculateVolume() throws Exception {
+	@Ignore
+	public void testCalcWaterVolumeOnSurface() throws Exception {
 		RainyHills rainyHills = new RainyHills();
 
-		assertThat(rainyHills.calcVolume(new int[] { 0 }), equalTo(0));
-		assertThat(rainyHills.calcVolume(new int[] { 7 }), equalTo(0));
-		assertThat(rainyHills.calcVolume(new int[] { 0, 0 }), equalTo(0));
+		List<TestData> testDataList = new ArrayList<>();
+		testDataList.add(new TestData(new int[] { 4, 2, 4, 1, 2 }, 2));
 
-		assertThat(rainyHills.calcVolume(new int[] { 1, 1 }), equalTo(0));
-		assertThat(rainyHills.calcVolume(new int[] { 1, 0, 1 }), equalTo(1));
-		assertThat(rainyHills.calcVolume(new int[] { 1, 1, 0, 1 }), equalTo(1));
-		assertThat(rainyHills.calcVolume(new int[] { 1, 0, 0, 1 }), equalTo(2));
-		assertThat(rainyHills.calcVolume(new int[] { 1, 0, 0, 0, 1 }), equalTo(3));
+		for (TestData testData : testDataList) {
+			assertThat(rainyHills.calcWaterVolumeOnSurface(testData.getSurface()), equalTo(testData.getWaterVolume()));
+		}
+	}
 
-		assertThat(rainyHills.calcVolume(new int[] { 3, 3 }), equalTo(0));
-		assertThat(rainyHills.calcVolume(new int[] { 3, 0, 3 }), equalTo(3));
-		assertThat(rainyHills.calcVolume(new int[] { 3, 3, 0, 3 }), equalTo(3));
-		assertThat(rainyHills.calcVolume(new int[] { 3, 0, 0, 3 }), equalTo(6));
-		assertThat(rainyHills.calcVolume(new int[] { 3, 0, 0, 0, 3 }), equalTo(9));
+	private static class TestData {
+		private final int[] surface;
+		private final int waterVolume;
 
-		assertThat(rainyHills.calcVolume(new int[] { 3, 0, 2 }), equalTo(2));
-		assertThat(rainyHills.calcVolume(new int[] { 2, 0, 3 }), equalTo(2));
+		TestData(int[] surface, int waterVolume) {
+			this.surface = surface;
+			this.waterVolume = waterVolume;
+		}
 
-		assertThat(rainyHills.calcVolume(new int[] { 3, 0, 1 }), equalTo(1));
-		assertThat(rainyHills.calcVolume(new int[] { 1, 0, 3 }), equalTo(1));
+		int[] getSurface() {
+			return surface;
+		}
 
-		assertThat(rainyHills.calcVolume(new int[] { 3, 3, 0, 3 }), equalTo(3));
-		assertThat(rainyHills.calcVolume(new int[] { 3, 0, 0, 3 }), equalTo(6));
-		assertThat(rainyHills.calcVolume(new int[] { 3, 0, 0, 0, 3 }), equalTo(9));
-
-		assertThat(rainyHills.calcVolume(new int[] { 3, 3, 3, 3 }), equalTo(0));
-
-		assertThat(rainyHills.calcVolume(new int[] { 3, 1, 2, 0, 3 }), equalTo(6));
-
-		assertThat(rainyHills.calcVolume(new int[] { 5, 3, 0, 2, 4 }), equalTo(7));
-		assertThat(rainyHills.calcVolume(new int[] { 4, 4, 2, 0, 5 }), equalTo(6));
-
-		//		assertThat(rainyHills.calcVolume(new int[] { 3, 2, 4, 1, 2 }), equalTo(2));
+		int getWaterVolume() {
+			return waterVolume;
+		}
 	}
 
 }
