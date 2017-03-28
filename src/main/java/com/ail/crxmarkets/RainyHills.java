@@ -2,32 +2,41 @@ package com.ail.crxmarkets;
 
 public class RainyHills {
 
-	// рассматриваем участки с водой как сосуд с кривым дном,
-	// у которого есть левая и правая стенки (l, r)
+	// Рассматриваем участки с водой как двумерные сосуды с кривым дном,
+	// у которых есть левая и правая стенки (l, r)
+	// и стенки могут быть разной высоты.
+	// У левой стенки вода стекает вправо, а у правой стенки - влево.
 	public int calcWaterVolumeOnSurface(int[] surface) {
-		int l, r;
+		int result = 0;
 
+		int l, r = 0;
 		int cur = 0;
 
 		// пробегаемся по поверхности слева направо
-		while (cur < surface.length) {
+		while (cur < surface.length - 1) {
 			// Если вода может стечь вправо
 			if (surface[cur] > surface[cur + 1]) {
-				// то указываем левую стенку
+				// то это левая стенка сосуда
 				l = cur;
-
-				// от левой стенки пробегаемся по поверхности дальше направо
-				while (++cur < surface.length) {
-					if (surface[cur] <= surface[l]) { // TODO определить условие нахождения правой стенки сосуда
-
+				// от левой стенки движемся по поверхности дальше направо и ищем правую стенку сосуда
+				while (++cur < surface.length - 1) {
+					// Если вода может стечь влево и не может стечь дальше вправо
+					if (surface[cur] >= surface[cur - 1] && surface[cur] >= surface[cur + 1]) {
+						// то это правая стенка сосуда
+						r = cur;
+						break;
 					}
 				}
+				// считаем объем воды в сосуде
+				if (r > l) {
+					result += calcVesselVolume(surface, l, r);
+					l = r;
+				}
 			}
-
 			cur++;
 		}
 
-		return 0;
+		return result;
 	}
 
 	public int calcVesselVolume(int[] surface, int l, int r) {
