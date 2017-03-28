@@ -5,27 +5,45 @@ public class RainyHills {
 	// рассматриваем участки с водой как сосуд с кривым дном,
 	// у которого есть левая и правая стенки (l, r)
 	public int calcVolume(int[] surface) {
-		int l, r;
+		return calcVesselVolume(surface, 0, surface.length - 1);
+		//		int l, r;
+		//
+		//		int cur = 0;
+		//
+		//		// пробегаемся по поверхности слева направо
+		//		while (cur < surface.length) {
+		//			// Если вода может стечь вправо
+		//			if (surface[cur] > surface[cur + 1]) {
+		//				// то указываем левую стенку
+		//				l = cur;
+		//
+		//				// от левой стенки пробегаемся по поверхности дальше направо
+		//				while (cur < surface.length) {
+		//					cur++;
+		//					if (surface[cur] <= surface[l]) {
+		//
+		//					}
+		//				}
+		//			}
+		//
+		//			cur++;
+		//		}
+		//
+		//		return 0;
+	}
 
-		int cur = 0;
+	private int calcVesselVolume(int[] surface, int l, int r) {
+		int result = 0;
 
-		// пробегаемся по поверхности слева направо
-		while (cur < surface.length) {
-			// Если вода может стечь вправо
-			if (surface[cur] > surface[cur + 1]) {
-				// то указываем левую стенку
-				l = cur;
+		int waterLevel = Math.min(surface[l], surface[r]);
 
-				// от левой стенки пробегаемся по поверхности дальше направо
-				while (cur < surface.length) {
+		int cur = l;
 
-				}
-			}
-
-			cur++;
+		while (++cur < r) {
+			result += waterLevel - surface[cur];
 		}
 
-		return 0;
+		return result;
 	}
 
 	// TODO vertical histogram
