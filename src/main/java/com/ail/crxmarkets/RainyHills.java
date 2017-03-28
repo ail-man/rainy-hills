@@ -19,7 +19,8 @@ public class RainyHills {
 				// то это левая стенка сосуда
 				l = cur;
 				// от левой стенки движемся по поверхности дальше направо и ищем правую стенку сосуда
-				while (++cur < surface.length - 1) {
+				cur++;
+				while (cur < surface.length - 1) {
 					// Если вода может стечь влево и не может стечь дальше вправо
 					if (surface[cur] >= surface[cur - 1] && surface[cur] >= surface[cur + 1]) {
 						// то это правая стенка сосуда
