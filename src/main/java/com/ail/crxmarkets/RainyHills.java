@@ -34,9 +34,8 @@ public class RainyHills {
 						j++;
 					}
 				}
-
-				j++;
-				while (j < surface.length) {
+				
+				while (++j < surface.length) {
 					if (surface[right] < surface[j]) {
 						if (surface[right] > surface[left] && surface[j] > surface[left]) {
 							break;
@@ -44,7 +43,6 @@ public class RainyHills {
 							right = j;
 						}
 					}
-					j++;
 				}
 
 				if (right > left) {
