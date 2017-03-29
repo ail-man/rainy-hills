@@ -32,7 +32,7 @@ public class RainyHills {
 
 				int k = j + 1;
 				while (k < surface.length) {
-					if (surface[k] > surface[left]) {
+					if (surface[curRight] < surface[k]) {
 						curRight = k;
 					}
 					k++;
