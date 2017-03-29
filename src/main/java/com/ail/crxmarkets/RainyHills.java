@@ -35,17 +35,17 @@ public class RainyHills {
 					}
 				}
 
-				int k = j + 1;
-				while (k < surface.length) {
-					if (surface[curRight] < surface[k]) {
-						if (surface[curRight] > surface[left] && surface[k] > surface[left]) {
+				j++;
+				while (j < surface.length) {
+					if (surface[curRight] < surface[j]) {
+						if (surface[curRight] > surface[left] && surface[j] > surface[left]) {
 							right = curRight;
 							break;
 						} else {
-							curRight = k;
+							curRight = j;
 						}
 					}
-					k++;
+					j++;
 				}
 
 				if (curRight > right) {
@@ -56,7 +56,7 @@ public class RainyHills {
 					result += calcVesselVolume(surface, left, right);
 					i = right;
 				} else {
-					i = k;
+					i = j;
 				}
 			} else {
 				i++;
