@@ -7,48 +7,43 @@ public class RainyHills {
 	// и стенки могут быть разной высоты.
 	// У левой стенки вода стекает вправо, а у правой стенки - влево.
 	public int calcWaterVolumeOnSurface(int[] surface) {
+		if (surface.length < 3) {
+			return 0;
+		}
+
 		int result = 0;
 
-		int left, right = 0, tmpRight = 0;
+		int left, right = 0, curRight = 0;
 		int i = 0;
 
 		// пробегаемся по поверхности слева направо
 		while (i < surface.length - 1) {
-			// Если поверхность правее текущей точки является ниже текущей точки
+			// Если вода может стечь вправо
 			if (surface[i] > surface[i + 1]) {
 				// то это левая стенка сосуда
 				left = i;
 
 				// от левой стенки движемся по поверхности дальше направо и ищем правую стенку сосуда
-				while (++i < surface.length) {
-
-					// Если поверхность выше предыдущей точки
-					if (surface[i] >= surface[i - 1]) {
-						// то это временная правая стенка сосуда
-						tmpRight = i;
+				int j = i + 2;
+				while (j < surface.length) {
+					if (surface[j - 1] < surface[j]) {
+						curRight = j;
 						break;
+					} else {
+						j++;
 					}
 				}
 
-				// вторым циклом пробегаемся от следующей точки
-				int j = i + 1;
-				while (j < surface.length) {// TODO breakpoint on (i == 24)
-					// если поверхность выше или равна временной правой стенки сосуда
-					// и её высота выше или равна левой стенки
-					if (surface[j] >= surface[tmpRight] && surface[j] >= surface[left]) { // TODO check correct right
-						// то это новая временная правая стенка сосуда
-						tmpRight = j;
-						// если дальше идёт склон, то прерываем цикл
-						if (surface[j] > surface[j + 1]) {
-							break;
-						}
+				int k = j + 1;
+				while (k < surface.length) {
+					if (surface[k] > surface[left]) {
+						curRight = k;
 					}
-					j++;
+					k++;
 				}
 
-				// и самую высокую поверхность делаем правой стенкой сосуда
-				if (tmpRight > right) {
-					right = tmpRight;
+				if (curRight > right) {
+					right = curRight;
 				}
 
 				// затем считаем объем воды в найденном сосуде
