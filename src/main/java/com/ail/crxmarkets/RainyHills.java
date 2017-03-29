@@ -18,7 +18,7 @@ public class RainyHills {
 
 		int result = 0;
 
-		int left, right = 0, curRight = 0;
+		int left, right = 0;
 		int i = 0;
 
 		while (i < surface.length - 1) {
@@ -28,7 +28,7 @@ public class RainyHills {
 				int j = i + 2;
 				while (j < surface.length) {
 					if (surface[j - 1] < surface[j]) {
-						curRight = j;
+						right = j;
 						break;
 					} else {
 						j++;
@@ -37,19 +37,14 @@ public class RainyHills {
 
 				j++;
 				while (j < surface.length) {
-					if (surface[curRight] < surface[j]) {
-						if (surface[curRight] > surface[left] && surface[j] > surface[left]) {
-							right = curRight;
+					if (surface[right] < surface[j]) {
+						if (surface[right] > surface[left] && surface[j] > surface[left]) {
 							break;
 						} else {
-							curRight = j;
+							right = j;
 						}
 					}
 					j++;
-				}
-
-				if (curRight > right) {
-					right = curRight;
 				}
 
 				if (right > left) {
