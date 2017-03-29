@@ -3,9 +3,11 @@ package com.ail.crxmarkets;
 public class RainyHills {
 
 	// Рассматриваем участки с водой как двумерные сосуды с кривым дном,
-	// у которых есть левая и правая стенки (l, r)
-	// и стенки могут быть разной высоты.
-	// У левой стенки вода стекает вправо, а у правой стенки - влево.
+	// у которых есть левая и правая стенки (left, right).
+	// Стенки могут быть разной высоты.
+	// Участки кривого дна сосуда не могут быть выше стенок сосуда.
+	// Задача будет состоять в нахождении левой и правой стенок всех сосудов
+	// и суммирование их объемов.
 	public int calcWaterVolumeOnSurface(int[] surface) {
 		if (surface.length < 3) {
 			return 0;
@@ -33,7 +35,12 @@ public class RainyHills {
 				int k = j + 1;
 				while (k < surface.length) {
 					if (surface[curRight] < surface[k]) {
-						curRight = k;
+						if (surface[curRight] > surface[left] && surface[k] > surface[left]) {
+							right = curRight;
+							break;
+						} else {
+							curRight = k;
+						}
 					}
 					k++;
 				}
