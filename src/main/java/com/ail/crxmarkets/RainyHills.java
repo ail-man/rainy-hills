@@ -16,45 +16,53 @@ public class RainyHills {
 
 		int result = 0;
 
-		int left, right = 0;
-		int i = 0;
+		int left;
+		int current = 0;
 
-		while (i < surface.length - 1) {
-			if (surface[i] > surface[i + 1]) {
-				left = i;
+		while (current < surface.length - 1) {
+			if (surface[current] > surface[current + 1]) {
+				left = current;
 
-				int j = i + 2;
-				while (j < surface.length) {
-					if (surface[j - 1] < surface[j]) {
-						right = j;
-						break;
-					} else {
-						j++;
-					}
-				}
-				
-				while (++j < surface.length) {
-					if (surface[right] < surface[j]) {
-						if (surface[right] > surface[left] && surface[j] > surface[left]) {
-							break;
-						} else {
-							right = j;
-						}
-					}
-				}
+				int right = getRight(surface, left, current);
 
 				if (right > left) {
 					result += calcVesselVolume(surface, left, right);
-					i = right;
+					current = right;
 				} else {
-					i++;
+					current++;
 				}
 			} else {
-				i++;
+				current++;
 			}
 		}
 
 		return result;
+	}
+
+	private int getRight(int[] surface, int left, int current) {
+		int right = 0;
+
+		int ahead = current + 2;
+		while (ahead < surface.length) {
+			if (surface[ahead - 1] < surface[ahead]) {
+				right = ahead;
+				break;
+			} else {
+				ahead++;
+			}
+		}
+
+		while (++ahead < surface.length) {
+			if (surface[right] < surface[ahead]) {
+				if (surface[right] > surface[left] && surface[ahead] > surface[left]) {
+					break;
+				} else {
+					right = ahead;
+				}
+			}
+		}
+
+		return right;
 	}
 
 	public int calcVesselVolume(int[] surface, int left, int right) {
