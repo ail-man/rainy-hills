@@ -31,12 +31,19 @@ public class RainyHills {
 				}
 
 				// вторым циклом пробегаемся от следующей точки
-				for (int j = i + 1; j < surface.length; j++) {
+				int j = i + 1;
+				while (j < surface.length) {// TODO breakpoint on (i == 24)
 					// если поверхность выше или равна временной правой стенки сосуда
-					if (surface[j] >= surface[tmpRight]) {
-						// то это временная правая стенка сосуда
+					// и её высота выше или равна левой стенки
+					if (surface[j] >= surface[tmpRight] && surface[j] >= surface[left]) { // TODO check correct right
+						// то это новая временная правая стенка сосуда
 						tmpRight = j;
+						// если дальше идёт склон, то прерываем цикл
+						if (surface[j] > surface[j + 1]) {
+							break;
+						}
 					}
+					j++;
 				}
 
 				// и самую высокую поверхность делаем правой стенкой сосуда
@@ -47,6 +54,7 @@ public class RainyHills {
 				// затем считаем объем воды в найденном сосуде
 				if (right > left) {
 					result += calcVesselVolume(surface, left, right);
+					i = right;
 				}
 			} else {
 				i++;
