@@ -70,6 +70,8 @@ public class RainyHillsTest {
 
 		List<TestData> testDataList = new ArrayList<>();
 		testDataList.add(new TestData(new int[] { 2, 3, 4, 4, 3, 2, 3, 4, 5 }, 4));
+		testDataList.add(new TestData(new int[] { 2, 3, 4, 4, 3, 2, 3, 4, 5, 4 }, 4));
+		testDataList.add(new TestData(new int[] { 2, 3, 4, 4, 3, 2, 3, 4, 5, 5 }, 4));
 		//		testDataList.add(new TestData(new int[] { 3, 2, 4, 1, 2 }, 2));
 
 		for (TestData testData : testDataList) {

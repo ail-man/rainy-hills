@@ -9,44 +9,58 @@ public class RainyHills {
 	public int calcWaterVolumeOnSurface(int[] surface) {
 		int result = 0;
 
-		int l, r = 0;
-		int cur = 0;
+		int left, right, tmpRight = 0;
+		int i = 0;
 
 		// пробегаемся по поверхности слева направо
-		while (cur < surface.length - 1) {
-			// Если вода может стечь вправо
-			if (surface[cur] > surface[cur + 1]) {
+		while (i < surface.length - 1) {
+			// Если поверхность правее текущей точки является ниже текущей точки
+			if (surface[i] > surface[i + 1]) {
 				// то это левая стенка сосуда
-				l = cur;
+				left = i;
+
 				// от левой стенки движемся по поверхности дальше направо и ищем правую стенку сосуда
-				while (++cur < surface.length - 1) {
-					// Если вода может стечь влево и не может стечь дальше вправо
-					if (surface[cur] >= surface[cur - 1] && surface[cur] < surface[cur + 1]) {
-						// то это правая стенка сосуда
-						r = cur + 1;
+				while (++i < surface.length - 1) {
+
+					// Если поверхность выше предыдущей точки
+					if (surface[i] >= surface[i - 1]) {
+						// то это временная правая стенка сосуда
+						tmpRight = i;
 						break;
 					}
 				}
-				// считаем объем воды в сосуде
-				if (r > l) {
-					result += calcVesselVolume(surface, l, r);
-					l = r;
+
+				// вторым циклом пробегаемся от следующей точки
+				for (int j = i + 1; j < surface.length; j++) {
+					// если поверхность выше или равна временной правой стенки сосуда
+					if (surface[j] >= surface[tmpRight]) {
+						// то это временная правая стенка сосуда
+						tmpRight = j;
+					}
+				}
+
+				// и самую высокую поверхность делаем правой стенкой сосуда
+				right = tmpRight;
+
+				// затем считаем объем воды в найденном сосуде
+				if (right > left) {
+					result += calcVesselVolume(surface, left, right);
 				}
 			}
-			cur++;
+			i++;
 		}
 
 		return result;
 	}
 
-	public int calcVesselVolume(int[] surface, int l, int r) {
+	public int calcVesselVolume(int[] surface, int left, int right) {
 		int result = 0;
 
-		int waterLevel = Math.min(surface[l], surface[r]);
+		int waterLevel = Math.min(surface[left], surface[right]);
 
-		int cur = l;
+		int cur = left;
 
-		while (++cur < r) {
+		while (++cur < right) {
 			result += waterLevel - surface[cur];
 		}
 
