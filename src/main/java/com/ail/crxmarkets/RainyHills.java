@@ -47,7 +47,7 @@ public class RainyHills {
 					result += calcVesselVolume(surface, left, right);
 					i = right;
 				} else {
-					i = j;
+					i++;
 				}
 			} else {
 				i++;
