@@ -74,12 +74,17 @@ public class RainyHillsTest {
 		//		testDataList.add(new TestData(new int[] { 2, 3, 4, 4, 3, 2, 3, 4, 5, 4 }, 4));
 		//		testDataList.add(new TestData(new int[] { 2, 3, 4, 4, 3, 2, 3, 4, 5, 5 }, 4));
 		//		testDataList.add(new TestData(new int[] { 2, 3, 4, 4, 3, 2, 3, 4, 5, 8 }, 4));
-		//		testDataList.add(new TestData(new int[] { 4, 1, 1, 0, 2, 3 }, 8));
+		testDataList.add(new TestData(new int[] { 4, 1, 1, 0, 2, 3 }, 8));
 		//		testDataList.add(new TestData(new int[] { 2, 4, 0, 2, 2, 4, 3, 3, 7, 4, 4, 5, 3, 2, 6, 3, 5, 5, 5, 8, 8, 8, 6, 1, 6, 6, 7, 1, 4, 4 }, 50));
 		//		testDataList.add(new TestData(new int[] { 5, 3, 7, 2, 6, 4, 5, 9, 1, 2 }, 14));
+
 		testDataList.add(new TestData(new int[] { 5, 3 }, 0));
 		testDataList.add(new TestData(new int[] { 5, 3, 7 }, 2));
 		testDataList.add(new TestData(new int[] { 5, 3, 4, 6 }, 3));
+
+		testDataList.add(new TestData(new int[] { 3, 2, 1 }, 0));
+		testDataList.add(new TestData(new int[] { 1, 2, 3 }, 0));
+		testDataList.add(new TestData(new int[] { 1, 2, 1 }, 0));
 
 		for (TestData testData : testDataList) {
 			assertThat(rainyHills.calcWaterVolumeOnSurface(testData.getSurface()), equalTo(testData.getWaterVolume()));

@@ -16,14 +16,10 @@ public class RainyHills {
 		int left, right = 0, curRight = 0;
 		int i = 0;
 
-		// пробегаемся по поверхности слева направо
 		while (i < surface.length - 1) {
-			// Если вода может стечь вправо
 			if (surface[i] > surface[i + 1]) {
-				// то это левая стенка сосуда
 				left = i;
 
-				// от левой стенки движемся по поверхности дальше направо и ищем правую стенку сосуда
 				int j = i + 2;
 				while (j < surface.length) {
 					if (surface[j - 1] < surface[j]) {
@@ -46,10 +42,11 @@ public class RainyHills {
 					right = curRight;
 				}
 
-				// затем считаем объем воды в найденном сосуде
 				if (right > left) {
 					result += calcVesselVolume(surface, left, right);
 					i = right;
+				} else {
+					i = k;
 				}
 			} else {
 				i++;
