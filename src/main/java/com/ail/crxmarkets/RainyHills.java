@@ -9,7 +9,7 @@ public class RainyHills {
 	public int calcWaterVolumeOnSurface(int[] surface) {
 		int result = 0;
 
-		int left, right, tmpRight = 0;
+		int left, right = 0, tmpRight = 0;
 		int i = 0;
 
 		// пробегаемся по поверхности слева направо
@@ -20,7 +20,7 @@ public class RainyHills {
 				left = i;
 
 				// от левой стенки движемся по поверхности дальше направо и ищем правую стенку сосуда
-				while (++i < surface.length - 1) {
+				while (++i < surface.length) {
 
 					// Если поверхность выше предыдущей точки
 					if (surface[i] >= surface[i - 1]) {
@@ -40,14 +40,17 @@ public class RainyHills {
 				}
 
 				// и самую высокую поверхность делаем правой стенкой сосуда
-				right = tmpRight;
+				if (tmpRight > right) {
+					right = tmpRight;
+				}
 
 				// затем считаем объем воды в найденном сосуде
 				if (right > left) {
 					result += calcVesselVolume(surface, left, right);
 				}
+			} else {
+				i++;
 			}
-			i++;
 		}
 
 		return result;
@@ -61,7 +64,9 @@ public class RainyHills {
 		int cur = left;
 
 		while (++cur < right) {
-			result += waterLevel - surface[cur];
+			if (surface[cur] < waterLevel) {
+				result += waterLevel - surface[cur];
+			}
 		}
 
 		return result;
