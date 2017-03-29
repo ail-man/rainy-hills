@@ -70,6 +70,9 @@ public class RainyHillsTest {
 
 		List<TestData> testDataList = new ArrayList<>();
 
+		testDataList.add(new TestData(new int[] { 8, 1, 1, 4, 2, 1, 1, 4, 4, 2, 7, 3, 2, 7, 2 }, 52));
+		testDataList.add(new TestData(new int[] { 8, 1, 1, 4, 2, 1, 1, 4, 4, 2, 7, 3, 2, 7, 2, 8 }, 71));
+		testDataList.add(new TestData(new int[] { 2, 4, 0, 2, 2, 4, 3, 3, 7, 4, 4, 5, 3, 2, 6, 3, 5, 5, 5, 8, 8, 8, 6, 1, 9, 9, 7, 1, 4, 4 }, 50));
 		testDataList.add(new TestData(new int[] { 2, 4, 0, 2, 2, 4, 3, 3, 7, 4, 4, 5, 3, 2, 6, 3, 5, 5, 5, 8, 8, 8, 6, 1, 6, 6, 7, 1, 4, 4 }, 50));
 		testDataList.add(new TestData(new int[] { 5, 3, 7, 2, 6, 4, 5, 9, 1, 2 }, 14));
 		testDataList.add(new TestData(new int[] { 5, 3, 7, 2, 6, 4, 5, 9 }, 13));
