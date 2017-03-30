@@ -21,7 +21,7 @@ public class RainyHillsEjb implements RainyHillsEjbLocal {
 			return 0;
 		}
 
-		System.out.println("### WATERED SURFACE ###############################################################");
+		System.out.println("===WATERED-SURFACE===============================================================");
 
 		int result = 0;
 
@@ -54,22 +54,22 @@ public class RainyHillsEjb implements RainyHillsEjbLocal {
 	private int getRight(int[] surface, int left, int current) {
 		int right = 0;
 
-		int ahead = current + 2;
-		while (ahead < surface.length) {
-			if (surface[ahead - 1] < surface[ahead]) {
-				right = ahead;
+		current = current + 2;
+		while (current < surface.length) {
+			if (surface[current] > surface[current - 1]) {
+				right = current;
 				break;
 			} else {
-				ahead++;
+				current++;
 			}
 		}
 
-		while (++ahead < surface.length) {
-			if (surface[right] < surface[ahead]) {
-				if (surface[right] > surface[left] && surface[ahead] > surface[left]) {
+		while (++current < surface.length) {
+			if (surface[right] < surface[current]) {
+				if (surface[right] > surface[left] && surface[current] > surface[left]) {
 					break;
 				} else {
-					right = ahead;
+					right = current;
 				}
 			}
 		}
@@ -97,20 +97,21 @@ public class RainyHillsEjb implements RainyHillsEjbLocal {
 	}
 
 	private void printAllSurface(int[] surface) {
-		System.out.println("### INITIAL SURFACE ###############################################################");
+		System.out.println("===INITIAL-SURFACE===============================================================");
 		for (int aSurface : surface) {
 			printSurfaceWithoutWater(aSurface);
 		}
 	}
 
 	private void printAllSurfaceWithouWater(int[] surface) {
-		System.out.println("### WATERED SURFACE ###############################################################");
+		System.out.println("===WATERED-SURFACE===============================================================");
 		for (int aSurface : surface) {
 			printSurfaceWithoutWater(aSurface);
 		}
 	}
 
 	private void printSurfaceWithoutWater(int surfaceHeight) {
+		System.out.print("|");
 		for (int i = 0; i < surfaceHeight; i++) {
 			System.out.print("X");
 		}
@@ -118,6 +119,7 @@ public class RainyHillsEjb implements RainyHillsEjbLocal {
 	}
 
 	private void printSurfaceWithWater(int surfaceHeight, int waterLevel) {
+		System.out.print("|");
 		for (int i = 0; i < surfaceHeight; i++) {
 			System.out.print("X");
 		}
