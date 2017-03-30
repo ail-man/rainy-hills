@@ -56,13 +56,6 @@
 			<artifactId>all-themes</artifactId>
 			<version>1.0.10</version>
 		</dependency>
-		<!-- Code generation -->
-		<dependency>
-			<groupId>org.projectlombok</groupId>
-			<artifactId>lombok</artifactId>
-			<version>1.16.10</version>
-			<scope>provided</scope>
-		</dependency>
 		<!-- Test -->
 		<dependency>
 			<groupId>junit</groupId>
