@@ -8,7 +8,7 @@
 	<ui:define name="content">
 		<f:loadBundle var="msg" basename="com.ail.crxmarkets.main.main"/>
 		<h:form>
-			<h:panelGrid columns="2" cellpadding="10">
+			<h:panelGrid id="panel" columns="1" border="1" cellpadding="10" cellspacing="1">
 				<h:outputText value="#{msg['pressButton']}"/>
 				<p:commandButton value="#{msg['go']}" action="rainyHills" ajax="false"/>
 			</h:panelGrid>
