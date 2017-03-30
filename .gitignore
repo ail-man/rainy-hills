@@ -3,3 +3,6 @@
 /*.iml
 /db/
 /log/
+
+# JRebel
+rebel.xml
