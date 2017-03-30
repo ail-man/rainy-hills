@@ -1,13 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui:composition xmlns="http://www.w3.org/1999/xhtml"
+								xmlns:f="http://xmlns.jcp.org/jsf/core"
 								xmlns:h="http://java.sun.com/jsf/html"
 								xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
 								template="/templates/masterLayout.xhtml">
-
 	<ui:define name="content">
-
-		<h:outputText value="Under construction..."/>
-
+		<f:loadBundle var="msg" basename="com.ail.crxmarkets.rainyHills.rainyHills"/>
+		<h:outputText value="#{msg['underConstruction']}"/>
 	</ui:define>
-
 </ui:composition>
