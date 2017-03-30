@@ -88,6 +88,8 @@ public class RainyHillsEjb implements RainyHillsEjbLocal {
 			if (surface[cur] < waterLevel) {
 				result += waterLevel - surface[cur];
 				printSurfaceWithWater(surface[cur], waterLevel);
+			} else {
+				printSurfaceWithoutWater(surface[cur]);
 			}
 		}
 
