@@ -3,7 +3,8 @@ package com.ail.crxmarkets.ejb;
 import javax.ejb.Stateless;
 
 import com.ail.crxmarkets.algorithm.RainyHillsAlgorithm;
-import com.ail.crxmarkets.algorithm.RainyHillsVesselAlgorithm;
+import com.ail.crxmarkets.algorithm.TowerAlgorithm;
+import com.ail.crxmarkets.algorithm.VesselAlgorithm;
 
 /**
  * Рассматриваем участки с водой как двумерные сосуды с кривым дном,
@@ -45,8 +46,20 @@ import com.ail.crxmarkets.algorithm.RainyHillsVesselAlgorithm;
 public class RainyHillsEjb implements RainyHillsEjbLocal {
 
 	@Override
-	public int calcWaterVolumeOnSurface(int[] surface) {
-		RainyHillsAlgorithm algorithm = new RainyHillsVesselAlgorithm();
+	public int calcWaterVolumeOnSurface(int[] surface, int method) {
+		RainyHillsAlgorithm algorithm;
+
+		switch (method) {
+		case 0:
+			algorithm = new VesselAlgorithm();
+			break;
+		case 1:
+			algorithm = new TowerAlgorithm();
+			break;
+		default:
+			algorithm = new VesselAlgorithm();
+			break;
+		}
 		return algorithm.calcWaterVolumeOnSurface(surface);
 	}
 

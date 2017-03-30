@@ -7,11 +7,11 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
 import org.junit.Test;
 
-public class RainyHillsVesselAlgorithmTest {
+public class VesselAlgorithmTest {
 
 	@Test
 	public void testCalcWaterVolumeOnSurface() throws Exception {
-		RainyHillsVesselAlgorithm rainyHillsEjb = new RainyHillsVesselAlgorithm();
+		VesselAlgorithm rainyHillsEjb = new VesselAlgorithm();
 
 		List<TestData> testDataList = new ArrayList<>();
 
