@@ -1,4 +1,4 @@
-package com.ail.crxmarkets.ejb;
+package com.ail.crxmarkets.algorithm;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -7,11 +7,11 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
 import org.junit.Test;
 
-public class RainyHillsEjbTest {
+public class RainyHillsVesselAlgorithmTest {
 
 	@Test
 	public void testCalcWaterVolumeOnSurface() throws Exception {
-		RainyHillsEjb rainyHillsEjb = new RainyHillsEjb();
+		RainyHillsVesselAlgorithm rainyHillsEjb = new RainyHillsVesselAlgorithm();
 
 		List<TestData> testDataList = new ArrayList<>();
 
