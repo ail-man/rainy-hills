@@ -14,6 +14,8 @@ public class RainyHillsEjb implements RainyHillsEjbLocal {
 	// Алгоритм имеет сложность O(N^2)
 	@Override
 	public int calcWaterVolumeOnSurface(int[] surface) {
+		printAllSurface(surface);
+
 		if (surface.length < 3) {
 			return 0;
 		}
@@ -26,6 +28,7 @@ public class RainyHillsEjb implements RainyHillsEjbLocal {
 		while (current < surface.length - 1) {
 			if (surface[current] > surface[current + 1]) {
 				left = current;
+				printSurfaceWithoutWater(surface[left]);
 
 				int right = getRight(surface, left, current);
 
@@ -36,10 +39,13 @@ public class RainyHillsEjb implements RainyHillsEjbLocal {
 					current++;
 				}
 			} else {
+				printSurfaceWithoutWater(surface[current]);
 				current++;
 			}
 		}
 
+		printSurfaceWithoutWater(surface[current]);
+		System.out.println("###############################################################");
 		return result;
 	}
 
@@ -69,7 +75,7 @@ public class RainyHillsEjb implements RainyHillsEjbLocal {
 		return right;
 	}
 
-	public int calcVesselVolume(int[] surface, int left, int right) {
+	int calcVesselVolume(int[] surface, int left, int right) {
 		int result = 0;
 
 		int waterLevel = Math.min(surface[left], surface[right]);
@@ -79,19 +85,35 @@ public class RainyHillsEjb implements RainyHillsEjbLocal {
 		while (++cur < right) {
 			if (surface[cur] < waterLevel) {
 				result += waterLevel - surface[cur];
+				printSurfaceWithWater(surface[cur], waterLevel);
 			}
 		}
 
 		return result;
 	}
 
-	// TODO vertical histogram
-	public void printSurface(int[] surface) {
-		for (int i = 0; i < surface.length; i++) {
-			for (int j = 0; j < surface[i]; j++) {
-				System.out.print("U");
-			}
-			System.out.println();
+	private void printAllSurface(int[] surface) {
+		for (int aSurface : surface) {
+			printSurfaceWithoutWater(aSurface);
 		}
+		System.out.println("###############################################################");
 	}
+
+	private void printSurfaceWithoutWater(int surfaceHeight) {
+		for (int i = 0; i < surfaceHeight; i++) {
+			System.out.print("X");
+		}
+		System.out.println();
+	}
+
+	private void printSurfaceWithWater(int surfaceHeight, int waterLevel) {
+		for (int i = 0; i < surfaceHeight; i++) {
+			System.out.print("X");
+		}
+		for (int i = 0; i < waterLevel - surfaceHeight; i++) {
+			System.out.print("~");
+		}
+		System.out.println();
+	}
+
 }

@@ -1,9 +1,8 @@
-package com.ail.crxmarkets;
+package com.ail.crxmarkets.ejb;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import com.ail.crxmarkets.ejb.RainyHillsEjb;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
 import org.junit.Test;
@@ -57,12 +56,6 @@ public class RainyHillsEjbTest {
 		for (TestData testData : testDataList) {
 			assertThat(rainyHillsEjb.calcVesselVolume(testData.getSurface(), 0, testData.getSurface().length - 1), equalTo(testData.getWaterVolume()));
 		}
-	}
-
-	@Test
-	public void testPrintHills() throws Exception {
-		RainyHillsEjb rainyHillsEjb = new RainyHillsEjb();
-		rainyHillsEjb.printSurface(new int[] { 3, 2, 4, 1, 2 });
 	}
 
 	@Test
