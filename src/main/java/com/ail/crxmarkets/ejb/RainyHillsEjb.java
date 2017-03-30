@@ -77,7 +77,7 @@ public class RainyHillsEjb implements RainyHillsEjbLocal {
 		return right;
 	}
 
-	int calcVesselVolume(int[] surface, int left, int right) {
+	private int calcVesselVolume(int[] surface, int left, int right) {
 		int result = 0;
 
 		int waterLevel = Math.min(surface[left], surface[right]);
