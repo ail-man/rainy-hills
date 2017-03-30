@@ -3,15 +3,16 @@ package com.ail.crxmarkets;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.ail.crxmarkets.ejb.RainyHillsEjb;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
 import org.junit.Test;
 
-public class RainyHillsTest {
+public class RainyHillsEjbTest {
 
 	@Test
 	public void calcVesselVolume() throws Exception {
-		RainyHills rainyHills = new RainyHills();
+		RainyHillsEjb rainyHillsEjb = new RainyHillsEjb();
 
 		List<TestData> testDataList = new ArrayList<>();
 
@@ -54,19 +55,19 @@ public class RainyHillsTest {
 		testDataList.add(new TestData(new int[] { 3, 0, 2, 1, 0, 4, 7 }, 9));
 
 		for (TestData testData : testDataList) {
-			assertThat(rainyHills.calcVesselVolume(testData.getSurface(), 0, testData.getSurface().length - 1), equalTo(testData.getWaterVolume()));
+			assertThat(rainyHillsEjb.calcVesselVolume(testData.getSurface(), 0, testData.getSurface().length - 1), equalTo(testData.getWaterVolume()));
 		}
 	}
 
 	@Test
 	public void testPrintHills() throws Exception {
-		RainyHills rainyHills = new RainyHills();
-		rainyHills.printSurface(new int[] { 3, 2, 4, 1, 2 });
+		RainyHillsEjb rainyHillsEjb = new RainyHillsEjb();
+		rainyHillsEjb.printSurface(new int[] { 3, 2, 4, 1, 2 });
 	}
 
 	@Test
 	public void testCalcWaterVolumeOnSurface() throws Exception {
-		RainyHills rainyHills = new RainyHills();
+		RainyHillsEjb rainyHillsEjb = new RainyHillsEjb();
 
 		List<TestData> testDataList = new ArrayList<>();
 
@@ -95,7 +96,7 @@ public class RainyHillsTest {
 		testDataList.add(new TestData(new int[] { 1, 2, 1 }, 0));
 
 		for (TestData testData : testDataList) {
-			assertThat(rainyHills.calcWaterVolumeOnSurface(testData.getSurface()), equalTo(testData.getWaterVolume()));
+			assertThat(rainyHillsEjb.calcWaterVolumeOnSurface(testData.getSurface()), equalTo(testData.getWaterVolume()));
 		}
 	}
 

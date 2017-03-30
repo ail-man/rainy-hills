@@ -1,6 +1,9 @@
-package com.ail.crxmarkets;
+package com.ail.crxmarkets.ejb;
 
-public class RainyHills {
+import javax.ejb.Stateless;
+
+@Stateless
+public class RainyHillsEjb implements RainyHillsEjbLocal {
 
 	// Рассматриваем участки с водой как двумерные сосуды с кривым дном,
 	// у которых есть левая и правая стенки (left, right).
@@ -9,6 +12,7 @@ public class RainyHills {
 	// Задача будет состоять в нахождении левой и правой стенок всех сосудов
 	// и суммирование их объемов.
 	// Алгоритм имеет сложность O(N^2)
+	@Override
 	public int calcWaterVolumeOnSurface(int[] surface) {
 		if (surface.length < 3) {
 			return 0;
