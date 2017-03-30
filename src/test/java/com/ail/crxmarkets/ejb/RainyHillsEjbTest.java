@@ -10,7 +10,7 @@ import org.junit.Test;
 public class RainyHillsEjbTest {
 
 	@Test
-	public void calcVesselVolume() throws Exception {
+	public void testCalcWaterVolumeOnSurface() throws Exception {
 		RainyHillsEjb rainyHillsEjb = new RainyHillsEjb();
 
 		List<TestData> testDataList = new ArrayList<>();
@@ -52,17 +52,6 @@ public class RainyHillsEjbTest {
 		testDataList.add(new TestData(new int[] { 4, 0, 2, 1, 0, 3, 3 }, 9));
 		testDataList.add(new TestData(new int[] { 3, 0, 2, 1, 0, 4, 4 }, 9));
 		testDataList.add(new TestData(new int[] { 3, 0, 2, 1, 0, 4, 7 }, 9));
-
-		for (TestData testData : testDataList) {
-			assertThat(rainyHillsEjb.calcVesselVolume(testData.getSurface(), 0, testData.getSurface().length - 1), equalTo(testData.getWaterVolume()));
-		}
-	}
-
-	@Test
-	public void testCalcWaterVolumeOnSurface() throws Exception {
-		RainyHillsEjb rainyHillsEjb = new RainyHillsEjb();
-
-		List<TestData> testDataList = new ArrayList<>();
 
 		testDataList.add(new TestData(new int[] { 8, 1, 1, 4, 2, 1, 1, 4, 4, 2, 7, 3, 2, 7, 2 }, 52));
 		testDataList.add(new TestData(new int[] { 8, 1, 1, 4, 2, 1, 1, 4, 4, 2, 7, 3, 2, 7, 2, 8 }, 71));
