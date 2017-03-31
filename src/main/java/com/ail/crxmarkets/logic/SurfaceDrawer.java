@@ -6,14 +6,14 @@ package com.ail.crxmarkets.logic;
 public interface SurfaceDrawer {
 
 	/**
-	 * Рисует поверхость
+	 * Рисует поверхость, определённой массивом
 	 *
 	 * @param surface массив поверхности
 	 */
 	void drawSurface(int[] surface);
 
 	/**
-	 * Рисует поверхость с водой
+	 * Рисует поверхость с водой, определённые массивами одинаковой длинны
 	 *
 	 * @param surface массив поверхности
 	 * @param water   массив воды на поверхности
