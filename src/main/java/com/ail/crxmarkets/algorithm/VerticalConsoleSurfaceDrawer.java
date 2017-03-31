@@ -1,9 +1,9 @@
-package com.ail.crxmarkets.histogram;
+package com.ail.crxmarkets.algorithm;
 
-public class VerticalConsoleHistogram implements Histogram {
+public class VerticalConsoleSurfaceDrawer implements SurfaceDrawer {
 
 	@Override
-	public void drawHistogram(int[] surface) {
+	public void drawSurface(int[] surface) {
 		System.out.println("===INITIAL-SURFACE===============================================================");
 		for (int height : surface) {
 			System.out.print("|");
@@ -15,7 +15,7 @@ public class VerticalConsoleHistogram implements Histogram {
 	}
 
 	@Override
-	public void drawDoubleLayerHistogram(int[] surface, int[] water) {
+	public void drawSurfaceWithWater(int[] surface, int[] water) {
 		System.out.println("===WATERED-SURFACE===============================================================");
 		for (int i = 0; i < surface.length; i++) {
 			System.out.print("|");

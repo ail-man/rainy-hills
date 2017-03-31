@@ -1,7 +1,5 @@
 package com.ail.crxmarkets.algorithm;
 
-import com.ail.crxmarkets.histogram.Histogram;
-import com.ail.crxmarkets.histogram.HorizontalConsoleHistogram;
 import org.apache.commons.lang3.tuple.Pair;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
@@ -9,19 +7,18 @@ import org.junit.Test;
 
 public class VesselAlgorithmTest extends BaseTest {
 
-	private Histogram histogram = new HorizontalConsoleHistogram();
+	private VesselAlgorithm vesselAlgorithm = new VesselAlgorithm();
+	private SurfaceDrawer surfaceDrawer = new HorizontalConsoleSurfaceDrawer();
 
 	@Test
 	public void testCalcWaterOnSurface() throws Exception {
-		VesselAlgorithm vesselAlgorithm = new VesselAlgorithm();
-
 		for (Pair<int[], Long> testData : getTestData()) {
 			int[] surface = testData.getLeft();
-			histogram.drawHistogram(surface);
+			surfaceDrawer.drawSurface(surface);
 
 			int[] water = vesselAlgorithm.calcWaterOnSurface(surface);
 			assertThat(water.length, equalTo(surface.length));
-			histogram.drawDoubleLayerHistogram(surface, water);
+			surfaceDrawer.drawSurfaceWithWater(surface, water);
 
 			long waterTotal = testData.getRight();
 			assertThat(sumWater(water), equalTo(waterTotal));
