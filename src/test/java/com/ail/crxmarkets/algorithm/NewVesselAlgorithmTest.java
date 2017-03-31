@@ -5,17 +5,17 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
 import org.junit.Test;
 
-public class VesselWateredAlgorithmTest extends BaseTest {
+public class NewVesselAlgorithmTest extends BaseTest {
 
 	@Test
 	public void calcWaterOnSurface() throws Exception {
-		VesselWateredAlgorithm vesselWateredAlgorithm = new VesselWateredAlgorithm();
+		NewVesselAlgorithm newVesselAlgorithm = new NewVesselAlgorithm();
 
 		for (Pair<int[], Long> testData : getTestData()) {
 			int[] surface = testData.getLeft();
 			printSurface(surface);
 
-			int[] water = vesselWateredAlgorithm.calcWaterOnSurface(surface);
+			int[] water = newVesselAlgorithm.calcWaterOnSurface(surface);
 			assertThat(water.length, equalTo(surface.length));
 			printSurfaceWithWater(surface, water);
 

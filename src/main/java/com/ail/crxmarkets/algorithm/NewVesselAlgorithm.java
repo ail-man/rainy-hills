@@ -1,6 +1,6 @@
 package com.ail.crxmarkets.algorithm;
 
-public class VesselWateredAlgorithm {
+public class NewVesselAlgorithm {
 
 	public int[] calcWaterOnSurface(int[] surface) {
 		int[] water = new int[surface.length];
