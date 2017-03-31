@@ -46,7 +46,7 @@ import com.ail.crxmarkets.algorithm.VesselAlgorithm;
 public class RainyHillsEjb implements RainyHillsEjbLocal {
 
 	@Override
-	public int calcWaterVolumeOnSurface(int[] surface, int method) {
+	public long calcWaterVolumeOnSurface(int[] surface, int method) {
 		RainyHillsAlgorithm algorithm;
 
 		switch (method) {

@@ -6,7 +6,7 @@ package com.ail.crxmarkets.algorithm;
 public class TowerAlgorithm implements RainyHillsAlgorithm {
 
 	@Override
-	public int calcWaterVolumeOnSurface(int[] surface) {
+	public long calcWaterVolumeOnSurface(int[] surface) {
 		int[] maxSeenSoFarFromRight = new int[surface.length];
 
 		//Populate maxSeenSoFarFromRight array.
@@ -15,7 +15,7 @@ public class TowerAlgorithm implements RainyHillsAlgorithm {
 			maxSeenSoFarFromRight[i] = Math.max(maxSeenSoFarFromRight[i + 1], surface[i]);
 		}
 
-		int totalWaterCollection = 0;
+		long totalWaterCollection = 0;
 
 		int maxSeenSoFarFromLeft = 0;
 		for (int i = 0; i < surface.length; i++) {

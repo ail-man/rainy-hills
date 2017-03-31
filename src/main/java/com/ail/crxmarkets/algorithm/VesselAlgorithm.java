@@ -39,7 +39,7 @@ package com.ail.crxmarkets.algorithm;
 public class VesselAlgorithm implements RainyHillsAlgorithm {
 
 	@Override
-	public int calcWaterVolumeOnSurface(int[] surface) {
+	public long calcWaterVolumeOnSurface(int[] surface) {
 		printAllSurface(surface);
 
 		if (surface.length < 3) {
@@ -49,7 +49,7 @@ public class VesselAlgorithm implements RainyHillsAlgorithm {
 
 		System.out.println("===WATERED-SURFACE===============================================================");
 
-		int result = 0;
+		long result = 0;
 
 		int left;
 		int current = 0;
@@ -103,8 +103,8 @@ public class VesselAlgorithm implements RainyHillsAlgorithm {
 		return right;
 	}
 
-	private int calcVesselVolume(int[] surface, int left, int right) {
-		int result = 0;
+	private long calcVesselVolume(int[] surface, int left, int right) {
+		long result = 0;
 
 		int waterLevel = Math.min(surface[left], surface[right]);
 
