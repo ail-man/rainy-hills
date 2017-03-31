@@ -13,11 +13,11 @@ public class NewVesselAlgorithmTest extends BaseTest {
 
 		for (Pair<int[], Long> testData : getTestData()) {
 			int[] surface = testData.getLeft();
-			printSurface(surface);
+			printVerticalSurface(surface);
 
 			int[] water = newVesselAlgorithm.calcWaterOnSurface(surface);
 			assertThat(water.length, equalTo(surface.length));
-			printSurfaceWithWater(surface, water);
+			printVerticalSurfaceWithWater(surface, water);
 
 			long waterTotal = testData.getRight();
 			assertThat(sumWater(water), equalTo(waterTotal));
