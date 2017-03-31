@@ -1,4 +1,4 @@
-package com.ail.crxmarkets.algorithm;
+package com.ail.crxmarkets.logic;
 
 /**
  * Реализация алгоритма для рассчёта количества воды методом сосудов.

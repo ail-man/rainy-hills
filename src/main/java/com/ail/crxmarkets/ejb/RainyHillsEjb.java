@@ -2,9 +2,9 @@ package com.ail.crxmarkets.ejb;
 
 import javax.ejb.Stateless;
 
-import com.ail.crxmarkets.algorithm.RainyHillsAlgorithm;
-import com.ail.crxmarkets.algorithm.TowerAlgorithm;
-import com.ail.crxmarkets.algorithm.VesselAlgorithm;
+import com.ail.crxmarkets.logic.RainyHillsAlgorithm;
+import com.ail.crxmarkets.logic.TowerAlgorithm;
+import com.ail.crxmarkets.logic.VesselAlgorithm;
 
 @Stateless
 public class RainyHillsEjb implements RainyHillsEjbLocal {

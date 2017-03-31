@@ -1,4 +1,4 @@
-package com.ail.crxmarkets.algorithm;
+package com.ail.crxmarkets.logic;
 
 /**
  * Рисует поверхность в консоли горизонтально

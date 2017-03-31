@@ -1,4 +1,4 @@
-package com.ail.crxmarkets.algorithm;
+package com.ail.crxmarkets.logic;
 
 import java.util.ArrayList;
 import java.util.List;

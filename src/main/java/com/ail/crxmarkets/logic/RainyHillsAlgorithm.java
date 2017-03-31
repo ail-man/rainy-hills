@@ -1,5 +1,9 @@
-package com.ail.crxmarkets.algorithm;
+package com.ail.crxmarkets.logic;
 
+/**
+ * Определяет интерфейс алгоритма для рассчёта воды на поверхности,
+ * определённой массивом
+ */
 public interface RainyHillsAlgorithm {
 
 	/**

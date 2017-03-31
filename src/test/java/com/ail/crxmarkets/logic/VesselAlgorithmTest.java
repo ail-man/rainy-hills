@@ -1,4 +1,4 @@
-package com.ail.crxmarkets.algorithm;
+package com.ail.crxmarkets.logic;
 
 import org.apache.commons.lang3.tuple.Pair;
 import static org.hamcrest.MatcherAssert.assertThat;

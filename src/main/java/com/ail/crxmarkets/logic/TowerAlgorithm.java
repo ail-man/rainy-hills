@@ -1,4 +1,4 @@
-package com.ail.crxmarkets.algorithm;
+package com.ail.crxmarkets.logic;
 
 /**
  * Found on http://javabypatel.blogspot.ru/2016/10/trapping-rain-water-between-towers.html
