@@ -3,7 +3,7 @@ package com.ail.crxmarkets.histogram;
 public class HorizontalConsoleHistogram implements Histogram {
 
 	@Override
-	public void printSurface(int[] surface) {
+	public void drawHistogram(int[] surface) {
 		System.out.println("===INITIAL-SURFACE===============================================================");
 
 		int var;
@@ -32,7 +32,7 @@ public class HorizontalConsoleHistogram implements Histogram {
 	}
 
 	@Override
-	public void printSurfaceWithWater(int[] surface, int[] water) {
+	public void drawDoubleLayerHistogram(int[] surface, int[] water) {
 		System.out.println("===WATERED-SURFACE===============================================================");
 
 		int var, level;

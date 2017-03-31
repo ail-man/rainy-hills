@@ -2,8 +2,8 @@ package com.ail.crxmarkets.histogram;
 
 public interface Histogram {
 
-	void printSurface(int[] surface);
+	void drawHistogram(int[] surface);
 
-	void printSurfaceWithWater(int[] surface, int[] water);
+	void drawDoubleLayerHistogram(int[] surface, int[] water);
 
 }

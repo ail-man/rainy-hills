@@ -33,31 +33,30 @@ package com.ail.crxmarkets.algorithm;
  * 2) иначе, делаем <right> = этому элементу и продолжаем цикл.
  * <p>
  * Затем берём поверхность между <left> и <right>, считаем количество воды.
- * Cуммируем и продолжаем двигаться дальше по поверхности по тому же алгоритму.
+ * и продолжаем двигаться дальше по поверхности по тому же алгоритму.
  * <p>
  * Алгоритм предположительно имеет сложность O(N^2)
  */
 public class VesselAlgorithm implements RainyHillsAlgorithm {
 
 	/**
-	 * Рассчитывает общее количество воды, которое может вместиться на поверхности,
+	 * Рассчитывает количество воды над каждым элементом поверхности
+	 * и возвращает в виде массива
 	 * определённой массивом surface
 	 *
 	 * @param surface массив поверхности
-	 * @return общее количество воды, которое может поместиться на поверхности
+	 * @return массив количества воды над каждым элементом поверхности
 	 */
 	@Override
-	public long calcWaterVolumeOnSurface(int[] surface) {
-		printAllSurface(surface);
+	public int[] calcWaterOnSurface(int[] surface) {
+		int[] water = new int[surface.length];
 
 		if (surface.length < 3) {
-			printAllSurfaceWithouWater(surface);
-			return 0;
+			for (int i = 0; i < surface.length; i++) {
+				water[i] = 0;
+			}
+			return water;
 		}
-
-		System.out.println("===WATERED-SURFACE===============================================================");
-
-		long result = 0;
 
 		int left;
 		int current = 0;
@@ -65,24 +64,24 @@ public class VesselAlgorithm implements RainyHillsAlgorithm {
 		while (current < surface.length - 1) {
 			if (surface[current] > surface[current + 1]) {
 				left = current;
-				printSurfaceWithoutWater(surface[left]);
+				water[left] = 0;
 
 				int right = getRight(surface, left, current);
 
 				if (right > left) {
-					result += calcVesselVolume(surface, left, right);
+					calcWaterInVessel(surface, water, left, right);
 					current = right;
 				} else {
 					current++;
 				}
 			} else {
-				printSurfaceWithoutWater(surface[current]);
+				water[current] = 0;
 				current++;
 			}
 		}
 
-		printSurfaceWithoutWater(surface[current]);
-		return result;
+		water[current] = 0;
+		return water;
 	}
 
 	private int getRight(int[] surface, int left, int current) {
@@ -111,56 +110,18 @@ public class VesselAlgorithm implements RainyHillsAlgorithm {
 		return right;
 	}
 
-	private long calcVesselVolume(int[] surface, int left, int right) {
-		long result = 0;
-
+	private void calcWaterInVessel(int[] surface, int[] water, int left, int right) {
 		int waterLevel = Math.min(surface[left], surface[right]);
 
 		int cur = left;
 
 		while (++cur < right) {
 			if (surface[cur] < waterLevel) {
-				result += waterLevel - surface[cur];
-				printSurfaceWithWater(surface[cur], waterLevel);
+				water[cur] = waterLevel - surface[cur];
 			} else {
-				printSurfaceWithoutWater(surface[cur]);
+				water[cur] = 0;
 			}
 		}
-
-		return result;
-	}
-
-	private void printAllSurface(int[] surface) {
-		System.out.println("===INITIAL-SURFACE===============================================================");
-		for (int aSurface : surface) {
-			printSurfaceWithoutWater(aSurface);
-		}
-	}
-
-	private void printAllSurfaceWithouWater(int[] surface) {
-		System.out.println("===WATERED-SURFACE===============================================================");
-		for (int aSurface : surface) {
-			printSurfaceWithoutWater(aSurface);
-		}
-	}
-
-	private void printSurfaceWithoutWater(int surfaceHeight) {
-		System.out.print("|");
-		for (int i = 0; i < surfaceHeight; i++) {
-			System.out.print("X");
-		}
-		System.out.println();
-	}
-
-	private void printSurfaceWithWater(int surfaceHeight, int waterLevel) {
-		System.out.print("|");
-		for (int i = 0; i < surfaceHeight; i++) {
-			System.out.print("X");
-		}
-		for (int i = 0; i < waterLevel - surfaceHeight; i++) {
-			System.out.print("~");
-		}
-		System.out.println();
 	}
 
 }

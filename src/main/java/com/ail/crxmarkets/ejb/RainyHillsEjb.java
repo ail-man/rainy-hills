@@ -60,7 +60,12 @@ public class RainyHillsEjb implements RainyHillsEjbLocal {
 			algorithm = new VesselAlgorithm();
 			break;
 		}
-		return algorithm.calcWaterVolumeOnSurface(surface);
+
+		int totalWater = 0;
+		for (int water : algorithm.calcWaterOnSurface(surface)) {
+			totalWater += water;
+		}
+		return totalWater;
 	}
 
 }
