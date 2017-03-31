@@ -11,8 +11,10 @@ public class VesselWateredAlgorithmTest extends BaseTest {
 	public void calcWaterOnSurface() throws Exception {
 		VesselWateredAlgorithm vesselWateredAlgorithm = new VesselWateredAlgorithm();
 
-		for (Pair testData : getTestData()) {
-			assertThat(sumWater(vesselWateredAlgorithm.calcWaterOnSurface((int[]) testData.getLeft())), equalTo(testData.getRight()));
+		for (Pair<int[], Long> testData : getTestData()) {
+			int[] surface = testData.getLeft();
+			long waterTotal = testData.getRight();
+			assertThat(sumWater(vesselWateredAlgorithm.calcWaterOnSurface(surface)), equalTo(waterTotal));
 		}
 	}
 

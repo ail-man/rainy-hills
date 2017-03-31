@@ -7,8 +7,8 @@ import org.apache.commons.lang3.tuple.Pair;
 
 public class BaseTest {
 
-	List<Pair> getTestData() {
-		List<Pair> testDataList = new ArrayList<>();
+	List<Pair<int[], Long>> getTestData() {
+		List<Pair<int[], Long>> testDataList = new ArrayList<>();
 
 		testDataList.add(Pair.of(new int[] { 0 }, 0L));
 
