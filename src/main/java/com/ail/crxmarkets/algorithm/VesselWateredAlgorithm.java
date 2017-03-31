@@ -2,17 +2,22 @@ package com.ail.crxmarkets.algorithm;
 
 public class VesselWateredAlgorithm {
 
-	public long calcWaterVolumeOnSurface(int[] surface) {
-		printAllSurface(surface);
+	public int[] calcWaterOnSurface(int[] surface) {
+		System.out.println("===INITIAL-SURFACE===============================================================");
+		printSurface(surface);
+
+		int[] water = new int[surface.length];
 
 		if (surface.length < 3) {
-			printAllSurfaceWithouWater(surface);
-			return 0;
+			System.out.println("===WATERED-SURFACE===============================================================");
+			printSurface(surface);
+			for (int i = 0; i < surface.length; i++) {
+				water[i] = 0;
+			}
+			return water;
 		}
 
 		System.out.println("===WATERED-SURFACE===============================================================");
-
-		long result = 0;
 
 		int left;
 		int current = 0;
@@ -20,24 +25,24 @@ public class VesselWateredAlgorithm {
 		while (current < surface.length - 1) {
 			if (surface[current] > surface[current + 1]) {
 				left = current;
-				printSurfaceWithoutWater(surface[left]);
+				printSurfaceWithoutWater(left, surface[left], water);
 
 				int right = getRight(surface, left, current);
 
 				if (right > left) {
-					result += calcVesselVolume(surface, left, right);
+					calcVesselVolume(surface, water, left, right);
 					current = right;
 				} else {
 					current++;
 				}
 			} else {
-				printSurfaceWithoutWater(surface[current]);
+				printSurfaceWithoutWater(current, surface[current], water);
 				current++;
 			}
 		}
 
-		printSurfaceWithoutWater(surface[current]);
-		return result;
+		printSurfaceWithoutWater(current, surface[current], water);
+		return water;
 	}
 
 	private int getRight(int[] surface, int left, int current) {
@@ -66,7 +71,7 @@ public class VesselWateredAlgorithm {
 		return right;
 	}
 
-	private long calcVesselVolume(int[] surface, int left, int right) {
+	private long calcVesselVolume(int[] surface, int[] water, int left, int right) {
 		long result = 0;
 
 		int waterLevel = Math.min(surface[left], surface[right]);
@@ -77,32 +82,30 @@ public class VesselWateredAlgorithm {
 			if (surface[cur] < waterLevel) {
 				result += waterLevel - surface[cur];
 				printSurfaceWithWater(surface[cur], waterLevel);
+				water[cur] = waterLevel;
 			} else {
-				printSurfaceWithoutWater(surface[cur]);
+				printSurfaceWithoutWater(cur, surface[cur], water);
 			}
 		}
 
 		return result;
 	}
 
-	private void printAllSurface(int[] surface) {
-		System.out.println("===INITIAL-SURFACE===============================================================");
-		for (int aSurface : surface) {
-			printSurfaceWithoutWater(aSurface);
+	private void printSurface(int[] surface) {
+		for (int height : surface) {
+			System.out.print("|");
+			for (int i = 0; i < height; i++) {
+				System.out.print("X");
+			}
+			System.out.println();
 		}
 	}
 
-	private void printAllSurfaceWithouWater(int[] surface) {
-		System.out.println("===WATERED-SURFACE===============================================================");
-		for (int aSurface : surface) {
-			printSurfaceWithoutWater(aSurface);
-		}
-	}
-
-	private void printSurfaceWithoutWater(int surfaceHeight) {
+	private void printSurfaceWithoutWater(int index, int surfaceHeight, int[] water) {
 		System.out.print("|");
 		for (int i = 0; i < surfaceHeight; i++) {
 			System.out.print("X");
+			water[index] = 0;
 		}
 		System.out.println();
 	}
