@@ -15,6 +15,7 @@ public class VerticalConsoleSurfaceDrawer implements SurfaceDrawer {
 			}
 			System.out.println();
 		}
+		System.out.println("=================================================================================\n");
 	}
 
 	@Override
@@ -30,6 +31,7 @@ public class VerticalConsoleSurfaceDrawer implements SurfaceDrawer {
 			}
 			System.out.println();
 		}
+		System.out.println("=================================================================================\n");
 	}
 
 }

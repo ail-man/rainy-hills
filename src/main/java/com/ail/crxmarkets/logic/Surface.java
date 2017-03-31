@@ -27,6 +27,14 @@ public class Surface {
 		water = new int[surface.length];
 	}
 
+	public void drawSurface(SurfaceDrawer surfaceDrawer) {
+		surfaceDrawer.drawSurface(surface);
+	}
+
+	public void drawSurfaceWithWater(SurfaceDrawer surfaceDrawer) {
+		surfaceDrawer.drawSurfaceWithWater(surface, water);
+	}
+
 	public int[] getSurface() {
 		return surface.clone();
 	}
