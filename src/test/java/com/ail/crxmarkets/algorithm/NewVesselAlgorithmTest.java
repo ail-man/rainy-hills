@@ -8,7 +8,7 @@ import org.junit.Test;
 public class NewVesselAlgorithmTest extends BaseTest {
 
 	@Test
-	public void calcWaterOnSurface() throws Exception {
+	public void testCalcWaterOnSurface() throws Exception {
 		NewVesselAlgorithm newVesselAlgorithm = new NewVesselAlgorithm();
 
 		for (Pair<int[], Long> testData : getTestData()) {

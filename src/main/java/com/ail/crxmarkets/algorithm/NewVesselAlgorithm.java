@@ -1,7 +1,22 @@
 package com.ail.crxmarkets.algorithm;
 
+/**
+ * Алгоритм является усовершенствованной версией алгоритма VesselAlgorithm,
+ * позволяющим возвращать массив количества воды над каждым элементом поверхности.
+ * В основу взят тот же алгорим рассчёта методом сосудов.
+ *
+ * @see com.ail.crxmarkets.algorithm.VesselAlgorithm#calcWaterVolumeOnSurface(int[] surface)
+ */
 public class NewVesselAlgorithm {
 
+	/**
+	 * Рассчитывает количество воды над каждым элементом поверхности
+	 * и возвращает в виде массива
+	 * определённой массивом surface
+	 *
+	 * @param surface массив поверхности
+	 * @return массив количества воды над каждым элементом поверхности
+	 */
 	public int[] calcWaterOnSurface(int[] surface) {
 		int[] water = new int[surface.length];
 

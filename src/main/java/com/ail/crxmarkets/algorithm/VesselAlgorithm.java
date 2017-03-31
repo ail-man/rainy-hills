@@ -1,6 +1,7 @@
 package com.ail.crxmarkets.algorithm;
 
 /**
+ * Реализация алгоритма для рассчёта количества воды методом сосудов.
  * Рассматриваем участки с водой как двумерные сосуды с кривым дном,
  * у которых есть левая и правая стенки (left, right).
  * Стенки могут быть разной высоты.
@@ -38,6 +39,13 @@ package com.ail.crxmarkets.algorithm;
  */
 public class VesselAlgorithm implements RainyHillsAlgorithm {
 
+	/**
+	 * Рассчитывает общее количество воды, которое может вместиться на поверхности,
+	 * определённой массивом surface
+	 *
+	 * @param surface массив поверхности
+	 * @return общее количество воды, которое может поместиться на поверхности
+	 */
 	@Override
 	public long calcWaterVolumeOnSurface(int[] surface) {
 		printAllSurface(surface);
