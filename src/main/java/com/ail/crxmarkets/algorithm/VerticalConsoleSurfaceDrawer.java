@@ -1,5 +1,8 @@
 package com.ail.crxmarkets.algorithm;
 
+/**
+ * Рисует поверхность в консоли вертикально
+ */
 public class VerticalConsoleSurfaceDrawer implements SurfaceDrawer {
 
 	@Override

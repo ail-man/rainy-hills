@@ -27,6 +27,7 @@ public class MbRainyHills {
 
 	public String calculate() {
 		log.debug("{}.calculate() invoked", this.getClass().getName());
+		rainyHillsEjbLocal.calcWaterOnSurface(new int[] { 1 }, 2);
 		return MbRainyHills.PAGE_NAME;
 	}
 }

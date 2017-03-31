@@ -5,6 +5,6 @@ import javax.ejb.Local;
 @Local
 public interface RainyHillsEjbLocal {
 
-	long calcWaterVolumeOnSurface(int[] surface, int method);
+	long calcWaterOnSurface(int[] surface, int method);
 
 }
