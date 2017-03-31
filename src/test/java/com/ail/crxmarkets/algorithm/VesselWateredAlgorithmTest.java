@@ -13,8 +13,14 @@ public class VesselWateredAlgorithmTest extends BaseTest {
 
 		for (Pair<int[], Long> testData : getTestData()) {
 			int[] surface = testData.getLeft();
+			printSurface(surface);
+
+			int[] water = vesselWateredAlgorithm.calcWaterOnSurface(surface);
+			assertThat(water.length, equalTo(surface.length));
+			printSurfaceWithWater(surface, water);
+
 			long waterTotal = testData.getRight();
-			assertThat(sumWater(vesselWateredAlgorithm.calcWaterOnSurface(surface)), equalTo(waterTotal));
+			assertThat(sumWater(water), equalTo(waterTotal));
 		}
 	}
 

@@ -23,7 +23,7 @@ public class VesselWateredAlgorithm {
 				int right = getRight(surface, left, current);
 
 				if (right > left) {
-					calcVesselVolume(surface, water, left, right);
+					calcWaterInVessel(surface, water, left, right);
 					current = right;
 				} else {
 					current++;
@@ -64,7 +64,7 @@ public class VesselWateredAlgorithm {
 		return right;
 	}
 
-	private void calcVesselVolume(int[] surface, int[] water, int left, int right) {
+	private void calcWaterInVessel(int[] surface, int[] water, int left, int right) {
 		int waterLevel = Math.min(surface[left], surface[right]);
 
 		int cur = left;
