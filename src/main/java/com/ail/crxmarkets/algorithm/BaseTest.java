@@ -34,7 +34,6 @@ public class BaseTest {
 		testDataList.add(Pair.of(new int[] { 1, 0, 3 }, 1L));
 
 		testDataList.add(Pair.of(new int[] { 3, 3, 0, 3 }, 3L));
-		testDataList.add(Pair.of(new int[] { 3, 0, 0, 3 }, 6L));
 		testDataList.add(Pair.of(new int[] { 3, 0, 0, 0, 3 }, 9L));
 
 		testDataList.add(Pair.of(new int[] { 3, 3, 3, 3 }, 0L));

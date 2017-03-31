@@ -71,7 +71,7 @@ public class VesselWateredAlgorithm {
 
 		while (++cur < right) {
 			if (surface[cur] < waterLevel) {
-				water[cur] = waterLevel;
+				water[cur] = waterLevel - surface[cur];
 			} else {
 				water[cur] = 0;
 			}
