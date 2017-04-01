@@ -45,10 +45,9 @@ public class MbRainyHills {
 	private CalculationMethod calculationMethod;
 	private String textArea;
 
-	// TODO исправить баг с отрисовкой при установлении параметров в 0
-	// TODO сделать ограничения от 1 до 500
 	// TODO реализовать неоптимизированный алгоритм методом башен
-	// TODO ограничения на величины (только положительные и не более 1000 в длину и высоту)
+	// TODO подключить Spring (под вопросом)
+	// TODO подключить логинку с JAAS
 	@PostConstruct
 	public void init() {
 		log.debug("Init MBean {} success", this.getClass().getName());

@@ -33,7 +33,7 @@
 							<h:panelGroup>
 								<h:panelGrid columns="1" cellpadding="5" styleClass="margin-bottom">
 									<h:outputText id="genSurfaceLengthOut" value="#{msg['length']}: #{mbRainyHills.surfaceLength}"/>
-									<p:slider for="genSurfaceLengthIn" display="genSurfaceLengthOut" style="width: 200px" displayTemplate="#{msg['length']}: {value}"/>
+									<p:slider for="genSurfaceLengthIn" minValue="1" maxValue="300" display="genSurfaceLengthOut" style="width:300px" displayTemplate="#{msg['length']}: {value}"/>
 								</h:panelGrid>
 								<h:inputHidden id="genSurfaceLengthIn" value="#{mbRainyHills.surfaceLength}"/>
 							</h:panelGroup>
@@ -41,7 +41,8 @@
 							<h:panelGroup>
 								<h:panelGrid columns="1" cellpadding="5" styleClass="margin-bottom">
 									<h:outputText id="surfaceHeightRange" value="#{msg['heightBetween']} #{mbRainyHills.surfaceMinHeight} #{msg['and']} #{mbRainyHills.surfaceMaxHeight}"/>
-									<p:slider for="surfaceMinHeight,surfaceMaxHeight" display="surfaceHeightRange" style="width: 400px" range="true" displayTemplate="#{msg['heightBetween']} {min} #{msg['and']} {max}"/>
+									<p:slider for="surfaceMinHeight,surfaceMaxHeight" minValue="1" maxValue="1000" display="surfaceHeightRange" style="width: 400px" range="true"
+														displayTemplate="#{msg['heightBetween']} {min} #{msg['and']} {max}"/>
 								</h:panelGrid>
 								<h:inputHidden id="surfaceMinHeight" value="#{mbRainyHills.surfaceMinHeight}"/>
 								<h:inputHidden id="surfaceMaxHeight" value="#{mbRainyHills.surfaceMaxHeight}"/>
