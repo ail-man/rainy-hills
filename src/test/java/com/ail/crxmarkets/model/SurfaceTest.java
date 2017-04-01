@@ -31,7 +31,7 @@ public class SurfaceTest {
 	@Test
 	public void testFillWithWater() throws Exception {
 		for (int i = 0; i < TEST_COUNT; i++) {
-			surface.fillWithWater(fillingAlgorythm, null);
+			surface.fillWithWater(fillingAlgorythm, new int[] {});
 			surface.drawSurface(surfaceDrawer);
 			surface.drawSurfaceWithWater(surfaceDrawer);
 		}
@@ -45,7 +45,7 @@ public class SurfaceTest {
 
 	@Test
 	public void testImmutable() throws Exception {
-		surface.fillWithWater(fillingAlgorythm, null);
+		surface.fillWithWater(fillingAlgorythm, new int[] {});
 	}
 
 }

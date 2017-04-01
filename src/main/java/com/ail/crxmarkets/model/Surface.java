@@ -17,34 +17,33 @@ public class Surface implements Serializable {
 	private final int[] surface;
 	private int[] water;
 
-	private boolean filled;
-	private long hashedTotalWater;
+	private boolean totalWaterCalculated;
+	private long totalWaterHashed;
 
 	@SuppressWarnings({ "WeakerAccess" })
 	public Surface(int[] surface) {
 		this.surface = surface.clone();
 		this.water = new int[surface.length];
-		this.filled = false;
+
+		this.totalWaterHashed = 0;
+		this.totalWaterCalculated = true;
 	}
 
 	public static Surface random(int length, int minHeight, int maxHeight) {
 		return new Surface(Utils.randomArray(length, minHeight, maxHeight));
 	}
 
-	public synchronized void fillWithWater(WaterFillMethod waterFillMethod, int[] waterToFill) {
-		if (!filled) {
-			water = waterFillMethod.calcWaterOnSurface(surface, waterToFill);
-			hashedTotalWater = Utils.sum(water);
-			filled = true;
-		}
+	@SuppressWarnings("UnusedDeclaration")
+	public void fillWithWater(WaterFillMethod waterFillMethod, int[] waterToFill) {
+		water = waterFillMethod.calcWaterOnSurface(surface, waterToFill);
+		totalWaterCalculated = false;
 	}
 
 	@SuppressWarnings({ "WeakerAccess" })
-	public synchronized void wipeTheWater() {
-		if (filled) {
-			water = new int[surface.length];
-			filled = false;
-		}
+	public void wipeTheWater() {
+		water = new int[surface.length];
+		totalWaterHashed = 0;
+		totalWaterCalculated = true;
 	}
 
 	@SuppressWarnings({ "WeakerAccess" })
@@ -59,10 +58,10 @@ public class Surface implements Serializable {
 
 	@SuppressWarnings({ "UnusedDeclaration" })
 	public long getTotalWater() {
-		if (filled) {
-			return hashedTotalWater;
+		if (!totalWaterCalculated) {
+			totalWaterHashed = Utils.sum(water);
 		}
-		return 0;
+		return totalWaterHashed;
 	}
 
 	public int[] getSurface() {
