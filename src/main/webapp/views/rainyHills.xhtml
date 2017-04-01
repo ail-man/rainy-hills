@@ -27,11 +27,20 @@
 				<h:panelGrid id="paramsPanel" columns="1">
 
 					<h:panelGrid columns="5" border="0" cellpadding="5" cellspacing="2">
+
 						<h:panelGrid columns="1" styleClass="margin-bottom">
-							<h:outputText id="output" value="#{msg['length']}: #{mbRainyHills.surfaceLength}"/>
-							<h:inputHidden id="txt2" value="#{mbRainyHills.surfaceLength}"/>
-							<p:slider for="txt2" display="output" style="width: 200px" displayTemplate="#{msg['length']}: {value}"/>
+							<h:outputText id="genSurfaceLengthOut" value="#{msg['length']}: #{mbRainyHills.surfaceLength}"/>
+							<h:inputHidden id="genSurfaceLengthIn" value="#{mbRainyHills.surfaceLength}"/>
+							<p:slider for="genSurfaceLengthIn" display="genSurfaceLengthOut" style="width: 200px" displayTemplate="#{msg['length']}: {value}"/>
 						</h:panelGrid>
+
+						<h:panelGrid columns="1" styleClass="margin-bottom">
+							<h:outputText id="surfaceHeightRange" value="#{msg['heightBetween']} #{mbRainyHills.surfaceMinHeight} #{msg['and']} #{mbRainyHills.surfaceMaxHeight}"/>
+							<p:slider for="surfaceMinHeight,surfaceMaxHeight" display="surfaceHeightRange" style="width: 400px" range="true" displayTemplate="#{msg['heightBetween']} {min} #{msg['and']} {max}"/>
+						</h:panelGrid>
+						<h:inputHidden id="surfaceMinHeight" value="#{mbRainyHills.surfaceMinHeight}"/>
+						<h:inputHidden id="surfaceMaxHeight" value="#{mbRainyHills.surfaceMaxHeight}"/>
+
 						<p:commandButton value="#{msg['generate']}" action="#{mbRainyHills.generate}" ajax="true" update="surfacePanel, infoPanel"/>
 					</h:panelGrid>
 
