@@ -7,13 +7,17 @@ import org.junit.Test;
 
 public class WFMFullVesselTest {
 
+	private WFMFullTestHelper testHelper = new WFMFullTestHelper();
+	private WaterFillMethod waterFillMethod = new WFMFullVessel();
+
 	@Test
 	public void testCalcWaterOnSurface() throws Exception {
-		WaterFillMethod waterFillMethod = new WFMFullVessel();
 		SurfaceDrawer surfaceDrawer = new HorizontalConsoleSurfaceDrawer();
-
-		WFMFullTestHelper testHelper = new WFMFullTestHelper();
 		testHelper.testWaterFillMethod(waterFillMethod, surfaceDrawer);
 	}
 
+	@Test
+	public void testEfficiency() throws Exception {
+		testHelper.testWaterFillMethodEfficiency(waterFillMethod, "Vessel Method");
+	}
 }

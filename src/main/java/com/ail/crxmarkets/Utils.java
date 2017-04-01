@@ -20,4 +20,19 @@ public class Utils {
 		return sum;
 	}
 
+	public static double getAverage(int[] arr) {
+		double average = 0;
+
+		double sum = 0;
+		for (int elem : arr) {
+			sum += elem;
+		}
+
+		if (sum != 0) {
+			average = sum / arr.length;
+		}
+
+		return average;
+	}
+
 }

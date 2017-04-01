@@ -12,6 +12,20 @@ import static org.hamcrest.Matchers.equalTo;
 
 class WFMFullTestHelper {
 
+	private static final int TEST_RUN_COUNT = 100000;
+
+	void testWaterFillMethodEfficiency(WaterFillMethod waterFillMethod, String methodName) {
+		Surface surface = Surface.random(10000, 0, 10000);
+		int[] calculationTimeArr = new int[TEST_RUN_COUNT];
+		for (int i = 0; i < TEST_RUN_COUNT; i++) {
+			long startTime = System.nanoTime();
+			surface.fillWater(waterFillMethod, null);
+			calculationTimeArr[i] = (int) (System.nanoTime() - startTime);
+		}
+
+		System.out.println("Average calculation time of + " + methodName + ": " + Utils.getAverage(calculationTimeArr) + "ns");
+	}
+
 	void testWaterFillMethod(WaterFillMethod waterFillMethod, SurfaceDrawer surfaceDrawer) {
 		for (Pair<int[], Long> testData : getTestData()) {
 			Surface surface = new Surface(testData.getLeft());
