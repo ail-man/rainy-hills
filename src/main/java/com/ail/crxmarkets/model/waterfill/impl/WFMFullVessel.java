@@ -1,4 +1,6 @@
-package com.ail.crxmarkets.waterfill;
+package com.ail.crxmarkets.model.waterfill.impl;
+
+import com.ail.crxmarkets.model.waterfill.WaterFillMethod;
 
 /**
  * Реализация алгоритма для рассчёта количества воды методом сосудов.

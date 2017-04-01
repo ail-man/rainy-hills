@@ -7,7 +7,7 @@ import javax.faces.bean.ViewScoped;
 
 import com.ail.crxmarkets.ejb.RainyHillsEjbLocal;
 import com.ail.crxmarkets.model.Surface;
-import com.ail.crxmarkets.waterfill.WFMFullVessel;
+import com.ail.crxmarkets.model.waterfill.impl.WFMFullVessel;
 import org.primefaces.model.chart.Axis;
 import org.primefaces.model.chart.AxisType;
 import org.primefaces.model.chart.BarChartModel;

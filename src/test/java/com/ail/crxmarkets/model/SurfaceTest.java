@@ -2,8 +2,8 @@ package com.ail.crxmarkets.model;
 
 import com.ail.crxmarkets.draw.HorizontalConsoleSurfaceDrawer;
 import com.ail.crxmarkets.draw.SurfaceDrawer;
-import com.ail.crxmarkets.waterfill.WFMFullVessel;
-import com.ail.crxmarkets.waterfill.WaterFillMethod;
+import com.ail.crxmarkets.model.waterfill.WaterFillMethod;
+import com.ail.crxmarkets.model.waterfill.impl.WFMFullVessel;
 import static org.hamcrest.CoreMatchers.not;
 import static org.hamcrest.CoreMatchers.nullValue;
 import static org.hamcrest.MatcherAssert.assertThat;

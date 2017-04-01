@@ -2,9 +2,9 @@ package com.ail.crxmarkets.ejb;
 
 import javax.ejb.Stateless;
 
-import com.ail.crxmarkets.waterfill.WFMFullTower;
-import com.ail.crxmarkets.waterfill.WFMFullVessel;
-import com.ail.crxmarkets.waterfill.WaterFillMethod;
+import com.ail.crxmarkets.model.waterfill.WaterFillMethod;
+import com.ail.crxmarkets.model.waterfill.impl.WFMFullTower;
+import com.ail.crxmarkets.model.waterfill.impl.WFMFullVessel;
 
 @Stateless
 public class RainyHillsEjb implements RainyHillsEjbLocal {

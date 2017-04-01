@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 import com.ail.crxmarkets.Utils;
 import com.ail.crxmarkets.draw.SurfaceDrawer;
-import com.ail.crxmarkets.waterfill.WaterFillMethod;
+import com.ail.crxmarkets.model.waterfill.WaterFillMethod;
 
 /**
  * Модель поверхности, которая может быть заполнена водой.

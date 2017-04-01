@@ -1,4 +1,6 @@
-package com.ail.crxmarkets.waterfill;
+package com.ail.crxmarkets.model.waterfill.impl;
+
+import com.ail.crxmarkets.model.waterfill.WaterFillMethod;
 
 /**
  * Found on http://javabypatel.blogspot.ru/2016/10/trapping-rain-water-between-towers.html

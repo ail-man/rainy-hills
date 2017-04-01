@@ -1,4 +1,4 @@
-package com.ail.crxmarkets.waterfill;
+package com.ail.crxmarkets.model.waterfill;
 
 /**
  * Определяет интерфейс алгоритма для рассчёта воды на поверхности,
