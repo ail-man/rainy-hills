@@ -34,14 +34,14 @@ public class Surface implements Serializable {
 	}
 
 	@SuppressWarnings("UnusedDeclaration")
-	public void fillWithWater(WaterFillMethod waterFillMethod, int[] waterToFill) {
+	public synchronized void fillWithWater(WaterFillMethod waterFillMethod, int[] waterToFill) {
 		water = waterFillMethod.calcWaterOnSurface(surface, waterToFill);
 
 		totalWaterCalculated = false;
 	}
 
 	@SuppressWarnings({ "WeakerAccess" })
-	public void wipeTheWater() {
+	public synchronized void wipeTheWater() {
 		water = new int[surface.length];
 
 		totalWaterHashed = 0;
@@ -59,7 +59,7 @@ public class Surface implements Serializable {
 	}
 
 	@SuppressWarnings({ "UnusedDeclaration" })
-	public long getTotalWater() {
+	public synchronized long getTotalWater() {
 		if (!totalWaterCalculated) {
 			totalWaterHashed = Utils.sum(water);
 			totalWaterCalculated = true;
@@ -71,7 +71,7 @@ public class Surface implements Serializable {
 		return surface.clone();
 	}
 
-	public int[] getWater() {
+	public synchronized int[] getWater() {
 		return water.clone();
 	}
 
