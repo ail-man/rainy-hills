@@ -1,8 +1,18 @@
-package com.ail.crxmarkets.logic;
+package com.ail.crxmarkets.model;
 
+import java.io.Serializable;
+
+import com.ail.crxmarkets.algorithm.WaterCalculatorAlgorithm;
+import com.ail.crxmarkets.draw.SurfaceDrawer;
 import org.apache.commons.lang3.RandomUtils;
 
-public class Surface {
+/**
+ * Модель поверхности, которая может быть заполнена водой
+ */
+public class Surface implements Serializable {
+
+	private static final long serialVersionUID = -8564161090848789227L;
+
 	private final int[] surface;
 	private int[] water;
 

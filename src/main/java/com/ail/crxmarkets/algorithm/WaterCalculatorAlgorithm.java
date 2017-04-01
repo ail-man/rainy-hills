@@ -1,4 +1,4 @@
-package com.ail.crxmarkets.logic;
+package com.ail.crxmarkets.algorithm;
 
 /**
  * Определяет интерфейс алгоритма для рассчёта воды на поверхности,

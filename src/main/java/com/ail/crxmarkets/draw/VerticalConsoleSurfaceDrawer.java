@@ -1,4 +1,4 @@
-package com.ail.crxmarkets.logic;
+package com.ail.crxmarkets.draw;
 
 /**
  * Рисует поверхность в консоли вертикально

@@ -1,5 +1,9 @@
-package com.ail.crxmarkets.logic;
+package com.ail.crxmarkets.model;
 
+import com.ail.crxmarkets.algorithm.VesselAlgorithm;
+import com.ail.crxmarkets.algorithm.WaterCalculatorAlgorithm;
+import com.ail.crxmarkets.draw.HorizontalConsoleSurfaceDrawer;
+import com.ail.crxmarkets.draw.SurfaceDrawer;
 import static org.hamcrest.CoreMatchers.not;
 import static org.hamcrest.CoreMatchers.nullValue;
 import static org.hamcrest.MatcherAssert.assertThat;

@@ -1,4 +1,4 @@
-package com.ail.crxmarkets.logic;
+package com.ail.crxmarkets.draw;
 
 /**
  * Рисовальщик поверхности с водой и без воды

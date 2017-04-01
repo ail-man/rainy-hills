@@ -1,4 +1,4 @@
-package com.ail.crxmarkets.logic;
+package com.ail.crxmarkets.model;
 
 import java.util.ArrayList;
 import java.util.List;

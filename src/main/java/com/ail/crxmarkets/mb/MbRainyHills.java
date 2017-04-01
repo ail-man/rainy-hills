@@ -1,15 +1,13 @@
 package com.ail.crxmarkets.mb;
 
-import java.io.Serializable;
-
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 
+import com.ail.crxmarkets.algorithm.VesselAlgorithm;
 import com.ail.crxmarkets.ejb.RainyHillsEjbLocal;
-import com.ail.crxmarkets.logic.Surface;
-import com.ail.crxmarkets.logic.VesselAlgorithm;
+import com.ail.crxmarkets.model.Surface;
 import org.primefaces.model.chart.Axis;
 import org.primefaces.model.chart.AxisType;
 import org.primefaces.model.chart.BarChartModel;
@@ -19,10 +17,10 @@ import org.slf4j.LoggerFactory;
 
 @ManagedBean(name = "mbRainyHills")
 @ViewScoped
-public class MbRainyHills implements Serializable {
+public class MbRainyHills {
 
 	public static final String PAGE_NAME = "rainyHills";
-	private static final long serialVersionUID = 8572333733056959831L;
+
 	private static final String BAR_MODEL_TITLE = "Rainy Hills";
 	private static final String BAR_MODEL_LEGEND_POSITION = "ne";
 	private static final String BAR_MODEL_X_LABEL = "Point";

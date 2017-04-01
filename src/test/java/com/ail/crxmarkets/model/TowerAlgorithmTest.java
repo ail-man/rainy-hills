@@ -1,5 +1,8 @@
-package com.ail.crxmarkets.logic;
+package com.ail.crxmarkets.model;
 
+import com.ail.crxmarkets.algorithm.TowerAlgorithm;
+import com.ail.crxmarkets.draw.HorizontalConsoleSurfaceDrawer;
+import com.ail.crxmarkets.draw.SurfaceDrawer;
 import org.apache.commons.lang3.tuple.Pair;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
