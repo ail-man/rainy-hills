@@ -1,5 +1,7 @@
 package com.ail.crxmarkets.mb;
 
+import java.io.Serializable;
+
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
@@ -9,8 +11,9 @@ import org.slf4j.LoggerFactory;
 
 @ManagedBean(name = "mbMain")
 @RequestScoped
-public class MbMain {
+public class MbMain implements Serializable {
 
+	private static final long serialVersionUID = 554344292726493887L;
 	private static final Logger log = LoggerFactory.getLogger(MbMain.class);
 
 	@PostConstruct
