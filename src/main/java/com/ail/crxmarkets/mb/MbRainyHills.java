@@ -1,12 +1,9 @@
 package com.ail.crxmarkets.mb;
 
 import javax.annotation.PostConstruct;
-import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 
-import com.ail.crxmarkets.ejb.RainyHillsEjbLocal;
-import com.ail.crxmarkets.jsf.FacesUtils;
 import com.ail.crxmarkets.model.Surface;
 import com.ail.crxmarkets.model.waterfill.impl.WFMFullVessel;
 import org.primefaces.model.chart.Axis;
@@ -20,50 +17,49 @@ import org.slf4j.LoggerFactory;
 @ViewScoped
 public class MbRainyHills {
 
-	static final String PAGE_NAME = "rainyHills";
+	@SuppressWarnings("WeakerAccess")
+	public static final String PAGE_NAME = "rainyHills";
 
-	private static final String CHART_SERIES_WATER = "Water";
-	private static final String CHART_SERIES_SURFACE = "Surface";
+	private static final String CHART_SERIES_WATER_LABEL = "Water";
+	private static final String CHART_SERIES_WATER_COLOR = "4BB2C5";
+	private static final String CHART_SERIES_SURFACE_LABEL = "Surface";
+	private static final String CHART_SERIES_SURFACE_COLOR = "EAA228";
 	private static final String BAR_MODEL_TITLE = "Rainy Hills";
 	private static final String BAR_MODEL_LEGEND_POSITION = "ne";
 	private static final String BAR_MODEL_X_LABEL = "Point";
 	private static final String BAR_MODEL_Y_LABEL = "Height";
+
 	private static final Logger log = LoggerFactory.getLogger(MbMain.class);
+
 	private BarChartModel stackedVerticalModel;
 	private Surface surface;
 	private long calculationTime;
-
 	private int surfaceLength;
-
 	private int surfaceMinHeight;
 	private int surfaceMaxHeight;
-	@EJB
-	private RainyHillsEjbLocal rainyHillsEjbLocal;
 
 	@PostConstruct
 	public void init() {
 		log.debug("Init MBean {} success", this.getClass().getName());
-		createBarModel();
+		surfaceLength = 10;
+		surfaceMinHeight = 0;
+		surfaceMaxHeight = 0;
+		surface = Surface.random(surfaceLength, surfaceMaxHeight, surfaceMaxHeight);
+		updateBarModel();
 	}
 
-	private void createBarModel() {
+	private void updateBarModel() {
 		stackedVerticalModel = new BarChartModel();
-
-		surface = Surface.random(20, 0, 20);
+		stackedVerticalModel.setSeriesColors(CHART_SERIES_SURFACE_COLOR + "," + CHART_SERIES_WATER_COLOR);
 
 		ChartSeries surfaceChartSeries = new ChartSeries();
-		surfaceChartSeries.setLabel(CHART_SERIES_SURFACE);
-
+		surfaceChartSeries.setLabel(CHART_SERIES_SURFACE_LABEL);
 		for (int i = 0; i < surface.getSurface().length; i++) {
 			surfaceChartSeries.set(i + 1, surface.getSurface()[i]);
 		}
 
-		long startTime = System.nanoTime();
-		surface.fillWater(new WFMFullVessel(), null);
-		calculationTime = System.nanoTime() - startTime;
-
 		ChartSeries waterChartSeries = new ChartSeries();
-		waterChartSeries.setLabel(CHART_SERIES_WATER);
+		waterChartSeries.setLabel(CHART_SERIES_WATER_LABEL);
 		for (int i = 0; i < surface.getWater().length; i++) {
 			waterChartSeries.set(i, surface.getWater()[i]);
 		}
@@ -85,7 +81,21 @@ public class MbRainyHills {
 		Axis yAxis = stackedVerticalModel.getAxis(AxisType.Y);
 		yAxis.setLabel(BAR_MODEL_Y_LABEL);
 		yAxis.setMin(0);
-		yAxis.setMax(25);
+		yAxis.setMax(surfaceMaxHeight);
+	}
+
+	public void generate() {
+		surface = Surface.random(surfaceLength, surfaceMinHeight, surfaceMaxHeight);
+		updateBarModel();
+	}
+
+	public void calculate() {
+		long startTime = System.nanoTime();
+		surface.fillWater(new WFMFullVessel(), null);
+		calculationTime = System.nanoTime() - startTime;
+
+		updateBarModel();
+		//		FacesUtils.error("TEFGADGGAEGA");
 	}
 
 	public BarChartModel getStackedVerticalModel() {
@@ -98,15 +108,6 @@ public class MbRainyHills {
 
 	public long getCalcuationTime() {
 		return calculationTime;
-	}
-
-	public void calculate() {
-		createBarModel();
-		FacesUtils.error("TEFGADGGAEGA");
-	}
-
-	public void generate() {
-		createBarModel();
 	}
 
 	public int getSurfaceLength() {

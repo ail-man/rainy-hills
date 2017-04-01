@@ -7,6 +7,50 @@
 								template="/templates/masterLayout.xhtml">
 	<ui:define name="content">
 		<f:loadBundle var="msg" basename="com.ail.crxmarkets.rainyHills.rainyHills"/>
+
+		<p:panel id="formPanel" styleClass="margin-top-bottom">
+			<h:form id="paramsForm">
+				<p:messages id="messages" showDetail="true" autoUpdate="true" closable="true"/>
+				<h:panelGrid id="paramsPanel" columns="1">
+
+					<h:panelGrid columns="5" border="0" cellpadding="5" cellspacing="2">
+
+						<h:panelGroup>
+							<h:panelGrid columns="1" cellpadding="5" styleClass="margin-bottom">
+								<h:outputText id="genSurfaceLengthOut" value="#{msg['length']}: #{mbRainyHills.surfaceLength}"/>
+								<p:slider for="genSurfaceLengthIn" display="genSurfaceLengthOut" style="width: 200px" displayTemplate="#{msg['length']}: {value}"/>
+							</h:panelGrid>
+							<h:inputHidden id="genSurfaceLengthIn" value="#{mbRainyHills.surfaceLength}"/>
+						</h:panelGroup>
+
+						<h:panelGroup>
+							<h:panelGrid columns="1" cellpadding="5" styleClass="margin-bottom">
+								<h:outputText id="surfaceHeightRange" value="#{msg['heightBetween']} #{mbRainyHills.surfaceMinHeight} #{msg['and']} #{mbRainyHills.surfaceMaxHeight}"/>
+								<p:slider for="surfaceMinHeight,surfaceMaxHeight" display="surfaceHeightRange" style="width: 400px" range="true" displayTemplate="#{msg['heightBetween']} {min} #{msg['and']} {max}"/>
+							</h:panelGrid>
+							<h:inputHidden id="surfaceMinHeight" value="#{mbRainyHills.surfaceMinHeight}"/>
+							<h:inputHidden id="surfaceMaxHeight" value="#{mbRainyHills.surfaceMaxHeight}"/>
+						</h:panelGroup>
+
+						<h:panelGroup>
+							<p></p>
+							<p:commandButton value="#{msg['generate']}" action="#{mbRainyHills.generate}" ajax="true" update="surfacePanel, infoPanel"/>
+						</h:panelGroup>
+
+					</h:panelGrid>
+
+					<h:panelGrid columns="5" border="0" cellpadding="5" cellspacing="2">
+						<h:outputText value="123"/>
+						<h:outputText value="123"/>
+						<h:outputText value="123"/>
+						<h:outputText value="123"/>
+						<p:commandButton value="#{msg['calculate']}" action="#{mbRainyHills.calculate}" ajax="true" update="surfacePanel, infoPanel"/>
+					</h:panelGrid>
+
+				</h:panelGrid>
+			</h:form>
+		</p:panel>
+
 		<p:panel id="surfacePanel" styleClass="margin-top-bottom">
 			<p:chart id="surface" type="bar" model="#{mbRainyHills.stackedVerticalModel}" style="height:400px"/>
 		</p:panel>
@@ -21,39 +65,5 @@
 			</h:panelGrid>
 		</p:panel>
 
-		<p:panel id="formPanel" styleClass="margin-bottom">
-			<h:form id="paramsForm">
-				<p:messages id="messages" showDetail="true" autoUpdate="true" closable="true"/>
-				<h:panelGrid id="paramsPanel" columns="1">
-
-					<h:panelGrid columns="5" border="0" cellpadding="5" cellspacing="2">
-
-						<h:panelGrid columns="1" styleClass="margin-bottom">
-							<h:outputText id="genSurfaceLengthOut" value="#{msg['length']}: #{mbRainyHills.surfaceLength}"/>
-							<h:inputHidden id="genSurfaceLengthIn" value="#{mbRainyHills.surfaceLength}"/>
-							<p:slider for="genSurfaceLengthIn" display="genSurfaceLengthOut" style="width: 200px" displayTemplate="#{msg['length']}: {value}"/>
-						</h:panelGrid>
-
-						<h:panelGrid columns="1" styleClass="margin-bottom">
-							<h:outputText id="surfaceHeightRange" value="#{msg['heightBetween']} #{mbRainyHills.surfaceMinHeight} #{msg['and']} #{mbRainyHills.surfaceMaxHeight}"/>
-							<p:slider for="surfaceMinHeight,surfaceMaxHeight" display="surfaceHeightRange" style="width: 400px" range="true" displayTemplate="#{msg['heightBetween']} {min} #{msg['and']} {max}"/>
-						</h:panelGrid>
-						<h:inputHidden id="surfaceMinHeight" value="#{mbRainyHills.surfaceMinHeight}"/>
-						<h:inputHidden id="surfaceMaxHeight" value="#{mbRainyHills.surfaceMaxHeight}"/>
-
-						<p:commandButton value="#{msg['generate']}" action="#{mbRainyHills.generate}" ajax="true" update="surfacePanel, infoPanel"/>
-					</h:panelGrid>
-
-					<h:panelGrid columns="5" border="0" cellpadding="5" cellspacing="2">
-						<h:outputText value="123"/>
-						<h:outputText value="123"/>
-						<h:outputText value="123"/>
-						<h:outputText value="123"/>
-						<p:commandButton value="#{msg['calculate']}" action="#{mbRainyHills.calculate}" ajax="true" update="surfacePanel, infoPanel"/>
-					</h:panelGrid>
-
-				</h:panelGrid>
-			</h:form>
-		</p:panel>
 	</ui:define>
 </ui:composition>
