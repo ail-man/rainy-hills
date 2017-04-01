@@ -43,4 +43,12 @@ public class Surface {
 		return water.clone();
 	}
 
+	public long totalWater() {
+		long result = 0;
+		for (int w : water) {
+			result += w;
+		}
+		return result;
+	}
+
 }
