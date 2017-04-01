@@ -1,8 +1,9 @@
-package com.ail.crxmarkets.model.waterfill;
+package com.ail.crxmarkets.model.waterfill.impl;
 
 import com.ail.crxmarkets.draw.HorizontalConsoleSurfaceDrawer;
 import com.ail.crxmarkets.draw.SurfaceDrawer;
-import com.ail.crxmarkets.model.waterfill.impl.WFMFullVessel;
+import com.ail.crxmarkets.model.waterfill.WFMFullTestHelper;
+import com.ail.crxmarkets.model.waterfill.WaterFillMethod;
 import org.junit.Ignore;
 import org.junit.Test;
 

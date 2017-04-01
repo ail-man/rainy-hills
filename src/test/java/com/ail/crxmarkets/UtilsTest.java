@@ -37,9 +37,9 @@ public class UtilsTest {
 
 	@Test
 	public void printAsText() throws Exception {
-		assertThat(Utils.printAsText(new int[] { 1, 6, 17, 7, 8, 56, 15, 8728, 2 }), is("1, 6,17, 7,8, 56, 15, 8728,2"));
+		assertThat(Utils.printAsText(new int[] { 1, 6, 17, 7, 8, 56, 15, 8728, 2 }), is("1,6,17,7,8,56,15,8728,2"));
 		assertThat(Utils.printAsText(new int[] { 16, 614, 7, 71, 8, 85, 2, 9, 69, 93, 17 }), is("16,614,7,71,8,85,2,9,69,93,17"));
-		assertThat(Utils.printAsText(new int[] { 16, 614161464, 14416, 641614, 6 }), is("16, 6 1   41  61464  , 14 416,6 416 14,6 "));
+		assertThat(Utils.printAsText(new int[] { 16, 614161464, 14416, 641614, 6 }), is("16,614161464,14416,641614,6"));
 	}
 
 }

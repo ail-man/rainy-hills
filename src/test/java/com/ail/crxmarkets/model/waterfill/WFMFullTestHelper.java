@@ -10,13 +10,13 @@ import org.apache.commons.lang3.tuple.Pair;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
 
-class WFMFullTestHelper {
+public class WFMFullTestHelper {
 
 	private static final int TEST_RUN_COUNT = 100000;
 	private static final int SURFACE_LENGTH = 100000;
 	private static final int SURFACE_MAX_HEIGHT = 100000;
 
-	void testWaterFillMethodEfficiency(WaterFillMethod waterFillMethod, String methodName) {
+	public void testWaterFillMethodEfficiency(WaterFillMethod waterFillMethod, String methodName) {
 		Surface surface = Surface.random(SURFACE_LENGTH, 0, SURFACE_MAX_HEIGHT);
 		int[] calculationTimeArr = new int[TEST_RUN_COUNT];
 		for (int i = 0; i < TEST_RUN_COUNT; i++) {
@@ -28,7 +28,7 @@ class WFMFullTestHelper {
 		System.out.println("Average calculation time of " + methodName + ": " + Utils.average(calculationTimeArr) + " ns");
 	}
 
-	void testWaterFillMethod(WaterFillMethod waterFillMethod, SurfaceDrawer surfaceDrawer) {
+	public void testWaterFillMethod(WaterFillMethod waterFillMethod, SurfaceDrawer surfaceDrawer) {
 		for (Pair<int[], Long> testData : getTestData()) {
 			Surface surface = new Surface(testData.getLeft());
 			surfaceDrawer.drawSurface(surface);
