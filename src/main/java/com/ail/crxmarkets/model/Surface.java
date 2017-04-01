@@ -2,12 +2,13 @@ package com.ail.crxmarkets.model;
 
 import java.io.Serializable;
 
+import com.ail.crxmarkets.Utils;
 import com.ail.crxmarkets.algorithm.WaterCalculatorAlgorithm;
 import com.ail.crxmarkets.draw.SurfaceDrawer;
-import org.apache.commons.lang3.RandomUtils;
 
 /**
- * Модель поверхности, которая может быть заполнена водой
+ * Модель поверхности, которая может быть заполнена водой.
+ * Модель является потокобезопасной.
  */
 public class Surface implements Serializable {
 
@@ -16,33 +17,52 @@ public class Surface implements Serializable {
 	private final int[] surface;
 	private int[] water;
 
+	private boolean filled;
+	private long hashedTotalWater;
+
+	@SuppressWarnings({ "WeakerAccess" })
 	public Surface(int[] surface) {
 		this.surface = surface.clone();
 		this.water = new int[surface.length];
+		this.filled = false;
 	}
 
 	public static Surface random(int length, int minHeight, int maxHeight) {
-		int[] surface = new int[length];
-		for (int i = 0; i < length; i++) {
-			surface[i] = RandomUtils.nextInt(minHeight, maxHeight);
+		return new Surface(Utils.randomArray(length, minHeight, maxHeight));
+	}
+
+	public synchronized void fillWithWater(WaterCalculatorAlgorithm algorithm) {
+		if (!filled) {
+			water = algorithm.calcWaterOnSurface(surface);
+			hashedTotalWater = Utils.calcSum(water);
+			filled = true;
 		}
-		return new Surface(surface);
 	}
 
-	public void fillWithWater(WaterCalculatorAlgorithm algorithm) {
-		water = algorithm.calcWaterOnSurface(surface);
+	@SuppressWarnings({ "WeakerAccess" })
+	public synchronized void wipeTheWater() {
+		if (filled) {
+			water = new int[surface.length];
+			filled = false;
+		}
 	}
 
-	public void wipeTheWater() {
-		water = new int[surface.length];
-	}
-
+	@SuppressWarnings({ "WeakerAccess" })
 	public void drawSurface(SurfaceDrawer surfaceDrawer) {
 		surfaceDrawer.drawSurface(surface);
 	}
 
+	@SuppressWarnings({ "WeakerAccess" })
 	public void drawSurfaceWithWater(SurfaceDrawer surfaceDrawer) {
 		surfaceDrawer.drawSurfaceWithWater(surface, water);
+	}
+
+	@SuppressWarnings({ "UnusedDeclaration" })
+	public long getTotalWater() {
+		if (filled) {
+			return hashedTotalWater;
+		}
+		return 0;
 	}
 
 	public int[] getSurface() {
@@ -51,14 +71,6 @@ public class Surface implements Serializable {
 
 	public int[] getWater() {
 		return water.clone();
-	}
-
-	public long totalWater() {
-		long result = 0;
-		for (int w : water) {
-			result += w;
-		}
-		return result;
 	}
 
 }
