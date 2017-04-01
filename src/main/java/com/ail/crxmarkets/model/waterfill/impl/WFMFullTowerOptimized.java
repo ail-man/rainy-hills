@@ -5,7 +5,7 @@ import com.ail.crxmarkets.model.waterfill.WaterFillMethod;
 /**
  * Found on http://javabypatel.blogspot.ru/2016/10/trapping-rain-water-between-towers.html
  */
-public class WFMFullTower implements WaterFillMethod {
+public class WFMFullTowerOptimized implements WaterFillMethod {
 
 	@Override
 	public int[] calcWaterOnSurface(int[] surface, int[] water, int[] waterToFill) {

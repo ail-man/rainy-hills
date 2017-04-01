@@ -9,7 +9,7 @@ import com.ail.crxmarkets.exception.ApplicationException;
 import com.ail.crxmarkets.jsf.FacesUtils;
 import com.ail.crxmarkets.model.Surface;
 import com.ail.crxmarkets.model.waterfill.WaterFillMethod;
-import com.ail.crxmarkets.model.waterfill.impl.WFMFullTower;
+import com.ail.crxmarkets.model.waterfill.impl.WFMFullTowerOptimized;
 import com.ail.crxmarkets.model.waterfill.impl.WFMFullVessel;
 import org.primefaces.model.chart.Axis;
 import org.primefaces.model.chart.AxisType;
@@ -34,6 +34,10 @@ public class MbRainyHills {
 	private static final String BAR_MODEL_X_LABEL = "Point";
 	private static final String BAR_MODEL_Y_LABEL = "Height";
 
+	private static final int DEFAULT_SURFACE_LENGTH = 150;
+	private static final int DEFAULT_SURFACE_MIN_HEIGHT = 0;
+	private static final int DEFAULT_SURFACE_MAX_HEIGHT = 500;
+
 	private static final Logger log = LoggerFactory.getLogger(MbMain.class);
 
 	private BarChartModel stackedVerticalModel;
@@ -51,9 +55,9 @@ public class MbRainyHills {
 	@PostConstruct
 	public void init() {
 		log.debug("Init MBean {} success", this.getClass().getName());
-		surfaceLength = 1;
-		surfaceMinHeight = 0;
-		surfaceMaxHeight = 0;
+		surfaceLength = DEFAULT_SURFACE_LENGTH;
+		surfaceMinHeight = DEFAULT_SURFACE_MIN_HEIGHT;
+		surfaceMaxHeight = DEFAULT_SURFACE_MAX_HEIGHT;
 		calculationMethod = CalculationMethod.VESSEL;
 		surface = Surface.random(surfaceLength, surfaceMinHeight, surfaceMaxHeight);
 		updateBarModel();
@@ -125,9 +129,11 @@ public class MbRainyHills {
 		case VESSEL:
 			return new WFMFullVessel();
 		case TOWER:
-			return new WFMFullTower();
+			return new WFMFullTowerOptimized();
+		case TOWER_OPTIMIZED:
+			return new WFMFullTowerOptimized();
 		default:
-			return new WFMFullTower();
+			return new WFMFullVessel();
 		}
 	}
 

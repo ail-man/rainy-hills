@@ -1,5 +1,5 @@
 package com.ail.crxmarkets.mb;
 
 public enum CalculationMethod {
-	VESSEL, TOWER
+	VESSEL, TOWER, TOWER_OPTIMIZED
 }

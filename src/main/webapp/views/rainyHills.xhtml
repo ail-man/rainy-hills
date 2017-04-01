@@ -57,11 +57,12 @@
 					</h:panelGroup>
 
 					<h:panelGroup>
-						<h:panelGrid columns="2" styleClass="margin-bottom" cellpadding="5">
+						<h:panelGrid columns="1" styleClass="margin-bottom" cellpadding="5">
 							<p:outputLabel for="calculationMethod" value="#{msg['calculationMethod']}:"/>
 							<p:selectOneRadio id="calculationMethod" value="#{mbRainyHills.calculationMethod}">
 								<f:selectItem itemLabel="#{msg['vesselMethod']}" itemValue="VESSEL"/>
 								<f:selectItem itemLabel="#{msg['towerMethod']}" itemValue="TOWER"/>
+								<f:selectItem itemLabel="#{msg['optimizedTowerMethod']}" itemValue="TOWER_OPTIMIZED"/>
 							</p:selectOneRadio>
 						</h:panelGrid>
 					</h:panelGroup>
