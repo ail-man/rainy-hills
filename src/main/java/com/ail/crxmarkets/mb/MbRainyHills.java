@@ -196,4 +196,9 @@ public class MbRainyHills {
 	public void setTextArea(String textArea) {
 		this.textArea = textArea;
 	}
+
+	private enum CalculationMethod {
+		VESSEL, TOWER, TOWER_OPTIMIZED
+	}
+
 }
