@@ -25,6 +25,8 @@ public class MbRainyHills {
 	@SuppressWarnings("WeakerAccess")
 	public static final String PAGE_NAME = "rainyHills";
 
+	private static final Logger log = LoggerFactory.getLogger(MbMain.class);
+
 	private static final String CHART_SERIES_SURFACE_LABEL = "Surface";
 	private static final String CHART_SERIES_SURFACE_COLOR = "EAA228";
 	private static final String CHART_SERIES_WATER_LABEL = "Water";
@@ -33,12 +35,12 @@ public class MbRainyHills {
 	private static final String BAR_MODEL_LEGEND_POSITION = "ne";
 	private static final String BAR_MODEL_X_LABEL = "Point";
 	private static final String BAR_MODEL_Y_LABEL = "Height";
-
-	private static final int DEFAULT_SURFACE_LENGTH = 150;
+	private static final String TICK_FORMAT = "%d";
+	private static final int BAR_MARGIN = 0;
+	private static final int BAR_PADDING = 0;
+	private static final int DEFAULT_SURFACE_LENGTH = 50;
 	private static final int DEFAULT_SURFACE_MIN_HEIGHT = 0;
-	private static final int DEFAULT_SURFACE_MAX_HEIGHT = 500;
-
-	private static final Logger log = LoggerFactory.getLogger(MbMain.class);
+	private static final int DEFAULT_SURFACE_MAX_HEIGHT = 200;
 
 	private BarChartModel stackedVerticalModel;
 	private Surface surface;
@@ -84,8 +86,8 @@ public class MbRainyHills {
 
 		stackedVerticalModel.setStacked(true);
 
-		stackedVerticalModel.setBarMargin(0);
-		stackedVerticalModel.setBarPadding(0);
+		stackedVerticalModel.setBarMargin(BAR_MARGIN);
+		stackedVerticalModel.setBarPadding(BAR_PADDING);
 
 		stackedVerticalModel.setTitle(BAR_MODEL_TITLE);
 		stackedVerticalModel.setLegendPosition(BAR_MODEL_LEGEND_POSITION);
@@ -97,10 +99,13 @@ public class MbRainyHills {
 		yAxis.setLabel(BAR_MODEL_Y_LABEL);
 		yAxis.setMin(0);
 		yAxis.setMax(surfaceMaxHeight);
+		yAxis.setTickFormat(TICK_FORMAT);
 	}
 
 	public void generate() {
 		surface = Surface.random(surfaceLength, surfaceMinHeight, surfaceMaxHeight);
+		surfaceLength = surface.getSurface().length;
+		surfaceMaxHeight = Utils.max(surface.getSurface());
 		textArea = Utils.printAsText(surface.getSurface());
 		updateBarModel();
 	}
@@ -109,6 +114,9 @@ public class MbRainyHills {
 		long startTime = System.nanoTime();
 		surface.fillWater(getWaterFillMethod(), null);
 		calculationTime = System.nanoTime() - startTime;
+
+		surfaceLength = surface.getSurface().length;
+		surfaceMaxHeight = Utils.max(surface.getSurface());
 		updateBarModel();
 	}
 
