@@ -17,8 +17,8 @@ public class Surface implements Serializable {
 	private final int[] surface;
 	private int[] water;
 
-	private boolean totalWaterCalculated;
-	private long totalWaterHashed;
+	private transient boolean totalWaterCalculated;
+	private transient long totalWaterHashed;
 
 	@SuppressWarnings({ "WeakerAccess" })
 	public Surface(int[] surface) {
@@ -36,12 +36,14 @@ public class Surface implements Serializable {
 	@SuppressWarnings("UnusedDeclaration")
 	public void fillWithWater(WaterFillMethod waterFillMethod, int[] waterToFill) {
 		water = waterFillMethod.calcWaterOnSurface(surface, waterToFill);
+
 		totalWaterCalculated = false;
 	}
 
 	@SuppressWarnings({ "WeakerAccess" })
 	public void wipeTheWater() {
 		water = new int[surface.length];
+
 		totalWaterHashed = 0;
 		totalWaterCalculated = true;
 	}
@@ -60,6 +62,7 @@ public class Surface implements Serializable {
 	public long getTotalWater() {
 		if (!totalWaterCalculated) {
 			totalWaterHashed = Utils.sum(water);
+			totalWaterCalculated = true;
 		}
 		return totalWaterHashed;
 	}
