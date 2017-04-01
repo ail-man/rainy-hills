@@ -5,17 +5,9 @@ import java.util.List;
 
 import org.apache.commons.lang3.tuple.Pair;
 
-public class WaterCalculatorAlgorithmTest {
+public class WFMFullTestHelper {
 
-	long totalWater(int[] water) {
-		long result = 0;
-		for (int w : water) {
-			result += w;
-		}
-		return result;
-	}
-
-	List<Pair<int[], Long>> getTestData() {
+	public static List<Pair<int[], Long>> getTestData() {
 		List<Pair<int[], Long>> testDataList = new ArrayList<>();
 
 		testDataList.add(Pair.of(new int[] { 0 }, 0L));

@@ -1,9 +1,9 @@
 package com.ail.crxmarkets.model;
 
-import com.ail.crxmarkets.algorithm.VesselAlgorithm;
-import com.ail.crxmarkets.algorithm.WaterCalculatorAlgorithm;
 import com.ail.crxmarkets.draw.HorizontalConsoleSurfaceDrawer;
 import com.ail.crxmarkets.draw.SurfaceDrawer;
+import com.ail.crxmarkets.waterfill.WFMFullVessel;
+import com.ail.crxmarkets.waterfill.WaterFillMethod;
 import static org.hamcrest.CoreMatchers.not;
 import static org.hamcrest.CoreMatchers.nullValue;
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -19,7 +19,7 @@ public class SurfaceTest {
 
 	private Surface surface;
 	private SurfaceDrawer surfaceDrawer = new HorizontalConsoleSurfaceDrawer();
-	private WaterCalculatorAlgorithm fillingAlgorythm = new VesselAlgorithm();
+	private WaterFillMethod fillingAlgorythm = new WFMFullVessel();
 
 	@Before
 	public void setUp() throws Exception {
@@ -31,7 +31,7 @@ public class SurfaceTest {
 	@Test
 	public void testFillWithWater() throws Exception {
 		for (int i = 0; i < TEST_COUNT; i++) {
-			surface.fillWithWater(fillingAlgorythm);
+			surface.fillWithWater(fillingAlgorythm, null);
 			surface.drawSurface(surfaceDrawer);
 			surface.drawSurfaceWithWater(surfaceDrawer);
 		}
@@ -45,7 +45,7 @@ public class SurfaceTest {
 
 	@Test
 	public void testImmutable() throws Exception {
-		surface.fillWithWater(fillingAlgorythm);
+		surface.fillWithWater(fillingAlgorythm, null);
 	}
 
 }

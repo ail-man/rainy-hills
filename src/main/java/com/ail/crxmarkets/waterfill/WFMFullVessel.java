@@ -1,4 +1,4 @@
-package com.ail.crxmarkets.algorithm;
+package com.ail.crxmarkets.waterfill;
 
 /**
  * Реализация алгоритма для рассчёта количества воды методом сосудов.
@@ -37,10 +37,10 @@ package com.ail.crxmarkets.algorithm;
  * <p>
  * Алгоритм предположительно имеет сложность O(N^2)
  */
-public class VesselAlgorithm implements WaterCalculatorAlgorithm {
+public class WFMFullVessel implements WaterFillMethod {
 
 	@Override
-	public int[] calcWaterOnSurface(int[] surface) {
+	public int[] calcWaterOnSurface(int[] surface, int[] waterToFill) {
 		int[] water = new int[surface.length];
 
 		if (surface.length < 3) {

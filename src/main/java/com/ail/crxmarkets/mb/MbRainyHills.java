@@ -5,9 +5,9 @@ import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 
-import com.ail.crxmarkets.algorithm.VesselAlgorithm;
 import com.ail.crxmarkets.ejb.RainyHillsEjbLocal;
 import com.ail.crxmarkets.model.Surface;
+import com.ail.crxmarkets.waterfill.WFMFullVessel;
 import org.primefaces.model.chart.Axis;
 import org.primefaces.model.chart.AxisType;
 import org.primefaces.model.chart.BarChartModel;
@@ -56,7 +56,7 @@ public class MbRainyHills {
 			surfaceChartSeries.set(i, surface.getSurface()[i]);
 		}
 
-		surface.fillWithWater(new VesselAlgorithm());
+		surface.fillWithWater(new WFMFullVessel(), null);
 
 		ChartSeries waterChartSeries = new ChartSeries();
 		waterChartSeries.setLabel("Water");

@@ -1,30 +1,32 @@
 package com.ail.crxmarkets.model;
 
-import com.ail.crxmarkets.algorithm.TowerAlgorithm;
+import com.ail.crxmarkets.Utils;
 import com.ail.crxmarkets.draw.HorizontalConsoleSurfaceDrawer;
 import com.ail.crxmarkets.draw.SurfaceDrawer;
+import com.ail.crxmarkets.waterfill.WFMFullTower;
+import com.ail.crxmarkets.waterfill.WaterFillMethod;
 import org.apache.commons.lang3.tuple.Pair;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
 import org.junit.Test;
 
-public class TowerAlgorithmTest extends WaterCalculatorAlgorithmTest {
+public class WFMFullTowerTestHelper {
 
-	private TowerAlgorithm vesselAlgorithm = new TowerAlgorithm();
+	private WaterFillMethod waterFillMethod = new WFMFullTower();
 	private SurfaceDrawer surfaceDrawer = new HorizontalConsoleSurfaceDrawer();
 
 	@Test
 	public void testCalcWaterOnSurface() throws Exception {
-		for (Pair<int[], Long> testData : getTestData()) {
+		for (Pair<int[], Long> testData : WFMFullTestHelper.getTestData()) {
 			int[] surface = testData.getLeft();
 			surfaceDrawer.drawSurface(surface);
 
-			int[] water = vesselAlgorithm.calcWaterOnSurface(surface);
+			int[] water = waterFillMethod.calcWaterOnSurface(surface, null);
 			assertThat(water.length, equalTo(surface.length));
 			surfaceDrawer.drawSurfaceWithWater(surface, water);
 
 			long waterTotal = testData.getRight();
-			assertThat(totalWater(water), equalTo(waterTotal));
+			assertThat(Utils.sum(water), equalTo(waterTotal));
 		}
 
 	}

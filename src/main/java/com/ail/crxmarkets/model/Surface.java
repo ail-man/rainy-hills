@@ -3,8 +3,8 @@ package com.ail.crxmarkets.model;
 import java.io.Serializable;
 
 import com.ail.crxmarkets.Utils;
-import com.ail.crxmarkets.algorithm.WaterCalculatorAlgorithm;
 import com.ail.crxmarkets.draw.SurfaceDrawer;
+import com.ail.crxmarkets.waterfill.WaterFillMethod;
 
 /**
  * Модель поверхности, которая может быть заполнена водой.
@@ -31,10 +31,10 @@ public class Surface implements Serializable {
 		return new Surface(Utils.randomArray(length, minHeight, maxHeight));
 	}
 
-	public synchronized void fillWithWater(WaterCalculatorAlgorithm algorithm) {
+	public synchronized void fillWithWater(WaterFillMethod waterFillMethod, int[] waterToFill) {
 		if (!filled) {
-			water = algorithm.calcWaterOnSurface(surface);
-			hashedTotalWater = Utils.calcSum(water);
+			water = waterFillMethod.calcWaterOnSurface(surface, waterToFill);
+			hashedTotalWater = Utils.sum(water);
 			filled = true;
 		}
 	}

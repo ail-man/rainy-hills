@@ -12,7 +12,7 @@ public class Utils {
 		return arr;
 	}
 
-	public static long calcSum(int[] arr) {
+	public static long sum(int[] arr) {
 		long sum = 0;
 		for (int i : arr) {
 			sum += i;

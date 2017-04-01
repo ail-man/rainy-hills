@@ -1,12 +1,12 @@
-package com.ail.crxmarkets.algorithm;
+package com.ail.crxmarkets.waterfill;
 
 /**
  * Found on http://javabypatel.blogspot.ru/2016/10/trapping-rain-water-between-towers.html
  */
-public class TowerAlgorithm implements WaterCalculatorAlgorithm {
+public class WFMFullTower implements WaterFillMethod {
 
 	@Override
-	public int[] calcWaterOnSurface(int[] surface) {
+	public int[] calcWaterOnSurface(int[] surface, int[] waterToFill) {
 		int[] maxSeenSoFarFromRight = new int[surface.length];
 
 		//Populate maxSeenSoFarFromRight array.
