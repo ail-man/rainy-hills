@@ -56,7 +56,7 @@ public class MbRainyHills {
 			surfaceChartSeries.set(i, surface.getSurface()[i]);
 		}
 
-		surface.fillWithWater(new WFMFullVessel(), null);
+		surface.fillWater(new WFMFullVessel(), null);
 
 		ChartSeries waterChartSeries = new ChartSeries();
 		waterChartSeries.setLabel("Water");

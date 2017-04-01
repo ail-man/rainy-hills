@@ -7,7 +7,7 @@ public class HorizontalConsoleSurfaceDrawer implements SurfaceDrawer {
 
 	@Override
 	public void drawSurface(int[] surface) {
-		System.out.println("INITIAL SURFACE\n");
+		System.out.println("SURFACE\n");
 
 		int var;
 
@@ -38,7 +38,7 @@ public class HorizontalConsoleSurfaceDrawer implements SurfaceDrawer {
 
 	@Override
 	public void drawSurfaceWithWater(int[] surface, int[] water) {
-		System.out.println("WATERED SURFACE");
+		System.out.println("SURFACE WITH WATER\n");
 
 		int var, level;
 

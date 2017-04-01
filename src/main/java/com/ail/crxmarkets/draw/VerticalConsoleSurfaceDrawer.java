@@ -7,7 +7,7 @@ public class VerticalConsoleSurfaceDrawer implements SurfaceDrawer {
 
 	@Override
 	public void drawSurface(int[] surface) {
-		System.out.println("===INITIAL-SURFACE===============================================================");
+		System.out.println("===SURFACE===============================================================");
 		for (int height : surface) {
 			System.out.print("|");
 			for (int i = 0; i < height; i++) {
@@ -20,7 +20,7 @@ public class VerticalConsoleSurfaceDrawer implements SurfaceDrawer {
 
 	@Override
 	public void drawSurfaceWithWater(int[] surface, int[] water) {
-		System.out.println("===WATERED-SURFACE===============================================================");
+		System.out.println("===SURFACE-WITH-WATER===============================================================");
 		for (int i = 0; i < surface.length; i++) {
 			System.out.print("|");
 			for (int j = 0; j < surface[i]; j++) {

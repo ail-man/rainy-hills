@@ -9,6 +9,8 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import org.junit.Before;
 import org.junit.Test;
 
+// TODO в SurfaceDrawer передавать объект Surface (вынести методы drawSurface в SurfaceDrawer)
+// TODO для логирования использовать Spring (может не надо)
 public class SurfaceTest {
 
 	private static final int LENGTH = 50;
@@ -21,6 +23,7 @@ public class SurfaceTest {
 
 	@Before
 	public void setUp() throws Exception {
+		System.out.println(">>> CREATE SURFACE <<<");
 		surface = Surface.random(LENGTH, MIN_HEIGHT, MAX_HEIGHT);
 		assertThatWaterIsAbsent();
 
@@ -29,23 +32,27 @@ public class SurfaceTest {
 
 	@Test
 	public void testFillWithWater() throws Exception {
-		surface.fillWithWater(waterFillMethod, new int[] {});
+		System.out.println(">>> FILL WITH WATER <<<");
+		surface.fillWater(waterFillMethod, new int[] {});
 
 		surface.drawSurfaceWithWater(surfaceDrawer);
 	}
 
 	@Test
 	public void testWipeTheWater() throws Exception {
-		surface.wipeTheWater();
+		testFillWithWater();
+
+		System.out.println(">>> WIPE ALL THE WATER <<<");
+		surface.wipeWater();
+		surface.drawSurfaceWithWater(surfaceDrawer);
+
 		assertThatWaterIsAbsent();
 		assertThat(surface.getTotalWater(), is(0L));
-
-		surface.drawSurfaceWithWater(surfaceDrawer);
 	}
 
 	private void assertThatWaterIsAbsent() {
 		for (int w : surface.getWater()) {
-			assertThat(w, is(0L));
+			assertThat(w, is(0));
 		}
 	}
 
