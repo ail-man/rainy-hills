@@ -3,9 +3,13 @@
 								xmlns:f="http://xmlns.jcp.org/jsf/core"
 								xmlns:h="http://java.sun.com/jsf/html"
 								xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+								xmlns:p="http://primefaces.org/ui"
 								template="/templates/masterLayout.xhtml">
 	<ui:define name="content">
 		<f:loadBundle var="msg" basename="com.ail.crxmarkets.rainyHills.rainyHills"/>
 		<h:outputText value="#{msg['underConstruction']}"/>
+
+		<p:chart type="bar" model="#{chartView.barModel}" style="height:300px"/>
+		<p:chart type="bar" model="#{chartView.horizontalBarModel}" style="height:300px"/>
 	</ui:define>
 </ui:composition>
