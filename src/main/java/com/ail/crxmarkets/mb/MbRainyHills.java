@@ -5,6 +5,8 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 
 import com.ail.crxmarkets.model.Surface;
+import com.ail.crxmarkets.model.waterfill.WaterFillMethod;
+import com.ail.crxmarkets.model.waterfill.impl.WFMFullTower;
 import com.ail.crxmarkets.model.waterfill.impl.WFMFullVessel;
 import org.primefaces.model.chart.Axis;
 import org.primefaces.model.chart.AxisType;
@@ -20,10 +22,10 @@ public class MbRainyHills {
 	@SuppressWarnings("WeakerAccess")
 	public static final String PAGE_NAME = "rainyHills";
 
-	private static final String CHART_SERIES_WATER_LABEL = "Water";
-	private static final String CHART_SERIES_WATER_COLOR = "4BB2C5";
 	private static final String CHART_SERIES_SURFACE_LABEL = "Surface";
 	private static final String CHART_SERIES_SURFACE_COLOR = "EAA228";
+	private static final String CHART_SERIES_WATER_LABEL = "Water";
+	private static final String CHART_SERIES_WATER_COLOR = "4BB2C5";
 	private static final String BAR_MODEL_TITLE = "Rainy Hills";
 	private static final String BAR_MODEL_LEGEND_POSITION = "ne";
 	private static final String BAR_MODEL_X_LABEL = "Point";
@@ -37,14 +39,21 @@ public class MbRainyHills {
 	private int surfaceLength;
 	private int surfaceMinHeight;
 	private int surfaceMaxHeight;
+	private CalculationMethod calculationMethod;
+	private String textArea;
 
+	// TODO поле для ввода данных вручную через запятую
+	// TODO исправить баг с отрисовкой при установлении параметров в 0
+	// TODO реализовать неоптимизированный алгоритм методом башен
+	// TODO ограничения на величины (только положительные и не более 1000 в длину и высоту)
 	@PostConstruct
 	public void init() {
 		log.debug("Init MBean {} success", this.getClass().getName());
-		surfaceLength = 10;
+		surfaceLength = 1;
 		surfaceMinHeight = 0;
 		surfaceMaxHeight = 0;
 		surface = Surface.random(surfaceLength, surfaceMaxHeight, surfaceMaxHeight);
+		calculationMethod = CalculationMethod.VESSEL;
 		updateBarModel();
 	}
 
@@ -91,11 +100,22 @@ public class MbRainyHills {
 
 	public void calculate() {
 		long startTime = System.nanoTime();
-		surface.fillWater(new WFMFullVessel(), null);
+		surface.fillWater(getWaterFillMethod(), null);
 		calculationTime = System.nanoTime() - startTime;
 
 		updateBarModel();
 		//		FacesUtils.error("TEFGADGGAEGA");
+	}
+
+	private WaterFillMethod getWaterFillMethod() {
+		switch (calculationMethod) {
+		case VESSEL:
+			return new WFMFullVessel();
+		case TOWER:
+			return new WFMFullTower();
+		default:
+			return new WFMFullTower();
+		}
 	}
 
 	public BarChartModel getStackedVerticalModel() {
@@ -132,5 +152,21 @@ public class MbRainyHills {
 
 	public void setSurfaceMaxHeight(int surfaceMaxHeight) {
 		this.surfaceMaxHeight = surfaceMaxHeight;
+	}
+
+	public CalculationMethod getCalculationMethod() {
+		return calculationMethod;
+	}
+
+	public void setCalculationMethod(CalculationMethod calculationMethod) {
+		this.calculationMethod = calculationMethod;
+	}
+
+	public String getTextArea() {
+		return textArea;
+	}
+
+	public void setTextArea(String textArea) {
+		this.textArea = textArea;
 	}
 }

@@ -33,18 +33,31 @@
 						</h:panelGroup>
 
 						<h:panelGroup>
-							<p></p>
-							<p:commandButton value="#{msg['generate']}" action="#{mbRainyHills.generate}" ajax="true" update="surfacePanel, infoPanel"/>
+							<h:panelGrid columns="1" cellpadding="5" styleClass="margin-bottom">
+								<p:commandButton value="#{msg['generate']}" action="#{mbRainyHills.generate}" ajax="true" update="surfacePanel, infoPanel"/>
+							</h:panelGrid>
 						</h:panelGroup>
 
 					</h:panelGrid>
 
 					<h:panelGrid columns="5" border="0" cellpadding="5" cellspacing="2">
-						<h:outputText value="123"/>
-						<h:outputText value="123"/>
-						<h:outputText value="123"/>
-						<h:outputText value="123"/>
-						<p:commandButton value="#{msg['calculate']}" action="#{mbRainyHills.calculate}" ajax="true" update="surfacePanel, infoPanel"/>
+
+						<h:panelGroup>
+							<h:panelGrid columns="2" styleClass="margin-bottom" cellpadding="5">
+								<p:outputLabel for="calculationMethod" value="#{msg['calculationMethod']}:"/>
+								<p:selectOneRadio id="calculationMethod" value="#{mbRainyHills.calculationMethod}">
+									<f:selectItem itemLabel="#{msg['vesselMethod']}" itemValue="VESSEL"/>
+									<f:selectItem itemLabel="#{msg['towerMethod']}" itemValue="TOWER"/>
+								</p:selectOneRadio>
+							</h:panelGrid>
+						</h:panelGroup>
+
+						<h:panelGroup>
+							<h:panelGrid columns="1" cellpadding="5" styleClass="margin-bottom">
+								<p:commandButton value="#{msg['calculate']}" action="#{mbRainyHills.calculate}" ajax="true" update="surfacePanel,infoPanel"/>
+							</h:panelGrid>
+						</h:panelGroup>
+
 					</h:panelGrid>
 
 				</h:panelGrid>
