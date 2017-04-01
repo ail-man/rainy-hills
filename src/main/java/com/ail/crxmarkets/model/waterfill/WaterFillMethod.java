@@ -11,9 +11,10 @@ public interface WaterFillMethod {
 	 * определённой массивом surface, и возвращает в виде другого массива
 	 *
 	 * @param surface     массив поверхности
+	 * @param water       массив воды, имеющейся на поверхности
 	 * @param waterToFill массив колличества воды, который падает на поверхность
 	 * @return массив количества воды над каждым элементом поверхности
 	 */
-	int[] calcWaterOnSurface(int[] surface, int[] waterToFill);
+	int[] calcWaterOnSurface(int[] surface, int[] water, int[] waterToFill);
 
 }

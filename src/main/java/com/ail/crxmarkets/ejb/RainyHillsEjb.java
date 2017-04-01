@@ -26,7 +26,7 @@ public class RainyHillsEjb implements RainyHillsEjbLocal {
 		}
 
 		int totalWater = 0;
-		for (int water : algorithm.calcWaterOnSurface(surface, null)) {
+		for (int water : algorithm.calcWaterOnSurface(surface, null, null)) {
 			totalWater += water;
 		}
 		return totalWater;

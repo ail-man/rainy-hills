@@ -42,14 +42,14 @@ import com.ail.crxmarkets.model.waterfill.WaterFillMethod;
 public class WFMFullVessel implements WaterFillMethod {
 
 	@Override
-	public int[] calcWaterOnSurface(int[] surface, int[] waterToFill) {
-		int[] water = new int[surface.length];
+	public int[] calcWaterOnSurface(int[] surface, int[] water, int[] waterToFill) {
+		int[] wat = new int[surface.length];
 
 		if (surface.length < 3) {
 			for (int i = 0; i < surface.length; i++) {
-				water[i] = 0;
+				wat[i] = 0;
 			}
-			return water;
+			return wat;
 		}
 
 		int left;
@@ -58,24 +58,24 @@ public class WFMFullVessel implements WaterFillMethod {
 		while (current < surface.length - 1) {
 			if (surface[current] > surface[current + 1]) {
 				left = current;
-				water[left] = 0;
+				wat[left] = 0;
 
 				int right = getRight(surface, left, current);
 
 				if (right > left) {
-					calcWaterInVessel(surface, water, left, right);
+					calcWaterInVessel(surface, wat, left, right);
 					current = right;
 				} else {
 					current++;
 				}
 			} else {
-				water[current] = 0;
+				wat[current] = 0;
 				current++;
 			}
 		}
 
-		water[current] = 0;
-		return water;
+		wat[current] = 0;
+		return wat;
 	}
 
 	private int getRight(int[] surface, int left, int current) {

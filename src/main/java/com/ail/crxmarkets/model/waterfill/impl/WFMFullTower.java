@@ -8,7 +8,7 @@ import com.ail.crxmarkets.model.waterfill.WaterFillMethod;
 public class WFMFullTower implements WaterFillMethod {
 
 	@Override
-	public int[] calcWaterOnSurface(int[] surface, int[] waterToFill) {
+	public int[] calcWaterOnSurface(int[] surface, int[] water, int[] waterToFill) {
 		int[] maxSeenSoFarFromRight = new int[surface.length];
 
 		//Populate maxSeenSoFarFromRight array.
@@ -17,7 +17,7 @@ public class WFMFullTower implements WaterFillMethod {
 			maxSeenSoFarFromRight[i] = Math.max(maxSeenSoFarFromRight[i + 1], surface[i]);
 		}
 
-		int[] water = new int[surface.length];
+		int[] wat = new int[surface.length];
 
 		int maxSeenSoFarFromLeft = 0;
 		for (int i = 0; i < surface.length; i++) {
@@ -25,10 +25,10 @@ public class WFMFullTower implements WaterFillMethod {
 				maxSeenSoFarFromLeft = surface[i];
 			}
 			int minFromLeftRight = Math.min(maxSeenSoFarFromLeft, maxSeenSoFarFromRight[i]);
-			water[i] = (minFromLeftRight - surface[i]);
+			wat[i] = (minFromLeftRight - surface[i]);
 		}
 
-		return water;
+		return wat;
 	}
 
 }
