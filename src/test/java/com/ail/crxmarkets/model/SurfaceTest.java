@@ -9,8 +9,6 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import org.junit.Before;
 import org.junit.Test;
 
-// TODO в SurfaceDrawer передавать объект Surface (вынести методы drawSurface в SurfaceDrawer)
-// TODO для логирования использовать Spring (может не надо)
 public class SurfaceTest {
 
 	private static final int LENGTH = 50;
