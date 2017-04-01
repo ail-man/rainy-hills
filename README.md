@@ -1,6 +1,6 @@
 # RainyHill Web Application project for interview
 ## Run project with maven
-To run project in GlassFish container project while development execute
+To run project with embedded GlassFish 4.1.1 container execute
 ```
 mvn clean package embedded-glassfish:run
 ```

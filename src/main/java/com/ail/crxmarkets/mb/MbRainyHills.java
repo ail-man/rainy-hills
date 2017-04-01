@@ -52,9 +52,6 @@ public class MbRainyHills {
 	private CalculationMethod calculationMethod;
 	private String textArea;
 
-	// TODO подключить Spring (под вопросом)
-	// TODO подключить логинку с JAAS
-	// TODO пробежаться по коду навести красоту
 	@PostConstruct
 	public void init() {
 		log.debug("Init MBean {} success", this.getClass().getName());
