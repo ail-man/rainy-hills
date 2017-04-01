@@ -3,7 +3,6 @@ package com.ail.crxmarkets.model;
 import java.io.Serializable;
 
 import com.ail.crxmarkets.Utils;
-import com.ail.crxmarkets.draw.SurfaceDrawer;
 import com.ail.crxmarkets.model.waterfill.WaterFillMethod;
 
 /**
@@ -45,16 +44,6 @@ public class Surface implements Serializable {
 
 		totalWaterHashed = 0;
 		totalWaterCalculated = true;
-	}
-
-	@SuppressWarnings({ "WeakerAccess" })
-	public void drawSurface(SurfaceDrawer surfaceDrawer) {
-		surfaceDrawer.drawSurface(surface);
-	}
-
-	@SuppressWarnings({ "WeakerAccess" })
-	public void drawSurfaceWithWater(SurfaceDrawer surfaceDrawer) {
-		surfaceDrawer.drawSurfaceWithWater(surface, water);
 	}
 
 	@SuppressWarnings({ "WeakerAccess" })

@@ -1,23 +1,24 @@
 package com.ail.crxmarkets.draw;
 
+import com.ail.crxmarkets.model.Surface;
+
 /**
- * Рисовальщик поверхности с водой и без воды
+ * Рисовальщик поверхности
  */
 public interface SurfaceDrawer {
 
 	/**
-	 * Рисует поверхость, определённой массивом
+	 * Рисует поверхость без воды
 	 *
-	 * @param surface массив поверхности
+	 * @param surface объект поверхности
 	 */
-	void drawSurface(int[] surface);
+	void drawSurface(Surface surface);
 
 	/**
-	 * Рисует поверхость с водой, определённые массивами одинаковой длинны
+	 * Рисует поверхость с водой
 	 *
-	 * @param surface массив поверхности
-	 * @param water   массив воды на поверхности
+	 * @param surface объект поверхности
 	 */
-	void drawSurfaceWithWater(int[] surface, int[] water);
+	void drawSurfaceWithWater(Surface surface);
 
 }
