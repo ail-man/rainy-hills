@@ -27,7 +27,7 @@ public class SurfaceTest {
 		surface = Surface.random(LENGTH, MIN_HEIGHT, MAX_HEIGHT);
 		assertThatWaterIsAbsent();
 
-		surface.drawSurface(surfaceDrawer);
+		surfaceDrawer.drawSurface(surface);
 	}
 
 	@Test
@@ -35,7 +35,7 @@ public class SurfaceTest {
 		System.out.println(">>> FILL WITH WATER <<<");
 		surface.fillWater(waterFillMethod, new int[] {});
 
-		surface.drawSurfaceWithWater(surfaceDrawer);
+		surfaceDrawer.drawSurfaceWithWater(surface);
 	}
 
 	@Test
@@ -44,7 +44,7 @@ public class SurfaceTest {
 
 		System.out.println(">>> WIPE ALL THE WATER <<<");
 		surface.wipeWater();
-		surface.drawSurfaceWithWater(surfaceDrawer);
+		surfaceDrawer.drawSurfaceWithWater(surface);
 
 		assertThatWaterIsAbsent();
 		assertThat(surface.getTotalWater(), is(0L));

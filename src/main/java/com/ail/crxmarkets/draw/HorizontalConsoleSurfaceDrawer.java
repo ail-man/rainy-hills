@@ -1,29 +1,31 @@
 package com.ail.crxmarkets.draw;
 
+import com.ail.crxmarkets.model.Surface;
+
 /**
  * Рисует поверхность в консоли горизонтально
  */
 public class HorizontalConsoleSurfaceDrawer implements SurfaceDrawer {
 
 	@Override
-	public void drawSurface(int[] surface) {
+	public void drawSurface(Surface surface) {
 		System.out.println("SURFACE\n");
 
+		int[] surf = surface.getSurface();
+		int max = surf[0];
 		int var;
 
-		int max = surface[0];
-
-		for (int i = 0; i < surface.length; i++) {
-			if (surface[i] > max) {
-				max = surface[i];
+		for (int i = 0; i < surf.length; i++) {
+			if (surf[i] > max) {
+				max = surf[i];
 			}
 		}
 
 		var = max;
 
 		for (int y = 0; y < var; y++) {
-			for (int x = 0; x < surface.length; x++) {
-				if (surface[x] < max) {
+			for (int x = 0; x < surf.length; x++) {
+				if (surf[x] < max) {
 					System.out.print(" ");
 				} else {
 					System.out.print("#");
@@ -33,33 +35,35 @@ public class HorizontalConsoleSurfaceDrawer implements SurfaceDrawer {
 			System.out.println();
 		}
 
-		printLine(surface.length);
+		printLine(surf.length);
 	}
 
 	@Override
-	public void drawSurfaceWithWater(int[] surface, int[] water) {
+	public void drawSurfaceWithWater(Surface surface) {
 		System.out.println("SURFACE WITH WATER\n");
 
+		int[] surf = surface.getSurface();
+		int[] wat = surface.getWater();
 		int var, level;
 
-		int max = surface[0] + water[0];
+		int max = surf[0] + wat[0];
 
-		for (int i = 0; i < surface.length; i++) {
-			level = surface[i] + water[i];
+		for (int i = 0; i < surf.length; i++) {
+			level = surf[i] + wat[i];
 			if (level > max) {
-				max = surface[i];
+				max = surf[i];
 			}
 		}
 
 		var = max;
 
 		for (int y = 0; y < var; y++) {
-			for (int x = 0; x < surface.length; x++) {
-				level = surface[x] + water[x];
+			for (int x = 0; x < surf.length; x++) {
+				level = surf[x] + wat[x];
 				if (level < max) {
 					System.out.print(" ");
 				} else {
-					if (surface[x] < max) {
+					if (surf[x] < max) {
 						System.out.print("~");
 					} else {
 						System.out.print("#");
@@ -70,7 +74,7 @@ public class HorizontalConsoleSurfaceDrawer implements SurfaceDrawer {
 			System.out.println();
 		}
 
-		printLine(surface.length);
+		printLine(surf.length);
 	}
 
 	private void printLine(int lenght) {
