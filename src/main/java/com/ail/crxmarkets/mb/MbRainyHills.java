@@ -59,7 +59,7 @@ public class MbRainyHills {
 		surfaceMinHeight = DEFAULT_SURFACE_MIN_HEIGHT;
 		surfaceMaxHeight = DEFAULT_SURFACE_MAX_HEIGHT;
 		calculationMethod = CalculationMethod.VESSEL;
-		surface = Surface.random(surfaceLength, surfaceMinHeight, surfaceMaxHeight);
+		surface = Surface.random(surfaceLength, 0, 0);
 		updateBarModel();
 	}
 
