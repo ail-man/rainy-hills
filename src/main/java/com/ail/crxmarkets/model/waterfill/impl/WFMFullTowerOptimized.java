@@ -3,10 +3,22 @@ package com.ail.crxmarkets.model.waterfill.impl;
 import com.ail.crxmarkets.model.waterfill.WaterFillMethod;
 
 /**
- * Found on http://javabypatel.blogspot.ru/2016/10/trapping-rain-water-between-towers.html
+ * See
+ * <a href="http://javabypatel.blogspot.ru/2016/10/trapping-rain-water-between-towers.html">
+ * http://javabypatel.blogspot.ru/2016/10/trapping-rain-water-between-towers.html
+ * </a>
  */
 public class WFMFullTowerOptimized implements WaterFillMethod {
 
+	/**
+	 * Рассчитывает максимальное количество воды, которое может поместиться
+	 * над каждым элементом поверхности, и возвращает в виде массива
+	 *
+	 * @param surface     массив поверхности
+	 * @param water       не используется
+	 * @param waterToFill не используется
+	 * @return массив количества воды над каждым элементом поверхности
+	 */
 	@Override
 	public int[] calcWaterOnSurface(int[] surface, int[] water, int[] waterToFill) {
 		int[] maxSeenSoFarFromRight = new int[surface.length];

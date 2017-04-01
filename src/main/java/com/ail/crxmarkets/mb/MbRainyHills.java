@@ -9,6 +9,7 @@ import com.ail.crxmarkets.exception.ApplicationException;
 import com.ail.crxmarkets.jsf.FacesUtils;
 import com.ail.crxmarkets.model.Surface;
 import com.ail.crxmarkets.model.waterfill.WaterFillMethod;
+import com.ail.crxmarkets.model.waterfill.impl.WFMFullTower;
 import com.ail.crxmarkets.model.waterfill.impl.WFMFullTowerOptimized;
 import com.ail.crxmarkets.model.waterfill.impl.WFMFullVessel;
 import org.primefaces.model.chart.Axis;
@@ -51,9 +52,9 @@ public class MbRainyHills {
 	private CalculationMethod calculationMethod;
 	private String textArea;
 
-	// TODO реализовать неоптимизированный алгоритм методом башен
 	// TODO подключить Spring (под вопросом)
 	// TODO подключить логинку с JAAS
+	// TODO пробежаться по коду навести красоту
 	@PostConstruct
 	public void init() {
 		log.debug("Init MBean {} success", this.getClass().getName());
@@ -137,7 +138,7 @@ public class MbRainyHills {
 		case VESSEL:
 			return new WFMFullVessel();
 		case TOWER:
-			return new WFMFullTowerOptimized();
+			return new WFMFullTower();
 		case TOWER_OPTIMIZED:
 			return new WFMFullTowerOptimized();
 		default:

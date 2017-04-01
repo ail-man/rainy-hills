@@ -1,5 +1,6 @@
-package com.ail.crxmarkets.draw;
+package com.ail.crxmarkets.draw.impl;
 
+import com.ail.crxmarkets.draw.SurfaceDrawer;
 import com.ail.crxmarkets.model.Surface;
 
 /**
@@ -15,17 +16,17 @@ public class HorizontalConsoleSurfaceDrawer implements SurfaceDrawer {
 		int max = surf[0];
 		int var;
 
-		for (int i = 0; i < surf.length; i++) {
-			if (surf[i] > max) {
-				max = surf[i];
+		for (int aSurf : surf) {
+			if (aSurf > max) {
+				max = aSurf;
 			}
 		}
 
 		var = max;
 
 		for (int y = 0; y < var; y++) {
-			for (int x = 0; x < surf.length; x++) {
-				if (surf[x] < max) {
+			for (int aSurf : surf) {
+				if (aSurf < max) {
 					System.out.print(" ");
 				} else {
 					System.out.print("#");

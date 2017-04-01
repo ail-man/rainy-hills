@@ -1,7 +1,7 @@
 package com.ail.crxmarkets.model.waterfill.impl;
 
 import com.ail.crxmarkets.draw.SurfaceDrawer;
-import com.ail.crxmarkets.draw.VerticalConsoleSurfaceDrawer;
+import com.ail.crxmarkets.draw.impl.VerticalConsoleSurfaceDrawer;
 import com.ail.crxmarkets.model.waterfill.WFMFullTestHelper;
 import com.ail.crxmarkets.model.waterfill.WaterFillMethod;
 import org.junit.Ignore;
@@ -13,7 +13,7 @@ public class WFMFullTowerOptimizedTest {
 	private WFMFullTestHelper testHelper = new WFMFullTestHelper();
 
 	@Test
-	public void testCalcWaterOnSurface() throws Exception {
+	public void calcWaterOnSurface() throws Exception {
 		SurfaceDrawer surfaceDrawer = new VerticalConsoleSurfaceDrawer();
 		testHelper.testWaterFillMethod(waterFillMethod, surfaceDrawer);
 	}
@@ -21,6 +21,6 @@ public class WFMFullTowerOptimizedTest {
 	@Test
 	@Ignore
 	public void testEfficiency() throws Exception {
-		testHelper.testWaterFillMethodEfficiency(waterFillMethod, "Tower Method");
+		testHelper.testWaterFillMethodEfficiency(waterFillMethod, "Optimized Tower Method");
 	}
 }

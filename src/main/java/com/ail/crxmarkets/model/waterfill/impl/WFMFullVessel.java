@@ -35,12 +35,24 @@ import com.ail.crxmarkets.model.waterfill.WaterFillMethod;
  * 2) иначе, делаем <right> = этому элементу и продолжаем цикл.
  * <p>
  * Затем берём поверхность между <left> и <right>, считаем количество воды.
- * и продолжаем двигаться дальше по поверхности по тому же алгоритму.
+ * и продолжаем двигаться дальше по поверхности, начиная от <right> + 1,
+ * по тому же алгоритму.
  * <p>
  * Алгоритм предположительно имеет сложность O(N^2)
+ *
+ * @author Arthur Lomsadze (ailman1985@gmail.com)
  */
 public class WFMFullVessel implements WaterFillMethod {
 
+	/**
+	 * Рассчитывает максимальное количество воды, которое может поместиться
+	 * над каждым элементом поверхности, и возвращает в виде массива
+	 *
+	 * @param surface     массив поверхности
+	 * @param water       не используется
+	 * @param waterToFill не используется
+	 * @return массив количества воды над каждым элементом поверхности
+	 */
 	@Override
 	public int[] calcWaterOnSurface(int[] surface, int[] water, int[] waterToFill) {
 		int[] wat = new int[surface.length];

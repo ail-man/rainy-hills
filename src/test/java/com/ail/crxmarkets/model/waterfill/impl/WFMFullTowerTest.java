@@ -7,10 +7,10 @@ import com.ail.crxmarkets.model.waterfill.WaterFillMethod;
 import org.junit.Ignore;
 import org.junit.Test;
 
-public class WFMFullVesselTest {
+public class WFMFullTowerTest {
 
 	private WFMFullTestHelper testHelper = new WFMFullTestHelper();
-	private WaterFillMethod waterFillMethod = new WFMFullVessel();
+	private WaterFillMethod waterFillMethod = new WFMFullTower();
 
 	@Test
 	public void calcWaterOnSurface() throws Exception {
@@ -21,6 +21,7 @@ public class WFMFullVesselTest {
 	@Test
 	@Ignore
 	public void testEfficiency() throws Exception {
-		testHelper.testWaterFillMethodEfficiency(waterFillMethod, "Vessel Method");
+		testHelper.testWaterFillMethodEfficiency(waterFillMethod, "Tower Method");
 	}
+
 }

@@ -1,7 +1,7 @@
 package com.ail.crxmarkets.model;
 
-import com.ail.crxmarkets.draw.HorizontalConsoleSurfaceDrawer;
 import com.ail.crxmarkets.draw.SurfaceDrawer;
+import com.ail.crxmarkets.draw.impl.HorizontalConsoleSurfaceDrawer;
 import com.ail.crxmarkets.model.waterfill.WaterFillMethod;
 import com.ail.crxmarkets.model.waterfill.impl.WFMFullVessel;
 import static org.hamcrest.CoreMatchers.is;

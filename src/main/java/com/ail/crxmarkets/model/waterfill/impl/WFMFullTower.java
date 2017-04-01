@@ -2,11 +2,25 @@ package com.ail.crxmarkets.model.waterfill.impl;
 
 import com.ail.crxmarkets.model.waterfill.WaterFillMethod;
 
+/**
+ * See
+ * <a href="https://anonymouscoders.wordpress.com/2015/06/12/amount-of-rain-water-above-tower/">
+ * https://anonymouscoders.wordpress.com/2015/06/12/amount-of-rain-water-above-tower/
+ * </a>
+ */
 public class WFMFullTower implements WaterFillMethod {
 
+	/**
+	 * Рассчитывает максимальное количество воды, которое может поместиться
+	 * над каждым элементом поверхности, и возвращает в виде массива
+	 *
+	 * @param surface     массив поверхности
+	 * @param water       не используется
+	 * @param waterToFill не используется
+	 * @return массив количества воды над каждым элементом поверхности
+	 */
 	@Override
 	public int[] calcWaterOnSurface(int[] surface, int[] water, int[] waterToFill) {
-		int waterAmount = 0;
 		int n = surface.length;
 		int leftMax[] = new int[n];
 		int rightMax[] = new int[n];
@@ -35,12 +49,11 @@ public class WFMFullTower implements WaterFillMethod {
 
 		// amount of water above each tower =
 		//Minimum height between highest left and right tower - height of tower
+		int result[] = new int[surface.length];
 		for (int k = 0; k < n; k++) {
-			waterAmount += Math.min(leftMax[k], rightMax[k]) - surface[k];
+			result[k] = Math.min(leftMax[k], rightMax[k]) - surface[k];
 		}
-		System.out.println(waterAmount);
-
-		return null; // TODO
+		return result;
 	}
 
 }

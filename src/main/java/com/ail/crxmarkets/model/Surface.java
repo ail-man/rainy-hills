@@ -19,7 +19,6 @@ public class Surface implements Serializable {
 	private boolean totalWaterCalculated;
 	private long totalWaterHashed;
 
-	@SuppressWarnings({ "WeakerAccess" })
 	public Surface(int[] surface) {
 		this.surface = surface.clone();
 		this.water = new int[surface.length];
@@ -38,7 +37,7 @@ public class Surface implements Serializable {
 		totalWaterCalculated = false;
 	}
 
-	@SuppressWarnings({ "WeakerAccess" })
+	@SuppressWarnings("WeakerAccess")
 	public synchronized void wipeWater() {
 		water = new int[surface.length];
 
@@ -46,7 +45,6 @@ public class Surface implements Serializable {
 		totalWaterCalculated = true;
 	}
 
-	@SuppressWarnings({ "WeakerAccess" })
 	public synchronized long getTotalWater() {
 		if (!totalWaterCalculated) {
 			totalWaterHashed = Utils.sum(water);
