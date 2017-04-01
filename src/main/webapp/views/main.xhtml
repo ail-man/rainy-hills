@@ -8,10 +8,12 @@
 	<ui:define name="content">
 		<f:loadBundle var="msg" basename="com.ail.crxmarkets.main.main"/>
 		<h:form>
-			<h:panelGrid id="panel" columns="1" border="0" cellpadding="10" cellspacing="2">
-				<h:outputText value="#{msg['pressButton']}"/>
-				<p:commandButton value="#{msg['go']}" action="#{mbMain.go}" ajax="false"/>
-			</h:panelGrid>
+			<p:panel styleClass="margin-top-bottom">
+				<h:panelGrid id="panel" columns="1" border="0" cellpadding="10" cellspacing="2">
+					<h:outputText value="#{msg['pressButton']}"/>
+					<p:commandButton value="#{msg['go']}" action="#{mbMain.go}" ajax="false"/>
+				</h:panelGrid>
+			</p:panel>
 		</h:form>
 	</ui:define>
 </ui:composition>

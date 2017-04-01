@@ -152,3 +152,15 @@
 	height: 150px;
 	max-height: 150px;
 }
+
+.length-slider {
+	width: 300px
+}
+
+.height-slider {
+	width: 400px;
+}
+
+.bar-chart {
+	height: 400px;
+}
