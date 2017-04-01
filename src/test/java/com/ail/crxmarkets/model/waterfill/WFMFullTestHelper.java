@@ -3,11 +3,31 @@ package com.ail.crxmarkets.model.waterfill;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.ail.crxmarkets.Utils;
+import com.ail.crxmarkets.draw.SurfaceDrawer;
+import com.ail.crxmarkets.model.Surface;
 import org.apache.commons.lang3.tuple.Pair;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.equalTo;
 
-public class WFMFullTestHelper {
+class WFMFullTestHelper {
 
-	public static List<Pair<int[], Long>> getTestData() {
+	void testWaterFillMethod(WaterFillMethod waterFillMethod, SurfaceDrawer surfaceDrawer) {
+		for (Pair<int[], Long> testData : getTestData()) {
+			Surface surface = new Surface(testData.getLeft());
+			surfaceDrawer.drawSurface(surface);
+
+			surface.fillWater(waterFillMethod, null);
+
+			assertThat(surface.getWater().length, equalTo(surface.getSurface().length));
+			surfaceDrawer.drawSurfaceWithWater(surface);
+
+			long waterTotal = testData.getRight();
+			assertThat(Utils.sum(surface.getWater()), equalTo(waterTotal));
+		}
+	}
+
+	private List<Pair<int[], Long>> getTestData() {
 		List<Pair<int[], Long>> testDataList = new ArrayList<>();
 
 		testDataList.add(Pair.of(new int[] { 0 }, 0L));
