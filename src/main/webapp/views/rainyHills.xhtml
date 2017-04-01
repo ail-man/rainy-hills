@@ -7,8 +7,44 @@
 								template="/templates/masterLayout.xhtml">
 	<ui:define name="content">
 		<f:loadBundle var="msg" basename="com.ail.crxmarkets.rainyHills.rainyHills"/>
-		<h:outputText value="#{msg['underConstruction']}"/>
+		<p:panel id="surfacePanel" styleClass="margin-top-bottom">
+			<p:chart id="surface" type="bar" model="#{mbRainyHills.stackedVerticalModel}" style="height:400px"/>
+		</p:panel>
 
-		<p:chart type="bar" model="#{mbRainyHills.stackedVerticalModel}" style="height:400px"/>
+		<p:panel id="infoPanel" styleClass="margin-bottom">
+			<h:panelGrid columns="2" border="0" cellpadding="5" cellspacing="2">
+				<h:outputText value="#{msg['totalWaterAmount']}:" styleClass="bold-text"/>
+				<h:outputText value="#{mbRainyHills.totalWaterAmount}"/>
+
+				<h:outputText value="#{msg['calculationTime']}:" styleClass="bold-text"/>
+				<h:outputText value="#{mbRainyHills.calcuationTime} #{msg['nanoseconds']}"/>
+			</h:panelGrid>
+		</p:panel>
+
+		<p:panel id="formPanel" styleClass="margin-bottom">
+			<h:form id="paramsForm">
+				<p:messages id="messages" showDetail="true" autoUpdate="true" closable="true"/>
+				<h:panelGrid id="paramsPanel" columns="1">
+
+					<h:panelGrid columns="5" border="0" cellpadding="5" cellspacing="2">
+						<h:panelGrid columns="1" styleClass="margin-bottom">
+							<h:outputText id="output" value="#{msg['length']}: #{mbRainyHills.surfaceLength}"/>
+							<h:inputHidden id="txt2" value="#{mbRainyHills.surfaceLength}"/>
+							<p:slider for="txt2" display="output" style="width: 200px" displayTemplate="#{msg['length']}: {value}"/>
+						</h:panelGrid>
+						<p:commandButton value="#{msg['generate']}" action="#{mbRainyHills.generate}" ajax="true" update="surfacePanel, infoPanel"/>
+					</h:panelGrid>
+
+					<h:panelGrid columns="5" border="0" cellpadding="5" cellspacing="2">
+						<h:outputText value="123"/>
+						<h:outputText value="123"/>
+						<h:outputText value="123"/>
+						<h:outputText value="123"/>
+						<p:commandButton value="#{msg['calculate']}" action="#{mbRainyHills.calculate}" ajax="true" update="surfacePanel, infoPanel"/>
+					</h:panelGrid>
+
+				</h:panelGrid>
+			</h:form>
+		</p:panel>
 	</ui:define>
 </ui:composition>
