@@ -4,6 +4,8 @@ import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 
+import com.ail.crxmarkets.Utils;
+import com.ail.crxmarkets.exception.ApplicationException;
 import com.ail.crxmarkets.jsf.FacesUtils;
 import com.ail.crxmarkets.model.Surface;
 import com.ail.crxmarkets.model.waterfill.WaterFillMethod;
@@ -43,7 +45,6 @@ public class MbRainyHills {
 	private CalculationMethod calculationMethod;
 	private String textArea;
 
-	// TODO поле для ввода данных вручную через запятую и сделать скроллинг
 	// TODO исправить баг с отрисовкой при установлении параметров в 0
 	// TODO сделать ограничения от 1 до 500
 	// TODO реализовать неоптимизированный алгоритм методом башен
@@ -97,6 +98,7 @@ public class MbRainyHills {
 
 	public void generate() {
 		surface = Surface.random(surfaceLength, surfaceMinHeight, surfaceMaxHeight);
+		textArea = Utils.printAsText(surface.getSurface());
 		updateBarModel();
 	}
 
@@ -104,12 +106,19 @@ public class MbRainyHills {
 		long startTime = System.nanoTime();
 		surface.fillWater(getWaterFillMethod(), null);
 		calculationTime = System.nanoTime() - startTime;
-
 		updateBarModel();
 	}
 
 	public void draw() {
-		FacesUtils.info("TEFGADGGAEGA");
+		try {
+			int[] surfArr = Utils.parseIntArray(textArea);
+			surface = new Surface(surfArr);
+			surfaceLength = surfArr.length;
+			surfaceMaxHeight = Utils.max(surfArr);
+		} catch (ApplicationException e) {
+			FacesUtils.error(e.getMessage());
+		}
+		updateBarModel();
 	}
 
 	private WaterFillMethod getWaterFillMethod() {

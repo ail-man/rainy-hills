@@ -3,6 +3,7 @@ package com.ail.crxmarkets.model.waterfill;
 import com.ail.crxmarkets.draw.SurfaceDrawer;
 import com.ail.crxmarkets.draw.VerticalConsoleSurfaceDrawer;
 import com.ail.crxmarkets.model.waterfill.impl.WFMFullTower;
+import org.junit.Ignore;
 import org.junit.Test;
 
 public class WFMFullTowerTest {
@@ -17,6 +18,7 @@ public class WFMFullTowerTest {
 	}
 
 	@Test
+	@Ignore
 	public void testEfficiency() throws Exception {
 		testHelper.testWaterFillMethodEfficiency(waterFillMethod, "Tower Method");
 	}
