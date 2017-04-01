@@ -19,7 +19,7 @@ public class Surface {
 		return new Surface(surface);
 	}
 
-	public void fillWithWater(RainyHillsAlgorithm algorithm) {
+	public void fillWithWater(WaterCalculatorAlgorithm algorithm) {
 		water = algorithm.calcWaterOnSurface(surface);
 	}
 

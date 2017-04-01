@@ -2,16 +2,16 @@ package com.ail.crxmarkets.ejb;
 
 import javax.ejb.Stateless;
 
-import com.ail.crxmarkets.logic.RainyHillsAlgorithm;
 import com.ail.crxmarkets.logic.TowerAlgorithm;
 import com.ail.crxmarkets.logic.VesselAlgorithm;
+import com.ail.crxmarkets.logic.WaterCalculatorAlgorithm;
 
 @Stateless
 public class RainyHillsEjb implements RainyHillsEjbLocal {
 
 	@Override
 	public long calcWaterOnSurface(int[] surface, int method) {
-		RainyHillsAlgorithm algorithm;
+		WaterCalculatorAlgorithm algorithm;
 
 		switch (method) {
 		case 0:

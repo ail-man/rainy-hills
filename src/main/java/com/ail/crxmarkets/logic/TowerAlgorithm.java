@@ -3,7 +3,7 @@ package com.ail.crxmarkets.logic;
 /**
  * Found on http://javabypatel.blogspot.ru/2016/10/trapping-rain-water-between-towers.html
  */
-public class TowerAlgorithm implements RainyHillsAlgorithm {
+public class TowerAlgorithm implements WaterCalculatorAlgorithm {
 
 	@Override
 	public int[] calcWaterOnSurface(int[] surface) {
@@ -15,7 +15,7 @@ public class TowerAlgorithm implements RainyHillsAlgorithm {
 			maxSeenSoFarFromRight[i] = Math.max(maxSeenSoFarFromRight[i + 1], surface[i]);
 		}
 
-		long totalWaterCollection = 0;
+		int[] water = new int[surface.length];
 
 		int maxSeenSoFarFromLeft = 0;
 		for (int i = 0; i < surface.length; i++) {
@@ -23,10 +23,10 @@ public class TowerAlgorithm implements RainyHillsAlgorithm {
 				maxSeenSoFarFromLeft = surface[i];
 			}
 			int minFromLeftRight = Math.min(maxSeenSoFarFromLeft, maxSeenSoFarFromRight[i]);
-			totalWaterCollection += (minFromLeftRight - surface[i]);
+			water[i] = (minFromLeftRight - surface[i]);
 		}
-		//		return totalWaterCollection; // TODO return int[] water
-		return null;
+
+		return water;
 	}
 
 }

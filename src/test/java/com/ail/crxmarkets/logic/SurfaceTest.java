@@ -15,6 +15,7 @@ public class SurfaceTest {
 
 	private Surface surface;
 	private SurfaceDrawer surfaceDrawer = new HorizontalConsoleSurfaceDrawer();
+	private WaterCalculatorAlgorithm fillingAlgorythm = new VesselAlgorithm();
 
 	@Before
 	public void setUp() throws Exception {
@@ -26,7 +27,7 @@ public class SurfaceTest {
 	@Test
 	public void testFillWithWater() throws Exception {
 		for (int i = 0; i < TEST_COUNT; i++) {
-			surface.fillWithWater(new VesselAlgorithm());
+			surface.fillWithWater(fillingAlgorythm);
 			surface.drawSurface(surfaceDrawer);
 			surface.drawSurfaceWithWater(surfaceDrawer);
 		}
@@ -40,7 +41,7 @@ public class SurfaceTest {
 
 	@Test
 	public void testImmutable() throws Exception {
-
+		surface.fillWithWater(fillingAlgorythm);
 	}
 
 }

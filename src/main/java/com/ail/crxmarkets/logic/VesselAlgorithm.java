@@ -37,7 +37,7 @@ package com.ail.crxmarkets.logic;
  * <p>
  * Алгоритм предположительно имеет сложность O(N^2)
  */
-public class VesselAlgorithm implements RainyHillsAlgorithm {
+public class VesselAlgorithm implements WaterCalculatorAlgorithm {
 
 	@Override
 	public int[] calcWaterOnSurface(int[] surface) {

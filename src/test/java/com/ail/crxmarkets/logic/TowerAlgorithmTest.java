@@ -5,9 +5,9 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
 import org.junit.Test;
 
-public class VesselAlgorithmTest extends WaterCalculatorAlgorithmTest {
+public class TowerAlgorithmTest extends WaterCalculatorAlgorithmTest {
 
-	private VesselAlgorithm vesselAlgorithm = new VesselAlgorithm();
+	private TowerAlgorithm vesselAlgorithm = new TowerAlgorithm();
 	private SurfaceDrawer surfaceDrawer = new HorizontalConsoleSurfaceDrawer();
 
 	@Test
@@ -23,6 +23,7 @@ public class VesselAlgorithmTest extends WaterCalculatorAlgorithmTest {
 			long waterTotal = testData.getRight();
 			assertThat(totalWater(water), equalTo(waterTotal));
 		}
+
 	}
 
 }

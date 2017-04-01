@@ -4,7 +4,7 @@ package com.ail.crxmarkets.logic;
  * Определяет интерфейс алгоритма для рассчёта воды на поверхности,
  * определённой массивом
  */
-public interface RainyHillsAlgorithm {
+public interface WaterCalculatorAlgorithm {
 
 	/**
 	 * Рассчитывает количество воды над каждым элементом поверхности,
