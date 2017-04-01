@@ -33,7 +33,6 @@ public class Surface implements Serializable {
 		return new Surface(Utils.randomArray(length, minHeight, maxHeight));
 	}
 
-	@SuppressWarnings("UnusedDeclaration")
 	public synchronized void fillWithWater(WaterFillMethod waterFillMethod, int[] waterToFill) {
 		water = waterFillMethod.calcWaterOnSurface(surface, waterToFill);
 
@@ -58,7 +57,7 @@ public class Surface implements Serializable {
 		surfaceDrawer.drawSurfaceWithWater(surface, water);
 	}
 
-	@SuppressWarnings({ "UnusedDeclaration" })
+	@SuppressWarnings({ "WeakerAccess" })
 	public synchronized long getTotalWater() {
 		if (!totalWaterCalculated) {
 			totalWaterHashed = Utils.sum(water);

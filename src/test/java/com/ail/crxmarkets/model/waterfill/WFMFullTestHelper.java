@@ -1,4 +1,4 @@
-package com.ail.crxmarkets.model;
+package com.ail.crxmarkets.model.waterfill;
 
 import java.util.ArrayList;
 import java.util.List;

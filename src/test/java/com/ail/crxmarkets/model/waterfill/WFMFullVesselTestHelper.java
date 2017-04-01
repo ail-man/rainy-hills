@@ -1,9 +1,8 @@
-package com.ail.crxmarkets.model;
+package com.ail.crxmarkets.model.waterfill;
 
 import com.ail.crxmarkets.Utils;
 import com.ail.crxmarkets.draw.HorizontalConsoleSurfaceDrawer;
 import com.ail.crxmarkets.draw.SurfaceDrawer;
-import com.ail.crxmarkets.model.waterfill.WaterFillMethod;
 import com.ail.crxmarkets.model.waterfill.impl.WFMFullVessel;
 import org.apache.commons.lang3.tuple.Pair;
 import static org.hamcrest.MatcherAssert.assertThat;
