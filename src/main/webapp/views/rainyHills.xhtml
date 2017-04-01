@@ -16,6 +16,23 @@
 					<h:panelGrid columns="5" border="0" cellpadding="5" cellspacing="2">
 
 						<h:panelGroup>
+							<h:panelGrid columns="1" styleClass="margin-bottom" cellpadding="5">
+								<p:outputLabel for="textArea" value="#{msg['inputSurfaceData']}:"/>
+								<p:inputTextarea id="textArea" rows="1" cols="50" completeMethod="#{mbRainyHills.textArea}"/>
+							</h:panelGrid>
+						</h:panelGroup>
+
+						<h:panelGroup>
+							<h:panelGrid columns="1" cellpadding="5" styleClass="margin-bottom">
+								<p:commandButton value="#{msg['draw']}" action="#{mbRainyHills.draw()}" ajax="true" update="surfacePanel,infoPanel"/>
+							</h:panelGrid>
+						</h:panelGroup>
+
+					</h:panelGrid>
+
+					<h:panelGrid columns="5" border="0" cellpadding="5" cellspacing="2">
+
+						<h:panelGroup>
 							<h:panelGrid columns="1" cellpadding="5" styleClass="margin-bottom">
 								<h:outputText id="genSurfaceLengthOut" value="#{msg['length']}: #{mbRainyHills.surfaceLength}"/>
 								<p:slider for="genSurfaceLengthIn" display="genSurfaceLengthOut" style="width: 200px" displayTemplate="#{msg['length']}: {value}"/>
@@ -34,7 +51,7 @@
 
 						<h:panelGroup>
 							<h:panelGrid columns="1" cellpadding="5" styleClass="margin-bottom">
-								<p:commandButton value="#{msg['generate']}" action="#{mbRainyHills.generate}" ajax="true" update="surfacePanel, infoPanel"/>
+								<p:commandButton value="#{msg['generate']}" action="#{mbRainyHills.generate()}" ajax="true" update="surfacePanel, infoPanel"/>
 							</h:panelGrid>
 						</h:panelGroup>
 
@@ -54,7 +71,7 @@
 
 						<h:panelGroup>
 							<h:panelGrid columns="1" cellpadding="5" styleClass="margin-bottom">
-								<p:commandButton value="#{msg['calculate']}" action="#{mbRainyHills.calculate}" ajax="true" update="surfacePanel,infoPanel"/>
+								<p:commandButton value="#{msg['calculate']}" action="#{mbRainyHills.calculate()}" ajax="true" update="surfacePanel,infoPanel"/>
 							</h:panelGrid>
 						</h:panelGroup>
 

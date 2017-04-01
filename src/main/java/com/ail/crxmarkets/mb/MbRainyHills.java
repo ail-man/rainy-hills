@@ -4,6 +4,7 @@ import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 
+import com.ail.crxmarkets.jsf.FacesUtils;
 import com.ail.crxmarkets.model.Surface;
 import com.ail.crxmarkets.model.waterfill.WaterFillMethod;
 import com.ail.crxmarkets.model.waterfill.impl.WFMFullTower;
@@ -42,8 +43,9 @@ public class MbRainyHills {
 	private CalculationMethod calculationMethod;
 	private String textArea;
 
-	// TODO поле для ввода данных вручную через запятую
+	// TODO поле для ввода данных вручную через запятую и сделать скроллинг
 	// TODO исправить баг с отрисовкой при установлении параметров в 0
+	// TODO сделать ограничения от 1 до 500
 	// TODO реализовать неоптимизированный алгоритм методом башен
 	// TODO ограничения на величины (только положительные и не более 1000 в длину и высоту)
 	@PostConstruct
@@ -104,7 +106,10 @@ public class MbRainyHills {
 		calculationTime = System.nanoTime() - startTime;
 
 		updateBarModel();
-		//		FacesUtils.error("TEFGADGGAEGA");
+	}
+
+	public void draw() {
+		FacesUtils.info("TEFGADGGAEGA");
 	}
 
 	private WaterFillMethod getWaterFillMethod() {
