@@ -7,11 +7,13 @@ import javax.faces.bean.ViewScoped;
 import com.ail.crxmarkets.Utils;
 import com.ail.crxmarkets.exception.ApplicationException;
 import com.ail.crxmarkets.jsf.FacesUtils;
+import com.ail.crxmarkets.jsf.ResourceBundles;
 import com.ail.crxmarkets.model.Surface;
 import com.ail.crxmarkets.model.waterfill.WaterFillMethod;
 import com.ail.crxmarkets.model.waterfill.impl.WFMFullTower;
 import com.ail.crxmarkets.model.waterfill.impl.WFMFullTowerOptimized;
 import com.ail.crxmarkets.model.waterfill.impl.WFMFullVessel;
+import org.apache.commons.lang3.StringUtils;
 import org.primefaces.model.chart.Axis;
 import org.primefaces.model.chart.AxisType;
 import org.primefaces.model.chart.LineChartModel;
@@ -69,6 +71,11 @@ public class MbRainyHills {
 	}
 
 	public void draw() {
+		if (StringUtils.isBlank(textArea)) {
+			FacesUtils.warn(FacesUtils.getlocalizedString(ResourceBundles.RAINY_HILLS, "enterIntegersByCommas"));
+			return;
+		}
+
 		try {
 			int[] surfArr = Utils.parseIntArray(textArea);
 			surface = new Surface(surfArr);
