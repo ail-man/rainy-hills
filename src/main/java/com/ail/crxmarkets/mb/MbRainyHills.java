@@ -36,20 +36,21 @@ public class MbRainyHills {
 	private static final String BAR_MODEL_LEGEND_POSITION = "ne";
 	private static final String BAR_MODEL_X_LABEL = "Point";
 	private static final String BAR_MODEL_Y_LABEL = "Height";
-	private static final String TICK_FORMAT = "%d";
+	private static final int DEFAULT_BAR_CHART_LENGHT = 20;
+	private static final int DEFAULT_BAR_CHART_HEIGHT = 10;
 	private static final int BAR_MARGIN = 0;
 	private static final int BAR_PADDING = 0;
-	private static final int DEFAULT_SURFACE_LENGTH = 50;
-	private static final int DEFAULT_SURFACE_MIN_HEIGHT = 0;
-	private static final int DEFAULT_SURFACE_MAX_HEIGHT = 200;
+	private static final int DEFAULT_LENGTH_SLIDER = 50;
+	private static final int DEFAULT_SURFACE_MIN_HEIGHT_SLIDER = 0;
+	private static final int DEFAULT_SURFACE_MAX_HEIGHT_SLIDER = 200;
 
-	private BarChartModel stackedVerticalModel;
 	private String textArea;
 	private int surfaceLengthSlider;
 	private int surfaceMinHeightSlider;
 	private int surfaceMaxHeightSlider;
 	private CalculationMethod calculationMethod;
 	private Surface surface;
+	private BarChartModel stackedVerticalModel;
 	private long calculationTime;
 
 	// TODO negative values (algorithm and graph)
@@ -59,28 +60,55 @@ public class MbRainyHills {
 	@PostConstruct
 	public void init() {
 		log.debug("Init MBean {} success", this.getClass().getName());
-		surfaceLengthSlider = DEFAULT_SURFACE_LENGTH;
-		surfaceMinHeightSlider = DEFAULT_SURFACE_MIN_HEIGHT;
-		surfaceMaxHeightSlider = DEFAULT_SURFACE_MAX_HEIGHT;
+		surfaceLengthSlider = DEFAULT_LENGTH_SLIDER;
+		surfaceMinHeightSlider = DEFAULT_SURFACE_MIN_HEIGHT_SLIDER;
+		surfaceMaxHeightSlider = DEFAULT_SURFACE_MAX_HEIGHT_SLIDER;
 		calculationMethod = CalculationMethod.VESSEL;
-		surface = Surface.random(surfaceLengthSlider, 0, 0);
-		updateBarModel();
+		surface = Surface.random(DEFAULT_BAR_CHART_LENGHT, 0, 0);
+		updateBarModel(true);
 	}
 
-	private void updateBarModel() {
+	public void draw() {
+		try {
+			int[] surfArr = Utils.parseIntArray(textArea);
+			surface = new Surface(surfArr);
+			updateBarModel(false);
+		} catch (ApplicationException e) {
+			FacesUtils.error(e.getMessage());
+		}
+	}
+
+	public void generate() {
+		surface = Surface.random(surfaceLengthSlider, surfaceMinHeightSlider, surfaceMaxHeightSlider);
+		textArea = Utils.printAsText(surface.getSurface());
+		updateBarModel(false);
+	}
+
+	public void calculate() {
+		long startTime = System.nanoTime();
+		surface.fillWater(getWaterFillMethod(), null);
+		calculationTime = System.nanoTime() - startTime;
+		updateBarModel(false);
+	}
+
+	private void updateBarModel(boolean firstInit) {
 		stackedVerticalModel = new BarChartModel();
 		stackedVerticalModel.setSeriesColors(CHART_SERIES_SURFACE_COLOR + "," + CHART_SERIES_WATER_COLOR);
 
 		ChartSeries surfaceChartSeries = new ChartSeries();
 		surfaceChartSeries.setLabel(CHART_SERIES_SURFACE_LABEL);
-		for (int i = 0; i < surface.getSurface().length; i++) {
-			surfaceChartSeries.set(i + 1, surface.getSurface()[i]);
+
+		int[] surArr = surface.getSurface();
+		for (int i = 0; i < surArr.length; i++) {
+			surfaceChartSeries.set(i + 1, surArr[i]);
 		}
 
 		ChartSeries waterChartSeries = new ChartSeries();
 		waterChartSeries.setLabel(CHART_SERIES_WATER_LABEL);
-		for (int i = 0; i < surface.getWater().length; i++) {
-			waterChartSeries.set(i, surface.getWater()[i]);
+
+		int[] watArr = surface.getWater();
+		for (int i = 0; i < watArr.length; i++) {
+			waterChartSeries.set(i, watArr[i]);
 		}
 
 		stackedVerticalModel.addSeries(surfaceChartSeries);
@@ -99,31 +127,8 @@ public class MbRainyHills {
 
 		Axis yAxis = stackedVerticalModel.getAxis(AxisType.Y);
 		yAxis.setLabel(BAR_MODEL_Y_LABEL);
-		yAxis.setMin(Utils.min(surface.getSurface()));
-		yAxis.setMax(Utils.max(surface.getSurface()));
-		yAxis.setTickFormat(TICK_FORMAT);
-	}
-
-	public void generate() {
-		surface = Surface.random(surfaceLengthSlider, surfaceMinHeightSlider, surfaceMaxHeightSlider);
-		textArea = Utils.printAsText(surface.getSurface());
-		updateBarModel();
-	}
-
-	public void calculate() {
-		long startTime = System.nanoTime();
-		surface.fillWater(getWaterFillMethod(), null);
-		calculationTime = System.nanoTime() - startTime;
-		updateBarModel();
-	}
-
-	public void draw() {
-		try {
-			int[] surfArr = Utils.parseIntArray(textArea);
-			surface = new Surface(surfArr);
-			updateBarModel();
-		} catch (ApplicationException e) {
-			FacesUtils.error(e.getMessage());
+		if (firstInit) {
+			yAxis.setMax(DEFAULT_BAR_CHART_HEIGHT);
 		}
 	}
 
@@ -140,16 +145,12 @@ public class MbRainyHills {
 		}
 	}
 
-	public BarChartModel getStackedVerticalModel() {
-		return stackedVerticalModel;
+	public String getTextArea() {
+		return textArea;
 	}
 
-	public long getTotalWaterAmount() {
-		return surface.getTotalWater();
-	}
-
-	public long getCalcuationTime() {
-		return calculationTime;
+	public void setTextArea(String textArea) {
+		this.textArea = textArea;
 	}
 
 	public int getSurfaceLengthSlider() {
@@ -184,12 +185,16 @@ public class MbRainyHills {
 		this.calculationMethod = calculationMethod;
 	}
 
-	public String getTextArea() {
-		return textArea;
+	public BarChartModel getStackedVerticalModel() {
+		return stackedVerticalModel;
 	}
 
-	public void setTextArea(String textArea) {
-		this.textArea = textArea;
+	public long getTotalWaterAmount() {
+		return surface.getTotalWater();
+	}
+
+	public long getCalcuationTime() {
+		return calculationTime;
 	}
 
 	private enum CalculationMethod {
