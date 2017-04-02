@@ -54,6 +54,8 @@ public class MbRainyHills {
 	private long calculationTime;
 
 	// TODO negative values in graph
+	// TODO Global ExceptionHandler
+	// TODO ResourceBundles for i18n in java code
 	// TODO translate Javadoc
 	// TODO check thread safety of Surface class
 	// TODO update README.md by adding task description with screenshots
@@ -80,16 +82,24 @@ public class MbRainyHills {
 	}
 
 	public void generate() {
-		surface = Surface.random(surfaceLengthSlider, surfaceMinHeightSlider, surfaceMaxHeightSlider);
-		textArea = Utils.printAsText(surface.getSurface());
-		updateBarModel(false);
+		try {
+			surface = Surface.random(surfaceLengthSlider, surfaceMinHeightSlider, surfaceMaxHeightSlider);
+			textArea = Utils.printAsText(surface.getSurface());
+			updateBarModel(false);
+		} catch (ApplicationException e) {
+			FacesUtils.error(e.getMessage());
+		}
 	}
 
 	public void calculate() {
-		long startTime = System.nanoTime();
-		surface.fillWater(getWaterFillMethod(), null);
-		calculationTime = System.nanoTime() - startTime;
-		updateBarModel(false);
+		try {
+			long startTime = System.nanoTime();
+			surface.fillWater(getWaterFillMethod(), null);
+			calculationTime = System.nanoTime() - startTime;
+			updateBarModel(false);
+		} catch (ApplicationException e) {
+			FacesUtils.error(e.getMessage());
+		}
 	}
 
 	private void updateBarModel(boolean firstInit) {
@@ -101,6 +111,7 @@ public class MbRainyHills {
 		stackedVerticalModel.setBarPadding(BAR_PADDING);
 		stackedVerticalModel.setTitle(BAR_MODEL_TITLE);
 		stackedVerticalModel.setLegendPosition(BAR_MODEL_LEGEND_POSITION);
+		stackedVerticalModel.setShadow(false);
 
 		ChartSeries surfaceChartSeries = new ChartSeries();
 		surfaceChartSeries.setLabel(CHART_SERIES_SURFACE_LABEL);
