@@ -13,6 +13,7 @@ public class Utils {
 		return arr;
 	}
 
+	@SuppressWarnings("WeakerAccess")
 	public static int max(int[] arr) {
 		int result = arr[0];
 		for (int elem : arr) {
@@ -58,7 +59,7 @@ public class Utils {
 
 	public static int[] parseIntArray(String string) throws ApplicationException {
 		try {
-			String[] array = string.replaceAll(" ", "").split(",");
+			String[] array = string.replaceAll("[ \n\r]", "").split(",");
 			int[] result = new int[array.length];
 			for (int i = 0; i < array.length; i++) {
 				result[i] = Integer.parseInt(array[i]);

@@ -39,6 +39,7 @@ public class UtilsTest {
 		assertThat(Utils.parseIntArray("1, 6,17, 7,8, 56, 15, 8728,2"), equalTo(new int[] { 1, 6, 17, 7, 8, 56, 15, 8728, 2 }));
 		assertThat(Utils.parseIntArray("16,614,7,71,8,85,2,9,69,93,17"), equalTo(new int[] { 16, 614, 7, 71, 8, 85, 2, 9, 69, 93, 17 }));
 		assertThat(Utils.parseIntArray("16, 6 1   41  61464  , 14 416,6 416 14,6 "), equalTo(new int[] { 16, 614161464, 14416, 641614, 6 }));
+		assertThat(Utils.parseIntArray("-3,-4,-2,-3, - 6  \r 7, -1,   - 3 , \r -2, - 4,-3\n"), equalTo(new int[] { -3, -4, -2, -3, -67, -1, -3, -2, -4, -3 }));
 	}
 
 	@Test

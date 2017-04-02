@@ -40,9 +40,9 @@ public class MbRainyHills {
 	private static final int DEFAULT_BAR_CHART_HEIGHT = 10;
 	private static final int BAR_MARGIN = 0;
 	private static final int BAR_PADDING = 0;
-	private static final int DEFAULT_LENGTH_SLIDER = 50;
-	private static final int DEFAULT_SURFACE_MIN_HEIGHT_SLIDER = 0;
-	private static final int DEFAULT_SURFACE_MAX_HEIGHT_SLIDER = 200;
+	private static final int DEFAULT_LENGTH_SLIDER = 30;
+	private static final int DEFAULT_SURFACE_MIN_HEIGHT_SLIDER = -10;
+	private static final int DEFAULT_SURFACE_MAX_HEIGHT_SLIDER = 10;
 
 	private String textArea;
 	private int surfaceLengthSlider;
@@ -53,7 +53,7 @@ public class MbRainyHills {
 	private BarChartModel stackedVerticalModel;
 	private long calculationTime;
 
-	// TODO negative values (algorithm and graph): WMFFullTowerOptimized & Vertical drawer
+	// TODO negative values in graph
 	// TODO translate Javadoc
 	// TODO check thread safety of Surface class
 	// TODO update README.md by adding task description with screenshots
@@ -72,6 +72,7 @@ public class MbRainyHills {
 		try {
 			int[] surfArr = Utils.parseIntArray(textArea);
 			surface = new Surface(surfArr);
+			textArea = Utils.printAsText(surfArr);
 			updateBarModel(false);
 		} catch (ApplicationException e) {
 			FacesUtils.error(e.getMessage());
@@ -94,6 +95,12 @@ public class MbRainyHills {
 	private void updateBarModel(boolean firstInit) {
 		stackedVerticalModel = new BarChartModel();
 		stackedVerticalModel.setSeriesColors(CHART_SERIES_SURFACE_COLOR + "," + CHART_SERIES_WATER_COLOR);
+		stackedVerticalModel.setNegativeSeriesColors(CHART_SERIES_SURFACE_COLOR + "," + CHART_SERIES_WATER_COLOR);
+		stackedVerticalModel.setStacked(true);
+		stackedVerticalModel.setBarMargin(BAR_MARGIN);
+		stackedVerticalModel.setBarPadding(BAR_PADDING);
+		stackedVerticalModel.setTitle(BAR_MODEL_TITLE);
+		stackedVerticalModel.setLegendPosition(BAR_MODEL_LEGEND_POSITION);
 
 		ChartSeries surfaceChartSeries = new ChartSeries();
 		surfaceChartSeries.setLabel(CHART_SERIES_SURFACE_LABEL);
@@ -113,14 +120,6 @@ public class MbRainyHills {
 
 		stackedVerticalModel.addSeries(surfaceChartSeries);
 		stackedVerticalModel.addSeries(waterChartSeries);
-
-		stackedVerticalModel.setStacked(true);
-
-		stackedVerticalModel.setBarMargin(BAR_MARGIN);
-		stackedVerticalModel.setBarPadding(BAR_PADDING);
-
-		stackedVerticalModel.setTitle(BAR_MODEL_TITLE);
-		stackedVerticalModel.setLegendPosition(BAR_MODEL_LEGEND_POSITION);
 
 		Axis xAxis = stackedVerticalModel.getAxis(AxisType.X);
 		xAxis.setLabel(BAR_MODEL_X_LABEL);

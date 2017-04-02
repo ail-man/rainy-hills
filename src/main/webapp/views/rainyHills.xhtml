@@ -24,7 +24,7 @@
 
 					<h:panelGroup>
 						<h:panelGrid columns="1" cellpadding="5" styleClass="margin-bottom">
-							<p:commandButton value="#{msg['draw']}" action="#{mbRainyHills.draw()}" ajax="true" update="surfacePanel,infoPanel"/>
+							<p:commandButton value="#{msg['draw']}" action="#{mbRainyHills.draw()}" ajax="true" update="surfacePanel,infoPanel, paramsForm"/>
 						</h:panelGrid>
 					</h:panelGroup>
 
@@ -41,7 +41,7 @@
 							<h:panelGroup>
 								<h:panelGrid columns="1" cellpadding="5" styleClass="margin-bottom">
 									<h:outputText id="surfaceHeightRange" value="#{msg['heightBetween']} #{mbRainyHills.surfaceMinHeightSlider} #{msg['and']} #{mbRainyHills.surfaceMaxHeightSlider}"/>
-									<p:slider for="surfaceMinHeightBarChart,surfaceMaxHeightBarChart" minValue="1" maxValue="400" display="surfaceHeightRange" styleClass="height-slider" range="true"
+									<p:slider for="surfaceMinHeightBarChart,surfaceMaxHeightBarChart" minValue="-200" maxValue="200" display="surfaceHeightRange" styleClass="height-slider" range="true"
 														displayTemplate="#{msg['heightBetween']} {min} #{msg['and']} {max}"/>
 								</h:panelGrid>
 								<h:inputHidden id="surfaceMinHeightBarChart" value="#{mbRainyHills.surfaceMinHeightSlider}"/>
