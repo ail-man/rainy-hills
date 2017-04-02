@@ -41,11 +41,11 @@
 							<h:panelGroup>
 								<h:panelGrid columns="1" cellpadding="5" styleClass="margin-bottom">
 									<h:outputText id="surfaceHeightRange" value="#{msg['heightBetween']} #{mbRainyHills.surfaceMinHeightSlider} #{msg['and']} #{mbRainyHills.surfaceMaxHeightSlider}"/>
-									<p:slider for="surfaceMinHeightBarChart,surfaceMaxHeightBarChart" minValue="-200" maxValue="200" display="surfaceHeightRange" styleClass="height-slider" range="true"
+									<p:slider for="surfaceMinHeightSlider,surfaceMaxHeightSlider" minValue="-200" maxValue="200" display="surfaceHeightRange" styleClass="height-range-slider" range="true"
 														displayTemplate="#{msg['heightBetween']} {min} #{msg['and']} {max}"/>
 								</h:panelGrid>
-								<h:inputHidden id="surfaceMinHeightBarChart" value="#{mbRainyHills.surfaceMinHeightSlider}"/>
-								<h:inputHidden id="surfaceMaxHeightBarChart" value="#{mbRainyHills.surfaceMaxHeightSlider}"/>
+								<h:inputHidden id="surfaceMinHeightSlider" value="#{mbRainyHills.surfaceMinHeightSlider}"/>
+								<h:inputHidden id="surfaceMaxHeightSlider" value="#{mbRainyHills.surfaceMaxHeightSlider}"/>
 							</h:panelGroup>
 						</h:panelGrid>
 					</h:panelGroup>
@@ -78,7 +78,7 @@
 		</p:panel>
 
 		<p:panel id="surfacePanel" styleClass="margin-top-bottom">
-			<p:chart id="surface" type="line" model="#{mbRainyHills.lineChartModel}" styleClass="bar-chart"/>
+			<p:chart id="surface" type="line" model="#{mbRainyHills.lineChartModel}" styleClass="graphics"/>
 		</p:panel>
 
 		<p:panel id="infoPanel" styleClass="margin-bottom">
