@@ -32,20 +32,20 @@
 						<h:panelGrid columns="2" border="0" cellpadding="5" cellspacing="2">
 							<h:panelGroup>
 								<h:panelGrid columns="1" cellpadding="5" styleClass="margin-bottom">
-									<h:outputText id="genSurfaceLengthOut" value="#{msg['length']}: #{mbRainyHills.surfaceLength}"/>
+									<h:outputText id="genSurfaceLengthOut" value="#{msg['length']}: #{mbRainyHills.surfaceLengthSlider}"/>
 									<p:slider for="genSurfaceLengthIn" minValue="1" maxValue="300" display="genSurfaceLengthOut" styleClass="length-slider" displayTemplate="#{msg['length']}: {value}"/>
 								</h:panelGrid>
-								<h:inputHidden id="genSurfaceLengthIn" value="#{mbRainyHills.surfaceLength}"/>
+								<h:inputHidden id="genSurfaceLengthIn" value="#{mbRainyHills.surfaceLengthSlider}"/>
 							</h:panelGroup>
 
 							<h:panelGroup>
 								<h:panelGrid columns="1" cellpadding="5" styleClass="margin-bottom">
-									<h:outputText id="surfaceHeightRange" value="#{msg['heightBetween']} #{mbRainyHills.surfaceMinHeight} #{msg['and']} #{mbRainyHills.surfaceMaxHeight}"/>
-									<p:slider for="surfaceMinHeight,surfaceMaxHeight" minValue="1" maxValue="400" display="surfaceHeightRange" styleClass="height-slider" range="true"
+									<h:outputText id="surfaceHeightRange" value="#{msg['heightBetween']} #{mbRainyHills.surfaceMinHeightSlider} #{msg['and']} #{mbRainyHills.surfaceMaxHeightSlider}"/>
+									<p:slider for="surfaceMinHeightBarChart,surfaceMaxHeightBarChart" minValue="1" maxValue="400" display="surfaceHeightRange" styleClass="height-slider" range="true"
 														displayTemplate="#{msg['heightBetween']} {min} #{msg['and']} {max}"/>
 								</h:panelGrid>
-								<h:inputHidden id="surfaceMinHeight" value="#{mbRainyHills.surfaceMinHeight}"/>
-								<h:inputHidden id="surfaceMaxHeight" value="#{mbRainyHills.surfaceMaxHeight}"/>
+								<h:inputHidden id="surfaceMinHeightBarChart" value="#{mbRainyHills.surfaceMinHeightSlider}"/>
+								<h:inputHidden id="surfaceMaxHeightBarChart" value="#{mbRainyHills.surfaceMaxHeightSlider}"/>
 							</h:panelGroup>
 						</h:panelGrid>
 					</h:panelGroup>

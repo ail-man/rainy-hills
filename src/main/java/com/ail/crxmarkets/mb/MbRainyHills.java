@@ -44,15 +44,14 @@ public class MbRainyHills {
 	private static final int DEFAULT_SURFACE_MAX_HEIGHT = 200;
 
 	private BarChartModel stackedVerticalModel;
+	private String textArea;
+	private int surfaceLengthSlider;
+	private int surfaceMinHeightSlider;
+	private int surfaceMaxHeightSlider;
+	private CalculationMethod calculationMethod;
 	private Surface surface;
 	private long calculationTime;
-	private int surfaceLength;
-	private int surfaceMinHeight;
-	private int surfaceMaxHeight;
-	private CalculationMethod calculationMethod;
-	private String textArea;
 
-	// TODO bug with maxHeightSlider and minHeightSlider after press generate several times
 	// TODO negative values (algorithm and graph)
 	// TODO translate Javadoc
 	// TODO check thread safety of Surface class
@@ -60,11 +59,11 @@ public class MbRainyHills {
 	@PostConstruct
 	public void init() {
 		log.debug("Init MBean {} success", this.getClass().getName());
-		surfaceLength = DEFAULT_SURFACE_LENGTH;
-		surfaceMinHeight = DEFAULT_SURFACE_MIN_HEIGHT;
-		surfaceMaxHeight = DEFAULT_SURFACE_MAX_HEIGHT;
+		surfaceLengthSlider = DEFAULT_SURFACE_LENGTH;
+		surfaceMinHeightSlider = DEFAULT_SURFACE_MIN_HEIGHT;
+		surfaceMaxHeightSlider = DEFAULT_SURFACE_MAX_HEIGHT;
 		calculationMethod = CalculationMethod.VESSEL;
-		surface = Surface.random(surfaceLength, 0, 0);
+		surface = Surface.random(surfaceLengthSlider, 0, 0);
 		updateBarModel();
 	}
 
@@ -100,39 +99,32 @@ public class MbRainyHills {
 
 		Axis yAxis = stackedVerticalModel.getAxis(AxisType.Y);
 		yAxis.setLabel(BAR_MODEL_Y_LABEL);
-		yAxis.setMin(surfaceMinHeight);
-		yAxis.setMax(surfaceMaxHeight);
+		yAxis.setMin(Utils.min(surface.getSurface()));
+		yAxis.setMax(Utils.max(surface.getSurface()));
 		yAxis.setTickFormat(TICK_FORMAT);
 	}
 
 	public void generate() {
-		surface = Surface.random(surfaceLength, surfaceMinHeight, surfaceMaxHeight);
-		updateBarDataAndModel(surface.getSurface());
+		surface = Surface.random(surfaceLengthSlider, surfaceMinHeightSlider, surfaceMaxHeightSlider);
 		textArea = Utils.printAsText(surface.getSurface());
+		updateBarModel();
 	}
 
 	public void calculate() {
 		long startTime = System.nanoTime();
 		surface.fillWater(getWaterFillMethod(), null);
 		calculationTime = System.nanoTime() - startTime;
-		updateBarDataAndModel(surface.getSurface());
+		updateBarModel();
 	}
 
 	public void draw() {
 		try {
 			int[] surfArr = Utils.parseIntArray(textArea);
 			surface = new Surface(surfArr);
-			updateBarDataAndModel(surfArr);
+			updateBarModel();
 		} catch (ApplicationException e) {
 			FacesUtils.error(e.getMessage());
 		}
-	}
-
-	private void updateBarDataAndModel(int[] surfArr) {
-		surfaceLength = surfArr.length;
-		surfaceMinHeight = Utils.min(surface.getSurface());
-		surfaceMaxHeight = Utils.max(surfArr);
-		updateBarModel();
 	}
 
 	private WaterFillMethod getWaterFillMethod() {
@@ -160,28 +152,28 @@ public class MbRainyHills {
 		return calculationTime;
 	}
 
-	public int getSurfaceLength() {
-		return surfaceLength;
+	public int getSurfaceLengthSlider() {
+		return surfaceLengthSlider;
 	}
 
-	public void setSurfaceLength(int surfaceLength) {
-		this.surfaceLength = surfaceLength;
+	public void setSurfaceLengthSlider(int surfaceLengthSlider) {
+		this.surfaceLengthSlider = surfaceLengthSlider;
 	}
 
-	public int getSurfaceMinHeight() {
-		return surfaceMinHeight;
+	public int getSurfaceMinHeightSlider() {
+		return surfaceMinHeightSlider;
 	}
 
-	public void setSurfaceMinHeight(int surfaceMinHeight) {
-		this.surfaceMinHeight = surfaceMinHeight;
+	public void setSurfaceMinHeightSlider(int surfaceMinHeightSlider) {
+		this.surfaceMinHeightSlider = surfaceMinHeightSlider;
 	}
 
-	public int getSurfaceMaxHeight() {
-		return surfaceMaxHeight;
+	public int getSurfaceMaxHeightSlider() {
+		return surfaceMaxHeightSlider;
 	}
 
-	public void setSurfaceMaxHeight(int surfaceMaxHeight) {
-		this.surfaceMaxHeight = surfaceMaxHeight;
+	public void setSurfaceMaxHeightSlider(int surfaceMaxHeightSlider) {
+		this.surfaceMaxHeightSlider = surfaceMaxHeightSlider;
 	}
 
 	public CalculationMethod getCalculationMethod() {
