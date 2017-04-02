@@ -27,17 +27,4 @@ public class WFMFullVesselTest {
 		testHelper.testWaterFillMethodEfficiency(waterFillMethod, "Vessel Method");
 	}
 
-	@Test
-	public void test() throws Exception {
-		int N = 1000;
-		double summ = N;
-
-		for (int sub = 0; sub < N; sub += 2) {
-			summ = summ + (N - sub);
-		}
-
-		double result = summ / N;
-
-		System.out.println(result);
-	}
 }

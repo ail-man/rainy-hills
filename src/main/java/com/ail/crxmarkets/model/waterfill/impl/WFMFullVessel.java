@@ -5,33 +5,33 @@ import com.ail.crxmarkets.model.waterfill.WaterFillMethod;
 /**
  * Implementation of algorithm for water amount calculation on a surface with
  * vessel method.
- * <p>
+ *
  * <p>Consider areas with a water as two-dimensional vessels with a curved
  * bottom which have left and right walls. Left and right walls can be
  * different heights. Curved bottom can't be higher than the smallest wall of
  * the vessel. The problem is to find the left and right walls of all vessels
  * and then sum their volumes.
- * <p>
+ *
  * <p>Algorithm description:
- * <p>
+ *
  * <p>1. Run over the surface from left to right.
- * <p>
+ *
  * <p>2. Check in a loop:
  * <p>- If the point of the surface is above the following then it's the left
  * wall of the vessel. Record it as *left* and exit the loop.
  * <p>- Otherwise, we pass to the next point to the right and continue the cycle.
- * <p>
+ *
  * <p>As soon as we found the left wall, we look for the right one. To do this,
  * we jump over the one point after the *left* (because the water can't
  * accumulate between two adjacent points) and run farther to the right.
- * <p>
+ *
  * <p>3. Check in a loop:
  * <p>- If the point is higher than the previous then it is probably the right
  * wall of the vessel (but still not a fact!) - Record it as *right* and exit
  * the loop.
  * <p>- Otherwise, we pass to the next point to the right and continue the
  * cycle.
- * <p>
+ *
  * <p>4. Now we need to make sure that *right* is really the right wall of the
  * vessel. To do this, we check in a second loop (we continue to run over the
  * surface from *(right + 1)*):
@@ -40,16 +40,16 @@ import com.ail.crxmarkets.model.waterfill.WaterFillMethod;
  * means that we found the right wall of the vessel (which is equal to
  * *right*), exit the loop;
  * <p>b) otherwise, assign *right* to this point and continue the cycle.
- * <p>
+ *
  * <p>As soon as we found the left and right walls of the vessel, we can
  * calculate the water in it. The water level in the vessel equals the height
  * of the smallest wall. Hence we can calculate the amount of water above
  * each surface point.
- * <p>
+ *
  * <p>Then continue to move further along the surface starting with the *
  * (right +
  * 1)* and look for the next vessel walls on the same algorithm.
- * <p>
+ *
  * <p>The complexity of the algorithm depends on the curvature of the surface.
  * <p>The upper bound of the complexity of the algorithm equals Ω(N * logN).
  * <p>The lower bound of the complexity of the algorithm equals O(N).
