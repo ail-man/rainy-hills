@@ -28,16 +28,19 @@ public class MbRainyHills {
 
 	private static final Logger log = LoggerFactory.getLogger(MbMain.class);
 
+	private static final String CHART_TITLE = "Rainy Hills";
+	private static final String CHART_LEGEND_POSITION = "ne";
+	private static final boolean CHART_SHOW_POINT_LABELS = true;
+	private static final boolean CHART_SHOW_SHADOW = false;
+	private static final boolean CHART_ZOOM = true;
 	private static final String CHART_SERIES_SURFACE_LABEL = "Surface";
 	private static final String CHART_SERIES_SURFACE_COLOR = "EAA228";
 	private static final String CHART_SERIES_WATER_LABEL = "Water";
 	private static final String CHART_SERIES_WATER_COLOR = "4BB2C5";
-	private static final String BAR_MODEL_TITLE = "Rainy Hills";
-	private static final String BAR_MODEL_LEGEND_POSITION = "ne";
-	private static final String BAR_MODEL_X_LABEL = "Point";
-	private static final String BAR_MODEL_Y_LABEL = "Height";
-	private static final int DEFAULT_BAR_CHART_LENGTH = 10;
-	private static final int DEFAULT_BAR_CHART_HEIGHT = 10;
+	private static final String X_AXIS_LABEL = "Point";
+	private static final String Y_AXIS_LABEL = "Height";
+	private static final int DEFAULT_CHART_LENGTH = 10;
+	private static final int DEFAULT_CHART_HEIGHT = 10;
 	private static final int DEFAULT_LENGTH_SLIDER = 30;
 	private static final int DEFAULT_SURFACE_MIN_HEIGHT_SLIDER = -10;
 	private static final int DEFAULT_SURFACE_MAX_HEIGHT_SLIDER = 10;
@@ -51,7 +54,6 @@ public class MbRainyHills {
 	private LineChartModel lineChartModel;
 	private long calculationTime;
 
-	// TODO negative values in graph
 	// TODO Global ExceptionHandler
 	// TODO ResourceBundles for i18n in java code
 	// TODO translate Javadoc
@@ -64,8 +66,8 @@ public class MbRainyHills {
 		surfaceMinHeightSlider = DEFAULT_SURFACE_MIN_HEIGHT_SLIDER;
 		surfaceMaxHeightSlider = DEFAULT_SURFACE_MAX_HEIGHT_SLIDER;
 		calculationMethod = CalculationMethod.VESSEL;
-		surface = Surface.random(DEFAULT_BAR_CHART_LENGTH, 0, 0);
-		drawSurfaceGraphic();
+		surface = Surface.random(DEFAULT_CHART_LENGTH, 0, 0);
+		drawSurfaceGraphic(true);
 	}
 
 	public void draw() {
@@ -73,7 +75,7 @@ public class MbRainyHills {
 			int[] surfArr = Utils.parseIntArray(textArea);
 			surface = new Surface(surfArr);
 			textArea = Utils.printAsText(surfArr);
-			drawSurfaceGraphic();
+			drawSurfaceGraphic(false);
 		} catch (ApplicationException e) {
 			FacesUtils.error(e.getMessage());
 		}
@@ -83,7 +85,7 @@ public class MbRainyHills {
 		try {
 			surface = Surface.random(surfaceLengthSlider, surfaceMinHeightSlider, surfaceMaxHeightSlider);
 			textArea = Utils.printAsText(surface.getSurface());
-			drawSurfaceGraphic();
+			drawSurfaceGraphic(false);
 		} catch (ApplicationException e) {
 			FacesUtils.error(e.getMessage());
 		}
@@ -100,18 +102,10 @@ public class MbRainyHills {
 		}
 	}
 
-	private void drawSurfaceGraphic() {
-		lineChartModel = new LineChartModel();
+	private void drawSurfaceGraphic(boolean firstInit) {
+		initLineCharModel(firstInit);
+
 		lineChartModel.setSeriesColors(CHART_SERIES_SURFACE_COLOR);
-		lineChartModel.setTitle(BAR_MODEL_TITLE);
-		lineChartModel.setLegendPosition(BAR_MODEL_LEGEND_POSITION);
-		lineChartModel.setShowPointLabels(true);
-
-		Axis xAxis = lineChartModel.getAxis(AxisType.X);
-		xAxis.setLabel(BAR_MODEL_X_LABEL);
-
-		Axis yAxis = lineChartModel.getAxis(AxisType.Y);
-		yAxis.setLabel(BAR_MODEL_Y_LABEL);
 
 		LineChartSeries surfaceChartSeries = new LineChartSeries();
 		surfaceChartSeries.setLabel(CHART_SERIES_SURFACE_LABEL);
@@ -124,11 +118,9 @@ public class MbRainyHills {
 	}
 
 	private void drawSurfaceWithWaterGraphic() {
-		lineChartModel = new LineChartModel();
+		initLineCharModel(false);
+
 		lineChartModel.setSeriesColors(CHART_SERIES_SURFACE_COLOR + "," + CHART_SERIES_WATER_COLOR);
-		lineChartModel.setTitle(BAR_MODEL_TITLE);
-		lineChartModel.setLegendPosition(BAR_MODEL_LEGEND_POSITION);
-		lineChartModel.setShowPointLabels(true);
 
 		LineChartSeries surfaceChartSeries = new LineChartSeries();
 		surfaceChartSeries.setLabel(CHART_SERIES_SURFACE_LABEL);
@@ -148,12 +140,25 @@ public class MbRainyHills {
 
 		lineChartModel.addSeries(surfaceChartSeries);
 		lineChartModel.addSeries(waterChartSeries);
+	}
+
+	private void initLineCharModel(boolean firstInit) {
+		lineChartModel = new LineChartModel();
+		lineChartModel.setTitle(CHART_TITLE);
+		lineChartModel.setLegendPosition(CHART_LEGEND_POSITION);
+		lineChartModel.setShowPointLabels(CHART_SHOW_POINT_LABELS);
+		lineChartModel.setShadow(CHART_SHOW_SHADOW);
+		lineChartModel.setZoom(CHART_ZOOM);
 
 		Axis xAxis = lineChartModel.getAxis(AxisType.X);
-		xAxis.setLabel(BAR_MODEL_X_LABEL);
+		xAxis.setLabel(X_AXIS_LABEL);
 
 		Axis yAxis = lineChartModel.getAxis(AxisType.Y);
-		yAxis.setLabel(BAR_MODEL_Y_LABEL);
+		yAxis.setLabel(Y_AXIS_LABEL);
+
+		if (firstInit) {
+			yAxis.setMax(DEFAULT_CHART_HEIGHT);
+		}
 	}
 
 	private WaterFillMethod getWaterFillMethod() {
