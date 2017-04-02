@@ -14,8 +14,8 @@ import com.ail.crxmarkets.model.waterfill.impl.WFMFullTowerOptimized;
 import com.ail.crxmarkets.model.waterfill.impl.WFMFullVessel;
 import org.primefaces.model.chart.Axis;
 import org.primefaces.model.chart.AxisType;
-import org.primefaces.model.chart.BarChartModel;
-import org.primefaces.model.chart.ChartSeries;
+import org.primefaces.model.chart.LineChartModel;
+import org.primefaces.model.chart.LineChartSeries;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -36,10 +36,8 @@ public class MbRainyHills {
 	private static final String BAR_MODEL_LEGEND_POSITION = "ne";
 	private static final String BAR_MODEL_X_LABEL = "Point";
 	private static final String BAR_MODEL_Y_LABEL = "Height";
-	private static final int DEFAULT_BAR_CHART_LENGTH = 20;
+	private static final int DEFAULT_BAR_CHART_LENGTH = 10;
 	private static final int DEFAULT_BAR_CHART_HEIGHT = 10;
-	private static final int BAR_MARGIN = 0;
-	private static final int BAR_PADDING = 0;
 	private static final int DEFAULT_LENGTH_SLIDER = 30;
 	private static final int DEFAULT_SURFACE_MIN_HEIGHT_SLIDER = -10;
 	private static final int DEFAULT_SURFACE_MAX_HEIGHT_SLIDER = 10;
@@ -50,7 +48,7 @@ public class MbRainyHills {
 	private int surfaceMaxHeightSlider;
 	private CalculationMethod calculationMethod;
 	private Surface surface;
-	private BarChartModel stackedVerticalModel;
+	private LineChartModel lineChartModel;
 	private long calculationTime;
 
 	// TODO negative values in graph
@@ -67,7 +65,7 @@ public class MbRainyHills {
 		surfaceMaxHeightSlider = DEFAULT_SURFACE_MAX_HEIGHT_SLIDER;
 		calculationMethod = CalculationMethod.VESSEL;
 		surface = Surface.random(DEFAULT_BAR_CHART_LENGTH, 0, 0);
-		updateBarModel(true);
+		drawSurfaceGraphic();
 	}
 
 	public void draw() {
@@ -75,7 +73,7 @@ public class MbRainyHills {
 			int[] surfArr = Utils.parseIntArray(textArea);
 			surface = new Surface(surfArr);
 			textArea = Utils.printAsText(surfArr);
-			updateBarModel(false);
+			drawSurfaceGraphic();
 		} catch (ApplicationException e) {
 			FacesUtils.error(e.getMessage());
 		}
@@ -85,7 +83,7 @@ public class MbRainyHills {
 		try {
 			surface = Surface.random(surfaceLengthSlider, surfaceMinHeightSlider, surfaceMaxHeightSlider);
 			textArea = Utils.printAsText(surface.getSurface());
-			updateBarModel(false);
+			drawSurfaceGraphic();
 		} catch (ApplicationException e) {
 			FacesUtils.error(e.getMessage());
 		}
@@ -96,50 +94,66 @@ public class MbRainyHills {
 			long startTime = System.nanoTime();
 			surface.fillWater(getWaterFillMethod(), null);
 			calculationTime = System.nanoTime() - startTime;
-			updateBarModel(false);
+			drawSurfaceWithWaterGraphic();
 		} catch (ApplicationException e) {
 			FacesUtils.error(e.getMessage());
 		}
 	}
 
-	private void updateBarModel(boolean firstInit) {
-		stackedVerticalModel = new BarChartModel();
-		stackedVerticalModel.setSeriesColors(CHART_SERIES_SURFACE_COLOR + "," + CHART_SERIES_WATER_COLOR);
-		stackedVerticalModel.setNegativeSeriesColors(CHART_SERIES_SURFACE_COLOR + "," + CHART_SERIES_WATER_COLOR);
-		stackedVerticalModel.setStacked(true);
-		stackedVerticalModel.setBarMargin(BAR_MARGIN);
-		stackedVerticalModel.setBarPadding(BAR_PADDING);
-		stackedVerticalModel.setTitle(BAR_MODEL_TITLE);
-		stackedVerticalModel.setLegendPosition(BAR_MODEL_LEGEND_POSITION);
-		stackedVerticalModel.setShadow(false);
+	private void drawSurfaceGraphic() {
+		lineChartModel = new LineChartModel();
+		lineChartModel.setSeriesColors(CHART_SERIES_SURFACE_COLOR);
+		lineChartModel.setTitle(BAR_MODEL_TITLE);
+		lineChartModel.setLegendPosition(BAR_MODEL_LEGEND_POSITION);
+		lineChartModel.setShowPointLabels(true);
 
-		ChartSeries surfaceChartSeries = new ChartSeries();
+		Axis xAxis = lineChartModel.getAxis(AxisType.X);
+		xAxis.setLabel(BAR_MODEL_X_LABEL);
+
+		Axis yAxis = lineChartModel.getAxis(AxisType.Y);
+		yAxis.setLabel(BAR_MODEL_Y_LABEL);
+
+		LineChartSeries surfaceChartSeries = new LineChartSeries();
+		surfaceChartSeries.setLabel(CHART_SERIES_SURFACE_LABEL);
+		int[] surArr = this.surface.getSurface();
+		for (int i = 0; i < surArr.length; i++) {
+			surfaceChartSeries.set(i, surArr[i]);
+		}
+
+		lineChartModel.addSeries(surfaceChartSeries);
+	}
+
+	private void drawSurfaceWithWaterGraphic() {
+		lineChartModel = new LineChartModel();
+		lineChartModel.setSeriesColors(CHART_SERIES_SURFACE_COLOR + "," + CHART_SERIES_WATER_COLOR);
+		lineChartModel.setTitle(BAR_MODEL_TITLE);
+		lineChartModel.setLegendPosition(BAR_MODEL_LEGEND_POSITION);
+		lineChartModel.setShowPointLabels(true);
+
+		LineChartSeries surfaceChartSeries = new LineChartSeries();
 		surfaceChartSeries.setLabel(CHART_SERIES_SURFACE_LABEL);
 
 		int[] surArr = surface.getSurface();
 		for (int i = 0; i < surArr.length; i++) {
-			surfaceChartSeries.set(i + 1, surArr[i]);
+			surfaceChartSeries.set(i, surArr[i]);
 		}
 
-		ChartSeries waterChartSeries = new ChartSeries();
+		LineChartSeries waterChartSeries = new LineChartSeries();
 		waterChartSeries.setLabel(CHART_SERIES_WATER_LABEL);
 
 		int[] watArr = surface.getWater();
 		for (int i = 0; i < watArr.length; i++) {
-			waterChartSeries.set(i, watArr[i]);
+			waterChartSeries.set(i, surArr[i] + watArr[i]);
 		}
 
-		stackedVerticalModel.addSeries(surfaceChartSeries);
-		stackedVerticalModel.addSeries(waterChartSeries);
+		lineChartModel.addSeries(surfaceChartSeries);
+		lineChartModel.addSeries(waterChartSeries);
 
-		Axis xAxis = stackedVerticalModel.getAxis(AxisType.X);
+		Axis xAxis = lineChartModel.getAxis(AxisType.X);
 		xAxis.setLabel(BAR_MODEL_X_LABEL);
 
-		Axis yAxis = stackedVerticalModel.getAxis(AxisType.Y);
+		Axis yAxis = lineChartModel.getAxis(AxisType.Y);
 		yAxis.setLabel(BAR_MODEL_Y_LABEL);
-		if (firstInit) {
-			yAxis.setMax(DEFAULT_BAR_CHART_HEIGHT);
-		}
 	}
 
 	private WaterFillMethod getWaterFillMethod() {
@@ -195,8 +209,8 @@ public class MbRainyHills {
 		this.calculationMethod = calculationMethod;
 	}
 
-	public BarChartModel getStackedVerticalModel() {
-		return stackedVerticalModel;
+	public LineChartModel getLineChartModel() {
+		return lineChartModel;
 	}
 
 	public long getTotalWaterAmount() {
