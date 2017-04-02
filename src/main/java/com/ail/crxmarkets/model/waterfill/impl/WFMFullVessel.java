@@ -3,55 +3,69 @@ package com.ail.crxmarkets.model.waterfill.impl;
 import com.ail.crxmarkets.model.waterfill.WaterFillMethod;
 
 /**
- * Реализация алгоритма для рассчёта количества воды методом сосудов.
- * Рассматриваем участки с водой как двумерные сосуды с кривым дном,
- * у которых есть левая и правая стенки (left, right).
- * Стенки могут быть разной высоты.
- * Участки кривого дна сосуда не могут быть выше стенок сосуда.
- * Задача состоит в нахождении левой и правой стенок всех сосудов и суммирование их объемов.
+ * Implementation of algorithm for water amount calculation on a surface with
+ * vessel method.
  * <p>
- * Описание алгоритма:
+ * <p>Consider areas with a water as two-dimensional vessels with a curved
+ * bottom which have left and right walls. Left and right walls can be
+ * different heights. Curved bottom can't be higher than the smallest wall of
+ * the vessel. The problem is to find the left and right walls of all vessels
+ * and then sum their volumes.
  * <p>
- * 1. Бежим по поверхности слева-направо.
+ * <p>Algorithm description:
  * <p>
- * 2. В цикле проверяем:
- * - Если элемент поверхности выше следующего, то это левая стенка сосуда.
- * Фиксируем её как <left> и выходим из цикла.
- * - Иначе, проходим на 1 элемент вправо и продолжаем цикл.
+ * <p>1. Run over the surface from left to right.
  * <p>
- * Теперь ищем правую стенку сосуда.
- * Для этого перепрыгиваем один элемент после <left>,
- * т.к. вода не может скопиться на двух рядом стоящих стенках, и бежим дальше направо.
+ * <p>2. Check in a loop:
+ * <p>- If the point of the surface is above the following then it's the left
+ * wall of the vessel. Record it as *left* and exit the loop.
+ * <p>- Otherwise, we pass to the next point to the right and continue the cycle.
  * <p>
- * 3. В цикле проверяем:
- * - Если элемент поверхности выше предыдущего, то это ВОЗМОЖНО правая стенка сосуда
- * (но пока еще не факт!) - фиксируем как <right>, и выходим из данного цикла.
- * - Иначе, проходим на 1 элемент вправо и продолжаем цикл.
+ * <p>As soon as we found the left wall, we look for the right one. To do this,
+ * we jump over the one point after the *left* (because the water can't
+ * accumulate between two adjacent points) and run farther to the right.
  * <p>
- * 4. Во втором цикле (продолжаем бежать дальше по поверхности) проверяем:
- * Если элемент выше <right>, то проверяем:
- * 1) если <right> и этот элемент оба сразу выше <left>,
- * то значит мы нашли правую стенку сосуда, (которая равна <right>), выходим из цикла;
- * 2) иначе, делаем <right> = этому элементу и продолжаем цикл.
+ * <p>3. Check in a loop:
+ * <p>- If the point is higher than the previous then it is probably the right
+ * wall of the vessel (but still not a fact!) - Record it as *right* and exit
+ * the loop.
+ * <p>- Otherwise, we pass to the next point to the right and continue the
+ * cycle.
  * <p>
- * Затем берём поверхность между <left> и <right>, считаем количество воды.
- * и продолжаем двигаться дальше по поверхности, начиная от <right> + 1,
- * по тому же алгоритму.
+ * <p>4. Now we need to make sure that *right* is really the right wall of the
+ * vessel. To do this, we check in a second loop (we continue to run over the
+ * surface from *(right + 1)*):
+ * <p>If the point is higher than the *right*, then check:
+ * <p>a) if the *right* and current point are both higher than the *left*, it
+ * means that we found the right wall of the vessel (which is equal to
+ * *right*), exit the loop;
+ * <p>b) otherwise, assign *right* to this point and continue the cycle.
  * <p>
- * Алгоритм предположительно имеет сложность O(N^2)
+ * <p>As soon as we found the left and right walls of the vessel, we can
+ * calculate the water in it. The water level in the vessel equals the height
+ * of the smallest wall. Hence we can calculate the amount of water above
+ * each surface point.
+ * <p>
+ * <p>Then continue to move further along the surface starting with the *
+ * (right +
+ * 1)* and look for the next vessel walls on the same algorithm.
+ * <p>
+ * <p>The complexity of the algorithm depends on the curvature of the surface.
+ * <p>The upper bound of the complexity of the algorithm equals Ω(N * logN).
+ * <p>The lower bound of the complexity of the algorithm equals O(N).
  *
  * @author Arthur Lomsadze (ailman1985@gmail.com)
  */
 public class WFMFullVessel implements WaterFillMethod {
 
 	/**
-	 * Рассчитывает максимальное количество воды, которое может поместиться
-	 * над каждым элементом поверхности, и возвращает в виде массива
+	 * Calculates the maximum amount of water that can fit above the each
+	 * point of the surface and returns in the form of an array
 	 *
-	 * @param surface     массив поверхности
-	 * @param water       не используется
-	 * @param waterToFill не используется
-	 * @return массив количества воды над каждым элементом поверхности
+	 * @param surface     surface array
+	 * @param water       not used
+	 * @param waterToFill not used
+	 * @return array of water amount above the each point of the surface
 	 */
 	@Override
 	public int[] calcWaterOnSurface(int[] surface, int[] water, int[] waterToFill) {
@@ -93,9 +107,9 @@ public class WFMFullVessel implements WaterFillMethod {
 	private int getRight(int[] surface, int left, int current) {
 		int right = 0;
 
-		current = current + 2;
+		current += 2;
 		while (current < surface.length) {
-			if (surface[current] > surface[current - 1]) {
+			if (surface[current - 1] < surface[current]) {
 				right = current;
 				break;
 			} else {

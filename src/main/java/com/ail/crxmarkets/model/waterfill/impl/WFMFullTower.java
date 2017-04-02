@@ -11,13 +11,13 @@ import com.ail.crxmarkets.model.waterfill.WaterFillMethod;
 public class WFMFullTower implements WaterFillMethod {
 
 	/**
-	 * Рассчитывает максимальное количество воды, которое может поместиться
-	 * над каждым элементом поверхности, и возвращает в виде массива
+	 * Calculates the maximum amount of water that can fit above the each
+	 * point of the surface and returns in the form of an array
 	 *
-	 * @param surface     массив поверхности
-	 * @param water       не используется
-	 * @param waterToFill не используется
-	 * @return массив количества воды над каждым элементом поверхности
+	 * @param surface     surface array
+	 * @param water       not used
+	 * @param waterToFill not used
+	 * @return array of water amount above the each point of the surface
 	 */
 	@Override
 	public int[] calcWaterOnSurface(int[] surface, int[] water, int[] waterToFill) {

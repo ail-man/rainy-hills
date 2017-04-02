@@ -5,6 +5,9 @@ import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.is;
 import org.junit.Test;
 
+/**
+ * Test class for {@link Utils} testing
+ */
 public class UtilsTest {
 	@Test
 	public void max() throws Exception {

@@ -9,6 +9,9 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import org.junit.Before;
 import org.junit.Test;
 
+/**
+ * Test class for {@link Surface} testing
+ */
 public class SurfaceTest {
 
 	private static final int LENGTH = 50;
@@ -25,7 +28,7 @@ public class SurfaceTest {
 		surface = Surface.random(LENGTH, MIN_HEIGHT, MAX_HEIGHT);
 		assertThatWaterIsAbsent();
 
-		surfaceDrawer.drawSurface(surface);
+		surfaceDrawer.draw(surface);
 	}
 
 	@Test
@@ -33,7 +36,7 @@ public class SurfaceTest {
 		System.out.println(">>> FILL WITH WATER <<<");
 		surface.fillWater(waterFillMethod, new int[] {});
 
-		surfaceDrawer.drawSurfaceWithWater(surface);
+		surfaceDrawer.drawWithWater(surface);
 	}
 
 	@Test
@@ -42,7 +45,7 @@ public class SurfaceTest {
 
 		System.out.println(">>> WIPE ALL THE WATER <<<");
 		surface.wipeWater();
-		surfaceDrawer.drawSurfaceWithWater(surface);
+		surfaceDrawer.drawWithWater(surface);
 
 		assertThatWaterIsAbsent();
 		assertThat(surface.getTotalWater(), is(0L));

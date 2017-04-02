@@ -3,22 +3,25 @@ package com.ail.crxmarkets.draw;
 import com.ail.crxmarkets.model.Surface;
 
 /**
- * Рисовальщик поверхности
+ * Surface drawer interface
+ *
+ * @author Arthur Lomsadze (ailman1985@gmail.com)
+ * @see Surface
  */
 public interface SurfaceDrawer {
 
 	/**
-	 * Рисует поверхость без воды
+	 * Draws surface without water
 	 *
-	 * @param surface объект поверхности
+	 * @param surface {@link Surface} object
 	 */
-	void drawSurface(Surface surface);
+	void draw(Surface surface);
 
 	/**
-	 * Рисует поверхость с водой
+	 * Draws surface with water
 	 *
-	 * @param surface объект поверхности
+	 * @param surface {@link Surface} object
 	 */
-	void drawSurfaceWithWater(Surface surface);
+	void drawWithWater(Surface surface);
 
 }

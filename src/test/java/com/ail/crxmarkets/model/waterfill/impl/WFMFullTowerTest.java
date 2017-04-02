@@ -7,6 +7,9 @@ import com.ail.crxmarkets.model.waterfill.WaterFillMethod;
 import org.junit.Ignore;
 import org.junit.Test;
 
+/**
+ * Tests for {@link WFMFullTowerTest} water filling algorithm
+ */
 public class WFMFullTowerTest {
 
 	private WFMFullTestHelper testHelper = new WFMFullTestHelper();

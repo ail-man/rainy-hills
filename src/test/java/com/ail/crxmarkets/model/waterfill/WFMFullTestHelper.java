@@ -10,12 +10,21 @@ import org.apache.commons.lang3.tuple.Pair;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
 
+/**
+ * Test helper class for {@link WaterFillMethod} algorithms testing
+ */
 public class WFMFullTestHelper {
 
 	private static final int TEST_RUN_COUNT = 100000;
 	private static final int SURFACE_LENGTH = 100000;
 	private static final int SURFACE_MAX_HEIGHT = 100000;
 
+	/**
+	 * Test for check {@link WaterFillMethod} algorithm efficiency
+	 *
+	 * @param waterFillMethod algorithm to check efficiency
+	 * @param methodName      just for print in console
+	 */
 	public void testWaterFillMethodEfficiency(WaterFillMethod waterFillMethod, String methodName) {
 		Surface surface = Surface.random(SURFACE_LENGTH, 0, SURFACE_MAX_HEIGHT);
 		int[] calculationTimeArr = new int[TEST_RUN_COUNT];
@@ -28,15 +37,22 @@ public class WFMFullTestHelper {
 		System.out.println("Average calculation time of " + methodName + ": " + Utils.average(calculationTimeArr) + " ns");
 	}
 
+	/**
+	 * Generates test arrays of surface with different curves
+	 *
+	 * @param waterFillMethod an {@link WaterFillMethod} object of water filling
+	 *                        algorithm
+	 * @param surfaceDrawer   an {@link SurfaceDrawer} object for the draw
+	 */
 	public void testWaterFillMethod(WaterFillMethod waterFillMethod, SurfaceDrawer surfaceDrawer) {
 		for (Pair<int[], Long> testData : getTestData()) {
 			Surface surface = new Surface(testData.getLeft());
-			surfaceDrawer.drawSurface(surface);
+			surfaceDrawer.draw(surface);
 
 			surface.fillWater(waterFillMethod, null);
 
 			assertThat(surface.getWater().length, equalTo(surface.getSurface().length));
-			surfaceDrawer.drawSurfaceWithWater(surface);
+			surfaceDrawer.drawWithWater(surface);
 
 			long waterTotal = testData.getRight();
 			assertThat(Utils.sum(surface.getWater()), equalTo(waterTotal));
@@ -115,6 +131,7 @@ public class WFMFullTestHelper {
 		testDataList.add(Pair.of(new int[] { 0, -1, -4, -1, -3, 0, -1, }, 9L));
 		testDataList.add(Pair.of(new int[] { -2, -4, 0, -2, -2, -4, -3, -3, -7, -4, -4, -5, -3, -2, -6, -3, -5, -5, -5, -8, -8, -8, -6, -1, -9, -9, -7, -1, -4, -4 }, 97L));
 		testDataList.add(Pair.of(new int[] { -2, -4, 0, -2, -2, -4, -3, -3, -7, -4, -4, -5, -3, -2, -6, -3, -5, -5, -5, -8, -8, -8, -6, -1, -6, -6, -7, -1, -4, -4 }, 91L));
+		testDataList.add(Pair.of(new int[] { -10, -5, -9, -3, -10, 4, -2, -8, 0, 9, 7, -1, -6, 5, -1, -6, 2, 5, -3, -4, 6, 1, -6, -4, -10, -5, 7, -2, 9, 5 }, 210L));
 		testDataList.add(Pair.of(new int[] { -5, -3, -7, -2, -6, -4, -5, -9, -1, -2 }, 20L));
 		testDataList.add(Pair.of(new int[] { -5, -3, -7, -2, -6, -4, -5, -9 }, 6L));
 		testDataList.add(Pair.of(new int[] { -5, -3, -7, -2, -6, -4, -5 }, 6L));

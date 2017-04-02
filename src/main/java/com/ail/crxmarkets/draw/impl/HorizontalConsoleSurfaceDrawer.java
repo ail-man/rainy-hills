@@ -5,12 +5,12 @@ import com.ail.crxmarkets.draw.SurfaceDrawer;
 import com.ail.crxmarkets.model.Surface;
 
 /**
- * Рисует поверхность в консоли горизонтально
+ * Draws surface in console horizontally
  */
 public class HorizontalConsoleSurfaceDrawer implements SurfaceDrawer {
 
 	@Override
-	public void drawSurface(Surface surface) {
+	public void draw(Surface surface) {
 		System.out.println("SURFACE\n");
 
 		int[] surf = surface.getSurface();
@@ -41,7 +41,7 @@ public class HorizontalConsoleSurfaceDrawer implements SurfaceDrawer {
 	}
 
 	@Override
-	public void drawSurfaceWithWater(Surface surface) {
+	public void drawWithWater(Surface surface) {
 		System.out.println("SURFACE WITH WATER. TOTAL WATER: " + Utils.sum(surface.getWater()) + "\n");
 
 		int[] surf = surface.getSurface();

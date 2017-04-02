@@ -56,8 +56,6 @@ public class MbRainyHills {
 	private LineChartModel lineChartModel;
 	private long calculationTime;
 
-	// TODO check thread safety of Surface class
-	// TODO translate Javadoc
 	// TODO update README.md by adding task description with screenshots
 	@PostConstruct
 	public void init() {
