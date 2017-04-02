@@ -1,5 +1,6 @@
 package com.ail.crxmarkets.draw.impl;
 
+import com.ail.crxmarkets.Utils;
 import com.ail.crxmarkets.draw.SurfaceDrawer;
 import com.ail.crxmarkets.model.Surface;
 
@@ -24,7 +25,7 @@ public class HorizontalConsoleSurfaceDrawer implements SurfaceDrawer {
 
 		var = max;
 
-		for (int y = 0; y < var; y++) {
+		for (int y = Utils.min(surf); y < var; y++) {
 			for (int aSurf : surf) {
 				if (aSurf < max) {
 					System.out.print(" ");
@@ -41,7 +42,7 @@ public class HorizontalConsoleSurfaceDrawer implements SurfaceDrawer {
 
 	@Override
 	public void drawSurfaceWithWater(Surface surface) {
-		System.out.println("SURFACE WITH WATER\n");
+		System.out.println("SURFACE WITH WATER. TOTAL WATER: " + Utils.sum(surface.getWater()) + "\n");
 
 		int[] surf = surface.getSurface();
 		int[] wat = surface.getWater();
@@ -58,7 +59,7 @@ public class HorizontalConsoleSurfaceDrawer implements SurfaceDrawer {
 
 		var = max;
 
-		for (int y = 0; y < var; y++) {
+		for (int y = Utils.min(surf); y < var; y++) {
 			for (int x = 0; x < surf.length; x++) {
 				level = surf[x] + wat[x];
 				if (level < max) {

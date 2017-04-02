@@ -107,6 +107,40 @@ public class WFMFullTestHelper {
 		testDataList.add(Pair.of(new int[] { 1, 2, 3 }, 0L));
 		testDataList.add(Pair.of(new int[] { 1, 2, 1 }, 0L));
 
+		testDataList.add(Pair.of(new int[] { -3, 0, 2, 1, 0, 3, 3 }, 3L));
+		testDataList.add(Pair.of(new int[] { -1, 0, -2, -1, 0, 2, -4 }, 3L));
+		testDataList.add(Pair.of(new int[] { 3, 0, 2, -1, 0, 4, -1 }, 11L));
+
+		testDataList.add(Pair.of(new int[] { -5, 6, -1, 7, 3, 3, 5, 1, -3, -2, -2, 0, 2 }, 27L));
+		testDataList.add(Pair.of(new int[] { 0, -1, -4, -1, -3, 0, -1, }, 9L));
+		testDataList.add(Pair.of(new int[] { -2, -4, 0, -2, -2, -4, -3, -3, -7, -4, -4, -5, -3, -2, -6, -3, -5, -5, -5, -8, -8, -8, -6, -1, -9, -9, -7, -1, -4, -4 }, 97L));
+		testDataList.add(Pair.of(new int[] { -2, -4, 0, -2, -2, -4, -3, -3, -7, -4, -4, -5, -3, -2, -6, -3, -5, -5, -5, -8, -8, -8, -6, -1, -6, -6, -7, -1, -4, -4 }, 91L));
+		testDataList.add(Pair.of(new int[] { -5, -3, -7, -2, -6, -4, -5, -9, -1, -2 }, 20L));
+		testDataList.add(Pair.of(new int[] { -5, -3, -7, -2, -6, -4, -5, -9 }, 6L));
+		testDataList.add(Pair.of(new int[] { -5, -3, -7, -2, -6, -4, -5 }, 6L));
+		testDataList.add(Pair.of(new int[] { -5, -3, -7, -2, -6, -4 }, 6L));
+		testDataList.add(Pair.of(new int[] { -5, -3, -7, -2, -6 }, 4L));
+
+		testDataList.add(Pair.of(new int[] { -7 }, 0L));
+
+		testDataList.add(Pair.of(new int[] { -1, -1 }, 0L));
+		testDataList.add(Pair.of(new int[] { 0, -1, 0 }, 1L));
+		testDataList.add(Pair.of(new int[] { 0, 0, -1, 0 }, 1L));
+		testDataList.add(Pair.of(new int[] { -1, 0, 0, -1 }, 0L));
+		testDataList.add(Pair.of(new int[] { -1, 0, 0, 0, -1 }, 0L));
+
+		testDataList.add(Pair.of(new int[] { -3, -3 }, 0L));
+		testDataList.add(Pair.of(new int[] { 0, -3, 0 }, 3L));
+		testDataList.add(Pair.of(new int[] { 0, -3, 0, -3 }, 3L));
+		testDataList.add(Pair.of(new int[] { -3, 0, 0, -3 }, 0L));
+		testDataList.add(Pair.of(new int[] { 0, -3, -3, -3, 0 }, 9L));
+
+		testDataList.add(Pair.of(new int[] { -3, -5, -2 }, 2L));
+		testDataList.add(Pair.of(new int[] { -2, -5, -3 }, 2L));
+
+		testDataList.add(Pair.of(new int[] { -3, -4, -1 }, 1L));
+		testDataList.add(Pair.of(new int[] { -1, -4, -3 }, 1L));
+
 		return testDataList;
 	}
 

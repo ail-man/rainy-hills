@@ -36,7 +36,7 @@ public class MbRainyHills {
 	private static final String BAR_MODEL_LEGEND_POSITION = "ne";
 	private static final String BAR_MODEL_X_LABEL = "Point";
 	private static final String BAR_MODEL_Y_LABEL = "Height";
-	private static final int DEFAULT_BAR_CHART_LENGHT = 20;
+	private static final int DEFAULT_BAR_CHART_LENGTH = 20;
 	private static final int DEFAULT_BAR_CHART_HEIGHT = 10;
 	private static final int BAR_MARGIN = 0;
 	private static final int BAR_PADDING = 0;
@@ -53,7 +53,7 @@ public class MbRainyHills {
 	private BarChartModel stackedVerticalModel;
 	private long calculationTime;
 
-	// TODO negative values (algorithm and graph)
+	// TODO negative values (algorithm and graph): WMFFullTowerOptimized & Vertical drawer
 	// TODO translate Javadoc
 	// TODO check thread safety of Surface class
 	// TODO update README.md by adding task description with screenshots
@@ -64,7 +64,7 @@ public class MbRainyHills {
 		surfaceMinHeightSlider = DEFAULT_SURFACE_MIN_HEIGHT_SLIDER;
 		surfaceMaxHeightSlider = DEFAULT_SURFACE_MAX_HEIGHT_SLIDER;
 		calculationMethod = CalculationMethod.VESSEL;
-		surface = Surface.random(DEFAULT_BAR_CHART_LENGHT, 0, 0);
+		surface = Surface.random(DEFAULT_BAR_CHART_LENGTH, 0, 0);
 		updateBarModel(true);
 	}
 

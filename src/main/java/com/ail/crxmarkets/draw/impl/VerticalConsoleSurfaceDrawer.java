@@ -1,5 +1,6 @@
 package com.ail.crxmarkets.draw.impl;
 
+import com.ail.crxmarkets.Utils;
 import com.ail.crxmarkets.draw.SurfaceDrawer;
 import com.ail.crxmarkets.model.Surface;
 
@@ -14,7 +15,7 @@ public class VerticalConsoleSurfaceDrawer implements SurfaceDrawer {
 		int[] surf = surface.getSurface();
 		for (int height : surf) {
 			System.out.print("|");
-			for (int i = 0; i < height; i++) {
+			for (int i = Utils.min(surf); i < height; i++) {
 				System.out.print("X");
 			}
 			System.out.println();
@@ -29,7 +30,7 @@ public class VerticalConsoleSurfaceDrawer implements SurfaceDrawer {
 		int[] wat = surface.getWater();
 		for (int i = 0; i < sur.length; i++) {
 			System.out.print("|");
-			for (int j = 0; j < sur[i]; j++) {
+			for (int j = Utils.min(sur); j < sur[i]; j++) {
 				System.out.print("X");
 			}
 			for (int j = 0; j < wat[i]; j++) {

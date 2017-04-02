@@ -1,7 +1,7 @@
 package com.ail.crxmarkets.model.waterfill.impl;
 
 import com.ail.crxmarkets.draw.SurfaceDrawer;
-import com.ail.crxmarkets.draw.impl.HorizontalConsoleSurfaceDrawer;
+import com.ail.crxmarkets.draw.impl.VerticalConsoleSurfaceDrawer;
 import com.ail.crxmarkets.model.waterfill.WFMFullTestHelper;
 import com.ail.crxmarkets.model.waterfill.WaterFillMethod;
 import org.junit.Ignore;
@@ -14,7 +14,7 @@ public class WFMFullTowerTest {
 
 	@Test
 	public void calcWaterOnSurface() throws Exception {
-		SurfaceDrawer surfaceDrawer = new HorizontalConsoleSurfaceDrawer();
+		SurfaceDrawer surfaceDrawer = new VerticalConsoleSurfaceDrawer();
 		testHelper.testWaterFillMethod(waterFillMethod, surfaceDrawer);
 	}
 

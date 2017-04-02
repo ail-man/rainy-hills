@@ -1,5 +1,6 @@
 package com.ail.crxmarkets.model.waterfill.impl;
 
+import com.ail.crxmarkets.Utils;
 import com.ail.crxmarkets.model.waterfill.WaterFillMethod;
 
 /**
@@ -31,7 +32,7 @@ public class WFMFullTowerOptimized implements WaterFillMethod {
 
 		int[] wat = new int[surface.length];
 
-		int maxSeenSoFarFromLeft = 0;
+		int maxSeenSoFarFromLeft = Utils.min(surface);
 		for (int i = 0; i < surface.length; i++) {
 			if (maxSeenSoFarFromLeft < surface[i]) {
 				maxSeenSoFarFromLeft = surface[i];
