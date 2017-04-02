@@ -5,6 +5,8 @@ import org.apache.commons.lang3.RandomUtils;
 
 /**
  * Helper class with different util methods
+ *
+ * @author Arthur Lomsadze (ailman1985@gmail.com)
  */
 public class Utils {
 
@@ -14,7 +16,7 @@ public class Utils {
 	 * @param length length of the array to be generated
 	 * @param min    min inclusive bound of values to be generated in array
 	 * @param max    max exclusive bound of values to be generated in array
-	 * @return
+	 * @return generated array
 	 */
 	public static int[] randomArray(int length, int min, int max) {
 		int[] arr = new int[length];
@@ -103,7 +105,7 @@ public class Utils {
 	 *
 	 * @param string string for parse
 	 * @return array of parsed values
-	 * @throws ApplicationException
+	 * @throws ApplicationException exception wrapper for this application
 	 */
 	public static int[] parseIntArray(String string) throws ApplicationException {
 		try {
@@ -121,8 +123,8 @@ public class Utils {
 	/**
 	 * Prints an array as string of values separated by commas
 	 *
-	 * @param arr
-	 * @return
+	 * @param arr array to print as text
+	 * @return string of values separated by commas
 	 */
 	public static String printAsText(int[] arr) {
 		if (arr == null || arr.length == 0) {

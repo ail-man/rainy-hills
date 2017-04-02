@@ -6,6 +6,9 @@ import com.ail.crxmarkets.model.Surface;
 
 /**
  * Draws surface in console vertically
+ *
+ * @author Arthur Lomsadze (ailman1985@gmail.com)
+ * @see Surface
  */
 public class VerticalConsoleSurfaceDrawer implements SurfaceDrawer {
 

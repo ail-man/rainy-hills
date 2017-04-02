@@ -3,6 +3,8 @@ package com.ail.crxmarkets.model.waterfill;
 /**
  * Defines an interface of algorithms for calculation of water above the
  * surface
+ *
+ * @author Arthur Lomsadze (ailman1985@gmail.com)
  */
 public interface WaterFillMethod {
 

@@ -8,7 +8,7 @@ import com.ail.crxmarkets.model.waterfill.WaterFillMethod;
 /**
  * A model of the surface that can be filled with water.
  * The model is thread safe.
- *
+ * @author Arthur Lomsadze (ailman1985@gmail.com)
  * @see WaterFillMethod
  */
 public class Surface implements Serializable {
