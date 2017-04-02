@@ -8,7 +8,13 @@ public class Utils {
 	public static int[] randomArray(int length, int min, int max) {
 		int[] arr = new int[length];
 		for (int i = 0; i < length; i++) {
-			arr[i] = RandomUtils.nextInt(min, max);
+			if (min < 0 && max < 0) {
+				arr[i] = -RandomUtils.nextInt(-max, -min);
+			} else if (min < 0) {
+				arr[i] = RandomUtils.nextInt(0, max - min) + min;
+			} else {
+				arr[i] = RandomUtils.nextInt(min, max);
+			}
 		}
 		return arr;
 	}
