@@ -41,7 +41,7 @@
 							<h:panelGroup>
 								<h:panelGrid columns="1" cellpadding="5" styleClass="margin-bottom">
 									<h:outputText id="surfaceHeightRange" value="#{msg['heightBetween']} #{mbRainyHills.surfaceMinHeight} #{msg['and']} #{mbRainyHills.surfaceMaxHeight}"/>
-									<p:slider for="surfaceMinHeight,surfaceMaxHeight" minValue="1" maxValue="1000" display="surfaceHeightRange" styleClass="height-slider" range="true"
+									<p:slider for="surfaceMinHeight,surfaceMaxHeight" minValue="1" maxValue="400" display="surfaceHeightRange" styleClass="height-slider" range="true"
 														displayTemplate="#{msg['heightBetween']} {min} #{msg['and']} {max}"/>
 								</h:panelGrid>
 								<h:inputHidden id="surfaceMinHeight" value="#{mbRainyHills.surfaceMinHeight}"/>

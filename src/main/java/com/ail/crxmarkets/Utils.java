@@ -23,6 +23,16 @@ public class Utils {
 		return result;
 	}
 
+	public static int min(int[] arr) {
+		int result = arr[0];
+		for (int elem : arr) {
+			if (elem < result) {
+				result = elem;
+			}
+		}
+		return result;
+	}
+
 	public static long sum(int[] arr) {
 		long sum = 0;
 		for (int i : arr) {

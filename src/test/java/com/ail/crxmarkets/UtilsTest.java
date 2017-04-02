@@ -6,12 +6,18 @@ import static org.hamcrest.Matchers.is;
 import org.junit.Test;
 
 public class UtilsTest {
-
 	@Test
 	public void max() throws Exception {
 		assertThat(Utils.max(new int[] { 51, 467, 471, 715, 57858, 528, 2587, 6416 }), is(57858));
 		assertThat(Utils.max(new int[] { 6116, 646, 4, 471, 751, 58, 28, 26, 8, 8 }), is(6116));
 		assertThat(Utils.max(new int[] { 61, 71, 578, 628, 689, 97, 25, 6, 6, 852, 852 }), is(852));
+	}
+
+	@Test
+	public void min() throws Exception {
+		assertThat(Utils.min(new int[] { 51, 467, 471, 715, 57858, 528, 2587, 6416 }), is(51));
+		assertThat(Utils.min(new int[] { 6116, 646, 4, 471, 751, 58, 28, 26, 8, 8 }), is(4));
+		assertThat(Utils.min(new int[] { 61, 71, 578, 628, 689, 97, 25, 6, 6, 852, 852 }), is(6));
 	}
 
 	@Test

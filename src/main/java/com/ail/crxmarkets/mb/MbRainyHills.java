@@ -52,6 +52,11 @@ public class MbRainyHills {
 	private CalculationMethod calculationMethod;
 	private String textArea;
 
+	// TODO bug with maxHeightSlider and minHeightSlider after press generate several times
+	// TODO negative values (algorithm and graph)
+	// TODO translate Javadoc
+	// TODO check thread safety of Surface class
+	// TODO update README.md by adding task description with screenshots
 	@PostConstruct
 	public void init() {
 		log.debug("Init MBean {} success", this.getClass().getName());
@@ -95,38 +100,38 @@ public class MbRainyHills {
 
 		Axis yAxis = stackedVerticalModel.getAxis(AxisType.Y);
 		yAxis.setLabel(BAR_MODEL_Y_LABEL);
-		yAxis.setMin(0);
+		yAxis.setMin(surfaceMinHeight);
 		yAxis.setMax(surfaceMaxHeight);
 		yAxis.setTickFormat(TICK_FORMAT);
 	}
 
 	public void generate() {
 		surface = Surface.random(surfaceLength, surfaceMinHeight, surfaceMaxHeight);
-		surfaceLength = surface.getSurface().length;
-		surfaceMaxHeight = Utils.max(surface.getSurface());
+		updateBarDataAndModel(surface.getSurface());
 		textArea = Utils.printAsText(surface.getSurface());
-		updateBarModel();
 	}
 
 	public void calculate() {
 		long startTime = System.nanoTime();
 		surface.fillWater(getWaterFillMethod(), null);
 		calculationTime = System.nanoTime() - startTime;
-
-		surfaceLength = surface.getSurface().length;
-		surfaceMaxHeight = Utils.max(surface.getSurface());
-		updateBarModel();
+		updateBarDataAndModel(surface.getSurface());
 	}
 
 	public void draw() {
 		try {
 			int[] surfArr = Utils.parseIntArray(textArea);
 			surface = new Surface(surfArr);
-			surfaceLength = surfArr.length;
-			surfaceMaxHeight = Utils.max(surfArr);
+			updateBarDataAndModel(surfArr);
 		} catch (ApplicationException e) {
 			FacesUtils.error(e.getMessage());
 		}
+	}
+
+	private void updateBarDataAndModel(int[] surfArr) {
+		surfaceLength = surfArr.length;
+		surfaceMinHeight = Utils.min(surface.getSurface());
+		surfaceMaxHeight = Utils.max(surfArr);
 		updateBarModel();
 	}
 
