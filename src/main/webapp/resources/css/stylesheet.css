@@ -75,8 +75,8 @@
 /* Header
 -----------------------------------------------------------------------------*/
 .header {
-	height: 70px;
-	background: #FFE680;
+	font-size: 35px;
+	text-align: center;
 }
 
 /* Middle
@@ -126,10 +126,11 @@
 /* Footer
 -----------------------------------------------------------------------------*/
 .footer {
+	font-size: 10px;
+	text-align: center;
 	margin: -100px auto 0;
 	min-width: 1000px;
 	height: 70px;
-	background: #BFF08E;
 	position: relative;
 }
 
@@ -137,6 +138,26 @@
 -----------------------------------------------------------------------------*/
 .bold-text {
 	font-weight: bold;
+}
+
+.yellow {
+	color: #EAA228;
+}
+
+.blue {
+	color: #4BB2C5;
+}
+
+.gray {
+	color: darkgrey;
+}
+
+.no-border {
+	border: none;
+}
+
+.center-text {
+	text-align: center;
 }
 
 .margin-top-bottom {

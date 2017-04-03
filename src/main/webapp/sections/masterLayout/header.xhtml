@@ -3,12 +3,15 @@
 		"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
 			xmlns:h="http://xmlns.jcp.org/jsf/html"
-			xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+			xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+			xmlns:p="http://primefaces.org/ui">
 <h:head> </h:head>
 <h:body>
 	<ui:composition>
-		<p>Header</p>
-		<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras tortor. Praesent dictum, libero ut tempus dictum, neque eros elementum mauris, quis mollis arcu velit ac diam. Etiam neque. Quisque nec turpis. Aliquam arcu nulla, dictum et, lacinia a, mollis in, ante. Sed eu felis in elit tempor venenatis. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Ut ultricies porttitor purus. Proin non tellus at ligula fringilla tristique. Fusce vehicula quam. Curabitur vel tortor vitae pede imperdiet ultrices. Sed tortor.</p>
+		<p:panel styleClass="no-border">
+			<h:outputText value="RAINY" styleClass="bold-text blue"/>
+			<h:outputText value="HILLS" styleClass="bold-text yellow"/>
+		</p:panel>
 	</ui:composition>
 </h:body>
 </html>
