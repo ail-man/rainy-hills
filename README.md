@@ -33,7 +33,7 @@ See [WFMFullVesselTest.java](https://github.com/ail-man/rainy-hills/blob/master/
 and [WFMFullTowerOptimizedTest.java](https://github.com/ail-man/rainy-hills/blob/master/src/test/java/com/ail/crxmarkets/model/waterfill/impl/WFMFullTowerOptimizedTest.java) classes.
 
 ## Run project with maven
-To run project with embedded GlassFish 4.1.1 container execute
+To build project as Web Application Archive (WAR) and run with embedded GlassFish 4.1.1 container execute
 ```
 mvn clean package embedded-glassfish:run
 ```

@@ -17,6 +17,7 @@ public class WFMFullTestHelper {
 
 	private static final int TEST_RUN_COUNT = 100000;
 	private static final int SURFACE_LENGTH = 100000;
+	private static final int SURFACE_MIN_HEIGHT = -100000;
 	private static final int SURFACE_MAX_HEIGHT = 100000;
 
 	/**
@@ -26,11 +27,13 @@ public class WFMFullTestHelper {
 	 * @param methodName      just for print in console
 	 */
 	public void testWaterFillMethodEfficiency(WaterFillMethod waterFillMethod, String methodName) {
-		Surface surface = Surface.random(SURFACE_LENGTH, 0, SURFACE_MAX_HEIGHT);
+		Surface surface = Surface.random(SURFACE_LENGTH, SURFACE_MIN_HEIGHT, SURFACE_MAX_HEIGHT);
+		int[] water = Utils.randomArray(SURFACE_LENGTH, 0, SURFACE_MAX_HEIGHT);
+
 		int[] calculationTimeArr = new int[TEST_RUN_COUNT];
 		for (int i = 0; i < TEST_RUN_COUNT; i++) {
 			long startTime = System.nanoTime();
-			surface.fillWater(waterFillMethod, null);
+			surface.fillWater(waterFillMethod, water);
 			calculationTimeArr[i] = (int) (System.nanoTime() - startTime);
 		}
 

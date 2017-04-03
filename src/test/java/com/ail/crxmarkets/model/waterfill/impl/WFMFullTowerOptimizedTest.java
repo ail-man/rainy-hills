@@ -26,4 +26,5 @@ public class WFMFullTowerOptimizedTest {
 	public void testEfficiency() throws Exception {
 		testHelper.testWaterFillMethodEfficiency(waterFillMethod, "Optimized Tower Method");
 	}
+
 }
