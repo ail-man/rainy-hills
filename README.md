@@ -5,8 +5,8 @@ It takes an array of surface points as an input, and calculates the volume of wa
 Built with JDK 1.8 and Primefaces 5.3
 
 ## Project description
-The main class of this project is [Surface.java](https://github.com/ail-man/rainy-hills/blob/master/src/main/java/com/ail/crxmarkets/model/Surface.java) class.
-It presents a surface with a water on it and it has several methods like fill some water, wipe the water, get surface curve, get water and get total water amount.
+The main class of this project [Surface.java](https://github.com/ail-man/rainy-hills/blob/master/src/main/java/com/ail/crxmarkets/model/Surface.java) class.
+It represents a surface object (thread-safe) with a water on it and it has several methods like fill some water, wipe the water, get surface curve, get water and get total water amount.
 It also has factory method for generating random surface object by parameters of length, min height and max height.
 
 To calculate the water on a curved surface the so called **Vessel Method** was developed using TDD approach in this project.
@@ -32,7 +32,9 @@ See [WFMFullVesselTest.java](https://github.com/ail-man/rainy-hills/blob/master/
 [WFMFullTowerTest.java](https://github.com/ail-man/rainy-hills/blob/master/src/test/java/com/ail/crxmarkets/model/waterfill/impl/WFMFullTowerTest.java)
 and [WFMFullTowerOptimizedTest.java](https://github.com/ail-man/rainy-hills/blob/master/src/test/java/com/ail/crxmarkets/model/waterfill/impl/WFMFullTowerOptimizedTest.java) classes.
 
-## Run project with maven
+## Build and run project with maven
+NOTIFICATION: Need JDK 1.8 installed!
+
 To build project as Web Application Archive (WAR) and run with embedded GlassFish 4.1.1 container execute
 ```
 mvn clean package embedded-glassfish:run
