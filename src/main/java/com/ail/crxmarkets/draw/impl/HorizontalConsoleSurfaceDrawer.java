@@ -3,6 +3,8 @@ package com.ail.crxmarkets.draw.impl;
 import com.ail.crxmarkets.Utils;
 import com.ail.crxmarkets.draw.SurfaceDrawer;
 import com.ail.crxmarkets.model.Surface;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Draws surface in console horizontally
@@ -12,9 +14,13 @@ import com.ail.crxmarkets.model.Surface;
  */
 public class HorizontalConsoleSurfaceDrawer implements SurfaceDrawer {
 
+	private static final Logger log = LoggerFactory.getLogger(HorizontalConsoleSurfaceDrawer.class);
+
 	@Override
 	public void draw(Surface surface) {
-		System.out.println("SURFACE\n");
+		StringBuilder sb = new StringBuilder();
+
+		sb.append("\n\nSURFACE\n\n");
 
 		int[] surf = surface.getSurface();
 		int max = surf[0];
@@ -31,21 +37,23 @@ public class HorizontalConsoleSurfaceDrawer implements SurfaceDrawer {
 		for (int y = Utils.min(surf); y < var; y++) {
 			for (int aSurf : surf) {
 				if (aSurf < max) {
-					System.out.print(" ");
+					sb.append(" ");
 				} else {
-					System.out.print("#");
+					sb.append("#");
 				}
 			}
 			max--;
-			System.out.println();
+			sb.append("\n");
 		}
 
-		printLine(surf.length);
+		pringWithBottomLine(sb, surf.length);
 	}
 
 	@Override
 	public void drawWithWater(Surface surface) {
-		System.out.println("SURFACE WITH WATER. TOTAL WATER: " + Utils.sum(surface.getWater()) + "\n");
+		StringBuilder sb = new StringBuilder();
+
+		sb.append("\n\nSURFACE WITH WATER. TOTAL WATER: ").append(Utils.sum(surface.getWater())).append("\n\n");
 
 		int[] surf = surface.getSurface();
 		int[] wat = surface.getWater();
@@ -66,28 +74,27 @@ public class HorizontalConsoleSurfaceDrawer implements SurfaceDrawer {
 			for (int x = 0; x < surf.length; x++) {
 				level = surf[x] + wat[x];
 				if (level < max) {
-					System.out.print(" ");
+					sb.append(" ");
 				} else {
 					if (surf[x] < max) {
-						System.out.print("~");
+						sb.append("~");
 					} else {
-						System.out.print("#");
+						sb.append("#");
 					}
 				}
 			}
 			max--;
-			System.out.println();
+			sb.append("\n");
 		}
 
-		printLine(surf.length);
+		pringWithBottomLine(sb, surf.length);
 	}
 
-	private void printLine(int lenght) {
-		StringBuilder sb = new StringBuilder();
+	private void pringWithBottomLine(StringBuilder sb, int lenght) {
 		for (int i = 0; i < lenght; i++) {
 			sb.append("-");
 		}
-		System.out.println(sb.toString() + "\n");
+		log.info(sb.toString() + "\n");
 	}
 
 }

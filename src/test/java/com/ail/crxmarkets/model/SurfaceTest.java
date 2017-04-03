@@ -8,11 +8,15 @@ import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
 import org.junit.Before;
 import org.junit.Test;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Test class for {@link Surface} testing
  */
 public class SurfaceTest {
+
+	private static final Logger log = LoggerFactory.getLogger(SurfaceTest.class);
 
 	private static final int LENGTH = 50;
 	private static final int MIN_HEIGHT = 0;
@@ -24,7 +28,7 @@ public class SurfaceTest {
 
 	@Before
 	public void setUp() throws Exception {
-		System.out.println(">>> CREATE SURFACE <<<");
+		log.info(">>> CREATE SURFACE <<<");
 		surface = Surface.random(LENGTH, MIN_HEIGHT, MAX_HEIGHT);
 		assertThatWaterIsAbsent();
 
@@ -33,7 +37,7 @@ public class SurfaceTest {
 
 	@Test
 	public void testFillWithWater() throws Exception {
-		System.out.println(">>> FILL WITH WATER <<<");
+		log.info(">>> FILL WITH WATER <<<");
 		surface.fillWater(waterFillMethod, new int[] {});
 
 		surfaceDrawer.drawWithWater(surface);
@@ -43,7 +47,7 @@ public class SurfaceTest {
 	public void testWipeTheWater() throws Exception {
 		testFillWithWater();
 
-		System.out.println(">>> WIPE ALL THE WATER <<<");
+		log.info(">>> WIPE ALL THE WATER <<<");
 		surface.wipeWater();
 		surfaceDrawer.drawWithWater(surface);
 

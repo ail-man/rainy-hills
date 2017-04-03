@@ -9,11 +9,15 @@ import com.ail.crxmarkets.model.Surface;
 import org.apache.commons.lang3.tuple.Pair;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Test helper class for {@link WaterFillMethod} algorithms testing
  */
 public class WFMFullTestHelper {
+
+	private static final Logger log = LoggerFactory.getLogger(WFMFullTestHelper.class);
 
 	private static final int TEST_RUN_COUNT = 100000;
 	private static final int SURFACE_LENGTH = 100000;
@@ -37,7 +41,7 @@ public class WFMFullTestHelper {
 			calculationTimeArr[i] = (int) (System.nanoTime() - startTime);
 		}
 
-		System.out.println("Average calculation time of " + methodName + ": " + Utils.average(calculationTimeArr) + " ns");
+		log.info("Average calculation time of " + methodName + ": " + Utils.average(calculationTimeArr) + " ns");
 	}
 
 	/**

@@ -3,6 +3,8 @@ package com.ail.crxmarkets.draw.impl;
 import com.ail.crxmarkets.Utils;
 import com.ail.crxmarkets.draw.SurfaceDrawer;
 import com.ail.crxmarkets.model.Surface;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Draws surface in console vertically
@@ -12,36 +14,46 @@ import com.ail.crxmarkets.model.Surface;
  */
 public class VerticalConsoleSurfaceDrawer implements SurfaceDrawer {
 
+	private static final Logger log = LoggerFactory.getLogger(VerticalConsoleSurfaceDrawer.class);
+
 	@Override
 	public void draw(Surface surface) {
-		System.out.println("===SURFACE===============================================================");
+		StringBuilder sb = new StringBuilder();
+
+		sb.append("\n\n===SURFACE===============================================================\n");
 		int[] surf = surface.getSurface();
 		for (int height : surf) {
-			System.out.print("|");
+			sb.append("|");
 			for (int i = Utils.min(surf); i < height; i++) {
-				System.out.print("X");
+				sb.append("X");
 			}
-			System.out.println();
+			sb.append("\n");
 		}
-		System.out.println("=================================================================================\n");
+		sb.append("=================================================================================\n");
+
+		log.info(sb.toString());
 	}
 
 	@Override
 	public void drawWithWater(Surface surface) {
-		System.out.println("===SURFACE-WITH-WATER===============================================================");
+		StringBuilder sb = new StringBuilder();
+
+		sb.append("\n\n===SURFACE-WITH-WATER===============================================================\n");
 		int[] sur = surface.getSurface();
 		int[] wat = surface.getWater();
 		for (int i = 0; i < sur.length; i++) {
-			System.out.print("|");
+			sb.append("|");
 			for (int j = Utils.min(sur); j < sur[i]; j++) {
-				System.out.print("X");
+				sb.append("X");
 			}
 			for (int j = 0; j < wat[i]; j++) {
-				System.out.print("~");
+				sb.append("~");
 			}
-			System.out.println();
+			sb.append("\n");
 		}
-		System.out.println("=================================================================================\n");
+		sb.append("=================================================================================\n");
+
+		log.info(sb.toString());
 	}
 
 }
