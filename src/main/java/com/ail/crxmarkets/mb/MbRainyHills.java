@@ -56,7 +56,6 @@ public class MbRainyHills {
 	private LineChartModel lineChartModel;
 	private long calculationTime;
 
-	// TODO update README.md by adding task description with screenshots
 	@PostConstruct
 	public void init() {
 		log.debug("Init MBean {} success", this.getClass().getName());
