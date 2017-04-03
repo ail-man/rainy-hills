@@ -6,6 +6,7 @@ import com.ail.crxmarkets.model.Surface;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+@SuppressWarnings("unused")
 @Stateless
 public class RainyHillsEjb implements RainyHillsEjbLocal {
 

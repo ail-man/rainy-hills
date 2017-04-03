@@ -8,13 +8,13 @@
 		<console name="console" target="SYSTEM_OUT">
 			<patternlayout pattern="${pattern}"/>
 		</console>
-		<file name="file" fileName="log/app.log">
+		<file name="file" fileName="log/test.log">
 			<patternlayout pattern="${pattern}"/>
 		</file>
 	</appenders>
 
 	<loggers>
-		<root level="all">
+		<root level="debug">
 			<appenderref ref="console" level="debug"/>
 			<appenderref ref="file" level="trace"/>
 		</root>
