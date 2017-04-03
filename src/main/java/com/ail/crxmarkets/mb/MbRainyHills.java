@@ -1,10 +1,12 @@
 package com.ail.crxmarkets.mb;
 
 import javax.annotation.PostConstruct;
+import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 
 import com.ail.crxmarkets.Utils;
+import com.ail.crxmarkets.ejb.RainyHillsEjbLocal;
 import com.ail.crxmarkets.exception.ApplicationException;
 import com.ail.crxmarkets.jsf.FacesUtils;
 import com.ail.crxmarkets.jsf.ResourceBundles;
@@ -47,6 +49,9 @@ public class MbRainyHills {
 	private static final int DEFAULT_SURFACE_MIN_HEIGHT_SLIDER = -10;
 	private static final int DEFAULT_SURFACE_MAX_HEIGHT_SLIDER = 10;
 
+	@EJB
+	private RainyHillsEjbLocal rainyHillsEjbLocal;
+
 	private String textArea;
 	private int surfaceLengthSlider;
 	private int surfaceMinHeightSlider;
@@ -63,7 +68,7 @@ public class MbRainyHills {
 		surfaceMinHeightSlider = DEFAULT_SURFACE_MIN_HEIGHT_SLIDER;
 		surfaceMaxHeightSlider = DEFAULT_SURFACE_MAX_HEIGHT_SLIDER;
 		calculationMethod = CalculationMethod.VESSEL;
-		surface = Surface.random(DEFAULT_CHART_LENGTH, 0, 0);
+		surface = rainyHillsEjbLocal.getRandomSurface(DEFAULT_CHART_LENGTH, 0, 0);
 		drawSurfaceGraphic(true);
 	}
 
@@ -85,7 +90,7 @@ public class MbRainyHills {
 
 	public void generate() {
 		try {
-			surface = Surface.random(surfaceLengthSlider, surfaceMinHeightSlider, surfaceMaxHeightSlider);
+			surface = rainyHillsEjbLocal.getRandomSurface(surfaceLengthSlider, surfaceMinHeightSlider, surfaceMaxHeightSlider);
 			textArea = Utils.printAsText(surface.getSurface());
 			drawSurfaceGraphic(false);
 		} catch (ApplicationException e) {
