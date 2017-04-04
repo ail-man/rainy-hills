@@ -3,8 +3,6 @@ package com.ail.crxmarkets;
 import java.util.Random;
 
 import com.ail.crxmarkets.exception.ApplicationException;
-import org.apache.commons.lang3.RandomUtils;
-import org.apache.commons.lang3.Validate;
 
 /**
  * Helper class with different util methods

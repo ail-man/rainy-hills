@@ -19,8 +19,7 @@ public class Surface implements Serializable {
 	private final int[] surface;
 	private int[] water;
 
-	private boolean totalWaterCalculated;
-	private long totalWaterHashed;
+	private Long totalWaterCashed;
 
 	/**
 	 * Constructs new {@link Surface} object from the array of surface height
@@ -32,8 +31,7 @@ public class Surface implements Serializable {
 		this.surface = surface.clone();
 		this.water = new int[surface.length];
 
-		this.totalWaterHashed = 0;
-		this.totalWaterCalculated = true;
+		this.totalWaterCashed = null;
 	}
 
 	/**
@@ -58,7 +56,7 @@ public class Surface implements Serializable {
 	public synchronized void fillWater(WaterFillMethod waterFillMethod, int[] waterToFill) {
 		water = waterFillMethod.calcWaterOnSurface(surface, water, waterToFill);
 
-		totalWaterCalculated = false;
+		this.totalWaterCashed = null;
 	}
 
 	/**
@@ -68,8 +66,7 @@ public class Surface implements Serializable {
 	public synchronized void wipeWater() {
 		water = new int[surface.length];
 
-		totalWaterHashed = 0;
-		totalWaterCalculated = true;
+		totalWaterCashed = 0L;
 	}
 
 	/**
@@ -78,11 +75,10 @@ public class Surface implements Serializable {
 	 * @return total amount of water
 	 */
 	public synchronized long getTotalWater() {
-		if (!totalWaterCalculated) {
-			totalWaterHashed = Utils.sum(water);
-			totalWaterCalculated = true;
+		if (totalWaterCashed == null) {
+			totalWaterCashed = Utils.sum(water);
 		}
-		return totalWaterHashed;
+		return totalWaterCashed;
 	}
 
 	/**
