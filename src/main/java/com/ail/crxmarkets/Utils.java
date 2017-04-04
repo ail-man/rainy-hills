@@ -1,7 +1,10 @@
 package com.ail.crxmarkets;
 
+import java.util.Random;
+
 import com.ail.crxmarkets.exception.ApplicationException;
 import org.apache.commons.lang3.RandomUtils;
+import org.apache.commons.lang3.Validate;
 
 /**
  * Helper class with different util methods
@@ -9,6 +12,15 @@ import org.apache.commons.lang3.RandomUtils;
  * @author Arthur Lomsadze (ailman1985@gmail.com)
  */
 public class Utils {
+
+	private static final Random RANDOM = new Random();
+
+	/**
+	 * This class can't have instances
+	 */
+	private Utils() {
+		throw new AssertionError();
+	}
 
 	/**
 	 * Generates array with random values
@@ -19,15 +31,16 @@ public class Utils {
 	 * @return generated array
 	 */
 	public static int[] randomArray(int length, int min, int max) {
+		if (length < 0) {
+			throw new IllegalArgumentException("length can't be negative");
+		}
+		if (min > max) {
+			throw new IllegalArgumentException("Min value must be smaller or equal to max value");
+		}
+
 		int[] arr = new int[length];
 		for (int i = 0; i < length; i++) {
-			if (min < 0 && max < 0) {
-				arr[i] = -RandomUtils.nextInt(-max, -min);
-			} else if (min < 0) {
-				arr[i] = RandomUtils.nextInt(0, max - min) + min;
-			} else {
-				arr[i] = RandomUtils.nextInt(min, max);
-			}
+			arr[i] = RANDOM.nextInt(max - min + 1) + min;
 		}
 		return arr;
 	}
