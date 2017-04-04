@@ -8,6 +8,7 @@ import com.ail.crxmarkets.model.waterfill.WaterFillMethod;
 /**
  * A model of the surface that can be filled with water.
  * The model is thread safe.
+ *
  * @author Arthur Lomsadze (ailman1985@gmail.com)
  * @see WaterFillMethod
  */
@@ -23,8 +24,7 @@ public class Surface implements Serializable {
 
 	/**
 	 * Constructs new {@link Surface} object from the array of surface height
-	 * points.
-	 * It clones the original array for the sake of safety
+	 * points. It clones the original array for the sake of safety
 	 *
 	 * @param surface the array of height points
 	 */
@@ -87,8 +87,7 @@ public class Surface implements Serializable {
 
 	/**
 	 * Gets an array of surface height points. It clones the original array for
-	 * the
-	 * sake of safety.
+	 * the sake of safety.
 	 *
 	 * @return array of surface height points
 	 */
