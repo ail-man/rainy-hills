@@ -51,8 +51,8 @@ import com.ail.crxmarkets.model.waterfill.WaterFillMethod;
  * 1)* and look for the next vessel walls on the same algorithm.
  *
  * <p>The complexity of the algorithm depends on the curvature of the surface.
- * <p>The upper bound of the complexity of the algorithm equals Ω(N + (N - 2) + (N - 4) + ... + (N - N))
- * <p>The lower bound of the complexity of the algorithm equals O(N).
+ * <p>The upper bound of the complexity of the algorithm equals O(N + (N - 2) + (N - 4) + ... + (N - N))
+ * <p>The lower bound of the complexity of the algorithm equals Ω(N).
  *
  * @author Arthur Lomsadze (ailman1985@gmail.com)
  */
