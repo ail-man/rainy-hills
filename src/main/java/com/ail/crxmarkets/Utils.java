@@ -9,7 +9,7 @@ import com.ail.crxmarkets.exception.ApplicationException;
  *
  * @author Arthur Lomsadze (ailman1985@gmail.com)
  */
-public class Utils {
+public final class Utils {
 
 	private static final Random RANDOM = new Random();
 
