@@ -22,8 +22,8 @@ public class WFMFullTower implements WaterFillMethod {
 	@Override
 	public int[] calcWaterOnSurface(int[] surface, int[] water, int[] waterToFill) {
 		int n = surface.length;
-		int leftMax[] = new int[n];
-		int rightMax[] = new int[n];
+		int[] leftMax = new int[n];
+		int[] rightMax = new int[n];
 
 		//to calculate height highest tower to left of each tower
 		int tempMax = surface[0];
@@ -49,7 +49,7 @@ public class WFMFullTower implements WaterFillMethod {
 
 		// amount of water above each tower =
 		//Minimum height between highest left and right tower - height of tower
-		int result[] = new int[surface.length];
+		int[] result = new int[surface.length];
 		for (int k = 0; k < n; k++) {
 			result[k] = Math.min(leftMax[k], rightMax[k]) - surface[k];
 		}

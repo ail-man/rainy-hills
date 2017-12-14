@@ -57,7 +57,8 @@ public class HorizontalConsoleSurfaceDrawer implements SurfaceDrawer {
 
 		int[] surf = surface.getSurface();
 		int[] wat = surface.getWater();
-		int var, level;
+		int var;
+		int level;
 
 		int max = surf[0] + wat[0];
 
